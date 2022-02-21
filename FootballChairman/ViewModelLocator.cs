@@ -20,10 +20,14 @@ namespace FootballChairman
             builder.RegisterModule<ServicesModule>();
 
             builder.RegisterType<FixturesPageViewModel>().SingleInstance();
+            builder.RegisterType<NavigationButtonsViewModel>().SingleInstance();
+            builder.RegisterType<MatchOverviewPageViewModel>().SingleInstance();
 
             _container = builder.Build();
         }
 
         public FixturesPageViewModel FixturesPage => _container.Resolve<FixturesPageViewModel>();
+        public NavigationButtonsViewModel NavigationButtons => _container.Resolve<NavigationButtonsViewModel>();
+        public MatchOverviewPageViewModel MatchOverviewPage => _container.Resolve<MatchOverviewPageViewModel>();
     }
 }

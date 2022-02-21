@@ -16,4 +16,8 @@
     <ProjectReference Include="..\FootballChairman.Services\FootballChairman.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

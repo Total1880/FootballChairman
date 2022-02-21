@@ -11,7 +11,7 @@ namespace FootballChairman.Repositories
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // ex: builder.RegisterType<CyclistRepository>().AsImplementedInterfaces();
+            builder.RegisterType<FixtureRepository>().AsImplementedInterfaces();
         }
     }
 }

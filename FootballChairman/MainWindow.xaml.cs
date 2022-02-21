@@ -1,4 +1,6 @@
-﻿using FootballChairman.Pages;
+﻿using FootballChairman.Messages.PageOpeners;
+using FootballChairman.Pages;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +24,32 @@ namespace FootballChairman
     public partial class MainWindow : Window
     {
         private FixturesPage _fixturesPage;
+        private NavigationButtonsPage _navigationButtonsPage;
+        public MatchOverviewPage _matchOverviewPage;
 
         public FixturesPage FixturesPage => _fixturesPage ??= new FixturesPage();
+        public NavigationButtonsPage NavigationButtonsPage => _navigationButtonsPage ??= new NavigationButtonsPage();
+        public MatchOverviewPage MatchOverviewPage => _matchOverviewPage ??= new MatchOverviewPage();
 
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.NavigationService.Navigate(FixturesPage);
+            NavigationFrame.NavigationService.Navigate(NavigationButtonsPage);
 
+            Messenger.Default.Register<OpenFixturesPageMessage>(this, OpenFixturePage);
+            Messenger.Default.Register<OpenMatchOverviewPageMessage>(this, OpenMatchOverviewPage);
+
+        }
+
+        private void OpenFixturePage(OpenFixturesPageMessage obj)
+        {
+            MainFrame.NavigationService.Navigate(FixturesPage);
+        }
+
+        private void OpenMatchOverviewPage(OpenMatchOverviewPageMessage obj)
+        {
+            MainFrame.NavigationService.Navigate(MatchOverviewPage);
         }
     }
 }

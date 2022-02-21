@@ -15,6 +15,7 @@ namespace FootballChairman.Services
             builder.RegisterModule<RepositoriesModule>();
 
             builder.RegisterType<ScheduleMakerService>().AsImplementedInterfaces();
+            builder.RegisterType<FixtureService>().AsImplementedInterfaces();
         }
     }
 }

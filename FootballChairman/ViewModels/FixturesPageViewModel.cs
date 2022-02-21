@@ -12,14 +12,14 @@ namespace FootballChairman.ViewModels
 {
     public class FixturesPageViewModel : ViewModelBase
     {
-        private IScheduleMakerService _scheduleMakerService;
+        private IFixtureService _fixtureService;
         private ObservableCollection<Fixture> _fixtures = new ObservableCollection<Fixture>();
 
         public ObservableCollection<Fixture>Fixtures{ get => _fixtures; }
 
-        public FixturesPageViewModel(IScheduleMakerService scheduleMakerService)
+        public FixturesPageViewModel(IFixtureService fixtureService)
         {
-            _scheduleMakerService = scheduleMakerService;
+            _fixtureService = fixtureService;
 
             CreateFixtures();
         }
@@ -35,7 +35,7 @@ namespace FootballChairman.ViewModels
             _teams.Add("AA Gent");
             _teams.Add("RC Genk");
 
-            _fixtures = new ObservableCollection<Fixture>(_scheduleMakerService.Generate(_teams));
+            _fixtures = new ObservableCollection<Fixture>(_fixtureService.GenerateFixtures(_teams));
         }
     }
 }

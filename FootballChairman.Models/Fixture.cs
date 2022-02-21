@@ -12,7 +12,7 @@ namespace FootballChairman.Models
         public int MatchNo { get; set; }
         public int HomeOpponentId { get; set; }
         public int AwayOpponentId { get; set; }
-        public string? HomeOpponent { get; set; }
-        public string? AwayOpponent { get; set; }
+        public string HomeOpponent { get; set; }
+        public string AwayOpponent { get; set; }
     }
 }
