@@ -5,14 +5,13 @@ using System.Xml;
 
 namespace FootballChairman.Repositories
 {
-    public class FixtureRepository : IRepository<Fixture>
+    public class FixtureRepository : RepositoryBase, IRepository<Fixture>
     {
-        private readonly string path = @".\Data";
         private readonly string file = $"Fixtures.xml";
 
         public FixtureRepository()
         {
-            CreateFiles();
+            CreateFiles(file);
         }
         public IList<Fixture> Create(IList<Fixture> itemList)
         {
@@ -89,18 +88,6 @@ namespace FootballChairman.Repositories
             return fixtureList;
         }
 
-        private void CreateFiles()
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
 
-            if (!File.Exists(Path.Combine(path, file)))
-            {
-                var createdFile = File.Create(Path.Combine(path, file));
-                createdFile.Close();
-            }
-        }
     }
 }
