@@ -54,6 +54,27 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <ListView ItemsSource="{Binding Ranking}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding ClubName}">
+                            <GridViewColumnHeader Content="Club"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Points}">
+                            <GridViewColumnHeader Content="Points"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding GoalsFor}">
+                            <GridViewColumnHeader Content="Goals For"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding GoalsAgainst}">
+                            <GridViewColumnHeader Content="Goals Against"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding GoalDifference}">
+                            <GridViewColumnHeader Content="Goals Dif"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>

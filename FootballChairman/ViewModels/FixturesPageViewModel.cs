@@ -54,7 +54,7 @@ namespace FootballChairman.ViewModels
         {
             foreach (var club in _clubService.GetAllClubs())
             {
-                _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = _competition.Id });
+                _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = _competition.Id, ClubName = club.Name });
             }
         }
 

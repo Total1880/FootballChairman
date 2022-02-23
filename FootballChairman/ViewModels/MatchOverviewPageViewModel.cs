@@ -15,20 +15,25 @@ namespace FootballChairman.ViewModels
     {
         private IFixtureService _fixtureService;
         private IGameService _gameService;
+        private IClubPerCompetitionService _clubPerCompetitionService;
         private int _matchDay;
         private ObservableCollection<Game> _lastGames;
         private ObservableCollection<Fixture> _nextFixtures;
+        private ObservableCollection<ClubPerCompetition> _ranking;
         private RelayCommand _nextGameCommand;
 
         public ObservableCollection<Game> LastGames { get => _lastGames; set { _lastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Fixture> NextFixtures { get => _nextFixtures; set { _nextFixtures = value; RaisePropertyChanged(); } }
+        public ObservableCollection<ClubPerCompetition> Ranking { get => _ranking; set { _ranking = value; RaisePropertyChanged(); } }
         public RelayCommand NextGameCommand => _nextGameCommand ??= new RelayCommand(NextGame);
         public string ScoreDevider { get => "-"; }
 
-        public MatchOverviewPageViewModel(IFixtureService fixtureService, IGameService gameService)
+        public MatchOverviewPageViewModel(IFixtureService fixtureService, IGameService gameService, IClubPerCompetitionService clubPerCompetitionService)
         {
             _fixtureService = fixtureService;
             _gameService = gameService;
+            _clubPerCompetitionService = clubPerCompetitionService;
+
             _matchDay = 1;
             LoadFixtureLists();
         }
@@ -43,6 +48,7 @@ namespace FootballChairman.ViewModels
             _matchDay++;
             LoadFixtureLists();
             PlayGames();
+            RefreshRanking();
         }
 
         private void PlayGames()
@@ -51,8 +57,17 @@ namespace FootballChairman.ViewModels
 
             foreach (var fixture in _fixtureService.LoadFixturesOfMatchday(_matchDay - 1))
             {
-                LastGames.Add(_gameService.PlayGame(fixture));
+                var game = _gameService.PlayGame(fixture);
+                LastGames.Add(game);
+                _clubPerCompetitionService.UpdateData(game);
             }
+        }
+
+        private void RefreshRanking()
+        {
+            Ranking = new ObservableCollection<ClubPerCompetition>(_clubPerCompetitionService.GetAll()
+                .OrderByDescending(c => c.GoalDifference)
+                .OrderByDescending(c => c.Points));
         }
     }
 }

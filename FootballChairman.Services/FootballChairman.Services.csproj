@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FootballChairman.Models\FootballChairman.Models.csproj" />
     <ProjectReference Include="..\FootballChairman.Repositories\FootballChairman.Repositories.csproj" />
+    <ProjectReference Include="..\OlavFramework\OlavFramework.csproj" />
   </ItemGroup>
 
 </Project>

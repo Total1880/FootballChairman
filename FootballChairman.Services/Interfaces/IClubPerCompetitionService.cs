@@ -11,5 +11,6 @@ namespace FootballChairman.Services.Interfaces
     {
         ClubPerCompetition CreateClubPerCompetition(ClubPerCompetition clubPerCompetition);
         IList<ClubPerCompetition> GetAll();
+        void UpdateData(Game game);
     }
 }

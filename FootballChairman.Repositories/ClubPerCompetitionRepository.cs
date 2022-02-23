@@ -29,7 +29,11 @@ namespace FootballChairman.Repositories
                 {
                     writer.WriteStartElement(nameof(ClubPerCompetition));
                     writer.WriteAttributeString(nameof(ClubPerCompetition.ClubId), clubPerCompetition.ClubId.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.ClubName), clubPerCompetition.ClubName.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.CompetitionId), clubPerCompetition.CompetitionId.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.Points), clubPerCompetition.Points.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.GoalsFor), clubPerCompetition.GoalsFor.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.GoalsAgainst), clubPerCompetition.GoalsAgainst.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -73,7 +77,11 @@ namespace FootballChairman.Repositories
                         var readClubPerCompetition = new ClubPerCompetition();
 
                         readClubPerCompetition.ClubId = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubId)));
+                        readClubPerCompetition.ClubName = xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubName));
                         readClubPerCompetition.CompetitionId = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.CompetitionId)));
+                        readClubPerCompetition.Points = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Points)));
+                        readClubPerCompetition.GoalsFor = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.GoalsFor)));
+                        readClubPerCompetition.GoalsAgainst = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.GoalsAgainst)));
 
                         clubPerCompetitionList.Add(readClubPerCompetition);
                     } while (xmlReader.ReadToNextSibling(nameof(ClubPerCompetition)));

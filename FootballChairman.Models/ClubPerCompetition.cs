@@ -9,6 +9,11 @@ namespace FootballChairman.Models
     public class ClubPerCompetition
     {
         public int ClubId { get; set; }
+        public string ClubName { get; set; }
         public int CompetitionId { get; set; }
+        public int Points { get; set; }
+        public int GoalsFor { get; set; }
+        public int GoalsAgainst { get; set; }
+        public int GoalDifference { get => GoalsFor - GoalsAgainst; }
     }
 }
