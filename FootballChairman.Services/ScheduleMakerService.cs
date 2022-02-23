@@ -10,7 +10,7 @@ namespace FootballChairman.Services
 {
     public class ScheduleMakerService : IScheduleMakerService
     {
-        private IList<string> _teams;
+        private IList<Club> _teams;
         private int _roundCount;
         private int _matchesPerRoundCount;
         private bool _alternate = false;
@@ -18,11 +18,11 @@ namespace FootballChairman.Services
 
         public ScheduleMakerService()
         {
-            _teams = new List<string>();
+            _teams = new List<Club>();
             _offsetList = new List<int>();
         }
 
-        public IList<Fixture> Generate(IList<string> teams)
+        public IList<Fixture> Generate(IList<Club> teams, int competitionId)
         {
             _teams = teams;
             _roundCount = _teams.Count - 1;
@@ -57,10 +57,10 @@ namespace FootballChairman.Services
                         {
                             RoundNo = roundNo + roundNoOffset,
                             MatchNo = matchIndex,
-                            HomeOpponentId = homes[matchIndex],
-                            AwayOpponentId = aways[matchIndex],
-                            HomeOpponent = _teams[homes[matchIndex]],
-                            AwayOpponent = _teams[aways[matchIndex]]
+                            HomeOpponentId = _teams[homes[matchIndex]].Id,
+                            AwayOpponentId = _teams[aways[matchIndex]].Id,
+                            HomeOpponent = _teams[homes[matchIndex]].Name,
+                            AwayOpponent = _teams[aways[matchIndex]].Name
                         });
                     }
                     else
@@ -69,10 +69,10 @@ namespace FootballChairman.Services
                         {
                             RoundNo = roundNo + roundNoOffset,
                             MatchNo = matchIndex,
-                            HomeOpponentId = aways[matchIndex],
-                            AwayOpponentId = homes[matchIndex],
-                            HomeOpponent = _teams[aways[matchIndex]],
-                            AwayOpponent = _teams[homes[matchIndex]]
+                            HomeOpponentId = _teams[aways[matchIndex]].Id,
+                            AwayOpponentId = _teams[homes[matchIndex]].Id,
+                            HomeOpponent = _teams[aways[matchIndex]].Name,
+                            AwayOpponent = _teams[homes[matchIndex]].Name
                         });
                     }
 

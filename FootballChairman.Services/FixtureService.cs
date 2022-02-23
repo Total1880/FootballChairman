@@ -30,9 +30,9 @@ namespace FootballChairman.Services
             return _fixtureRepository.Create(fixtures);
         }
 
-        public IList<Fixture> GenerateFixtures(IList<string> teams)
+        public IList<Fixture> GenerateFixtures(IList<Club> teams, int competitionId)
         {
-            return SaveFixtures(_scheduleMakerService.Generate(teams));
+            return SaveFixtures(_scheduleMakerService.Generate(teams, competitionId));
         }
 
         public IList<Fixture> LoadFixturesOfMatchday(int matchday)

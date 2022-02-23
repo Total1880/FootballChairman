@@ -9,6 +9,6 @@ namespace FootballChairman.Services.Interfaces
 {
     public interface IScheduleMakerService
     {
-        IList<Fixture> Generate(IList<string> teams);
+        IList<Fixture> Generate(IList<Club> teams, int competitionId);
     }
 }
