@@ -30,6 +30,7 @@ namespace FootballChairman.Repositories
                     writer.WriteStartElement(nameof(Club));
                     writer.WriteAttributeString(nameof(Club.Id), club.Id.ToString());
                     writer.WriteAttributeString(nameof(Club.Name), club.Name.ToString());
+                    writer.WriteAttributeString(nameof(Club.Skill), club.Skill.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -74,6 +75,7 @@ namespace FootballChairman.Repositories
 
                         readClub.Id = int.Parse(xmlReader.GetAttribute(nameof(Club.Id)));
                         readClub.Name = xmlReader.GetAttribute(nameof(Club.Name));
+                        readClub.Skill = int.Parse(xmlReader.GetAttribute(nameof(Club.Skill)));
 
                         clubList.Add(readClub);
                     } while (xmlReader.ReadToNextSibling(nameof(Club)));

@@ -30,5 +30,10 @@ namespace FootballChairman.Services
         {
             return _clubRepository.Get();
         }
+
+        public Club GetClub(int id)
+        {
+            return GetAllClubs().FirstOrDefault(c => c.Id == id);
+        }
     }
 }

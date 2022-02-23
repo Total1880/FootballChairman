@@ -10,6 +10,7 @@ namespace FootballChairman.Services.Interfaces
     public interface IClubService
     {
         Club CreateClub(Club club);
+        Club GetClub(int id);
         IList<Club> GetAllClubs();
     }
 }

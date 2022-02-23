@@ -19,7 +19,7 @@ namespace FootballChairman.ViewModels
         private ObservableCollection<Fixture> _fixtures = new ObservableCollection<Fixture>();
         private Competition _competition;
 
-        public ObservableCollection<Fixture>Fixtures{ get => _fixtures; }
+        public ObservableCollection<Fixture> Fixtures { get => _fixtures; }
 
         public FixturesPageViewModel(IFixtureService fixtureService, ICompetitionService competitionService, IClubService clubService, IClubPerCompetitionService clubPerCompetitionService)
         {
@@ -42,12 +42,12 @@ namespace FootballChairman.ViewModels
 
         private void CreateClubs()
         {
-            _clubService.CreateClub(new Club { Id = 0, Name = "Antwerp" });
-            _clubService.CreateClub(new Club { Id = 1, Name = "Anderlecht" });
-            _clubService.CreateClub(new Club { Id = 2, Name = "Club Brugge" });
-            _clubService.CreateClub(new Club { Id = 3, Name = "Union" });
-            _clubService.CreateClub(new Club { Id = 4, Name = "RC Genk" });
-            _clubService.CreateClub(new Club { Id = 5, Name = "AA Gent" });
+            _clubService.CreateClub(new Club { Id = 0, Skill = 2, Name = "Antwerp" });
+            _clubService.CreateClub(new Club { Id = 1, Skill = 1, Name = "Anderlecht" });
+            _clubService.CreateClub(new Club { Id = 2, Skill = 0, Name = "Club Brugge" });
+            _clubService.CreateClub(new Club { Id = 3, Skill = 0, Name = "Union" });
+            _clubService.CreateClub(new Club { Id = 4, Skill = -1, Name = "RC Genk" });
+            _clubService.CreateClub(new Club { Id = 5, Skill = -2, Name = "AA Gent" });
         }
 
         private void CreateClubsPerCompetitions()
