@@ -13,17 +13,28 @@
         <StackPanel>
             <Button Content="Next"
                     Command="{Binding NextGameCommand}"/>
-            <ListView ItemsSource="{Binding LastFixtures}">
+            <ListView ItemsSource="{Binding LastGames}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding RoundNo}">
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Fixture.RoundNo}">
                             <GridViewColumnHeader Content="RoundNo"/>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding HomeOpponent}">
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Fixture.HomeOpponent}">
                             <GridViewColumnHeader Content="HomeOpponent"/>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding AwayOpponent}">
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Fixture.AwayOpponent}">
                             <GridViewColumnHeader Content="AwayOpponent"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding HomeScore}">
+
+                        </GridViewColumn>
+                        <GridViewColumn Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate />
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding AwayScore}">
+
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>

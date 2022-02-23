@@ -34,6 +34,8 @@ namespace FootballChairman.ViewModels
             _teams.Add("Union");
             _teams.Add("AA Gent");
             _teams.Add("RC Genk");
+            _teams.Add("Charleroi");
+            _teams.Add("KV Mechelen");
 
             _fixtures = new ObservableCollection<Fixture>(_fixtureService.GenerateFixtures(_teams));
         }
