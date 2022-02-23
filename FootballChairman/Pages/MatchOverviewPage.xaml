@@ -12,7 +12,11 @@
     <Grid>
         <StackPanel>
             <Button Content="Next"
-                    Command="{Binding NextGameCommand}"/>
+                    Command="{Binding NextGameCommand}"
+                    Visibility="{Binding ShowNextGameButton}"/>
+            <Button Content="End Season"
+                    Command="{Binding EndSeasonCommand}"
+                    Visibility="{Binding ShowEndSeasonButton}"/>
             <ListView ItemsSource="{Binding LastGames}">
                 <ListView.View>
                     <GridView>

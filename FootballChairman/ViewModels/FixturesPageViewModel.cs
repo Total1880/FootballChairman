@@ -36,22 +36,31 @@ namespace FootballChairman.ViewModels
 
         private void CreateCompetition()
         {
-            _competition = new Competition { Id = 0, Name = "Eerste Klasse" };
+            if (_competitionService.GetAllCompetitions().Any())
+                return;
+
+            _competition = new Competition { Id = 0, Name = "Eerste Klasse", Skill = 3 };
             _competitionService.CreateCompetition(_competition);
         }
 
         private void CreateClubs()
         {
+            if (_clubService.GetAllClubs().Any())
+                return;
+
             _clubService.CreateClub(new Club { Id = 0, Skill = 2, Name = "Antwerp" });
-            _clubService.CreateClub(new Club { Id = 1, Skill = 1, Name = "Anderlecht" });
-            _clubService.CreateClub(new Club { Id = 2, Skill = 0, Name = "Club Brugge" });
-            _clubService.CreateClub(new Club { Id = 3, Skill = 0, Name = "Union" });
-            _clubService.CreateClub(new Club { Id = 4, Skill = -1, Name = "RC Genk" });
-            _clubService.CreateClub(new Club { Id = 5, Skill = -2, Name = "AA Gent" });
+            _clubService.CreateClub(new Club { Id = 1, Skill = 2, Name = "Anderlecht" });
+            _clubService.CreateClub(new Club { Id = 2, Skill = 1, Name = "Club Brugge" });
+            _clubService.CreateClub(new Club { Id = 3, Skill = 1, Name = "Union" });
+            _clubService.CreateClub(new Club { Id = 4, Skill = 0, Name = "RC Genk" });
+            _clubService.CreateClub(new Club { Id = 5, Skill = 0, Name = "AA Gent" });
         }
 
         private void CreateClubsPerCompetitions()
         {
+            if (_clubPerCompetitionService.GetAll().Any())
+                return;
+
             foreach (var club in _clubService.GetAllClubs())
             {
                 _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = _competition.Id, ClubName = club.Name });
@@ -60,6 +69,9 @@ namespace FootballChairman.ViewModels
 
         private void CreateFixtures()
         {
+            if(_fixtureService.LoadFixtures().Any())
+                return ;
+
             _fixtures = new ObservableCollection<Fixture>(_fixtureService.GenerateFixtures(_clubService.GetAllClubs(), _competition.Id));
         }
     }

@@ -10,5 +10,6 @@ namespace FootballChairman.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Skill { get; set; }
     }
 }

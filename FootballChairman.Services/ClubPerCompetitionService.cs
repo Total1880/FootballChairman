@@ -32,6 +32,20 @@ namespace FootballChairman.Services
             return _clubPerCompetitionRepository.Get();
         }
 
+        public void ResetData()
+        {
+            var list = GetAll();
+
+            foreach (var item in list)
+            {
+                item.GoalsFor = 0;
+                item.GoalsAgainst = 0;
+                item.Points = 0;
+            }
+
+            _clubPerCompetitionRepository.Create(list);
+        }
+
         public void UpdateData(Game game)
         {
             var list = GetAll();
