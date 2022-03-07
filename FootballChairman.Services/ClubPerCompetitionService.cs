@@ -13,10 +13,12 @@ namespace FootballChairman.Services
     public class ClubPerCompetitionService : IClubPerCompetitionService
     {
         IRepository<ClubPerCompetition> _clubPerCompetitionRepository;
+        ICompetitionService _competitionService;
 
-        public ClubPerCompetitionService(IRepository<ClubPerCompetition> clubPerCompetitionRepository)
+        public ClubPerCompetitionService(IRepository<ClubPerCompetition> clubPerCompetitionRepository, ICompetitionService competitionService)
         {
             _clubPerCompetitionRepository = clubPerCompetitionRepository;
+            _competitionService = competitionService;
         }
 
         public ClubPerCompetition CreateClubPerCompetition(ClubPerCompetition clubPerCompetition)
@@ -62,7 +64,7 @@ namespace FootballChairman.Services
                 home.Points += Configuration.PointPerWin;
                 away.Points += Configuration.PointPerLoss;
             }
-            else if(game.HomeScore < game.AwayScore)
+            else if (game.HomeScore < game.AwayScore)
             {
                 away.Points += Configuration.PointPerWin;
                 home.Points += Configuration.PointPerLoss;
@@ -71,6 +73,26 @@ namespace FootballChairman.Services
             {
                 home.Points += Configuration.PointPerEqual;
                 away.Points += Configuration.PointPerEqual;
+            }
+
+            _clubPerCompetitionRepository.Create(list);
+        }
+
+        public void UpdatePromotionsAndRelegations(IList<ClubPerCompetition> ranking)
+        {
+            var competition = _competitionService.GetAllCompetitions().FirstOrDefault(c => c.Id == ranking[0].CompetitionId);
+            var list = GetAll();
+
+            for (int i = 0; i < Configuration.PromotionSpots; i++)
+            {
+                if (competition.PromotionCompetitionId >= 0)
+                    list.FirstOrDefault(c => c.CompetitionId == competition.Id && c.ClubId == ranking[i].ClubId).CompetitionId = competition.PromotionCompetitionId;
+            }
+
+            for (int i = ranking.Count; i > ranking.Count - Configuration.RelegationSpots; i--)
+            {
+                if (competition.RelegationCompetitionId >= 0)
+                    list.FirstOrDefault(c => c.CompetitionId == competition.Id && c.ClubId == ranking[i - 1].ClubId).CompetitionId = competition.RelegationCompetitionId;
             }
 
             _clubPerCompetitionRepository.Create(list);

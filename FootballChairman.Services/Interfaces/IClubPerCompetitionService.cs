@@ -13,5 +13,6 @@ namespace FootballChairman.Services.Interfaces
         IList<ClubPerCompetition> GetAll();
         void UpdateData(Game game);
         void ResetData();
+        void UpdatePromotionsAndRelegations(IList<ClubPerCompetition> ranking);
     }
 }

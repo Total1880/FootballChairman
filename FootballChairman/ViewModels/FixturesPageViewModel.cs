@@ -38,8 +38,8 @@ namespace FootballChairman.ViewModels
             if (_competitionService.GetAllCompetitions().Any())
                 return;
 
-            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 6, RelegationCompetitionId = 1 });
-            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 3, PromotionCompetitionId = 0 });
+            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 6, PromotionCompetitionId = -1, RelegationCompetitionId = 1 });
+            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 3, PromotionCompetitionId = 0, RelegationCompetitionId = -1 });
         }
 
         private void CreateClubs()

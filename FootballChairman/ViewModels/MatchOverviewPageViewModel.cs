@@ -113,9 +113,12 @@ namespace FootballChairman.ViewModels
             {
                 SelectedCompetition = competition;
                 _clubService.UpdateClubsEndOfSeason(Ranking);
+                _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
             }
 
             SelectedCompetition = Competitions.FirstOrDefault(c => c.Id == originalSelectedCompetitionId);
+
+            ResetFictures();
 
             _clubPerCompetitionService.ResetData();
             ShowEndSeasonButton = Visibility.Collapsed;
@@ -125,6 +128,24 @@ namespace FootballChairman.ViewModels
             RefreshRanking();
         }
 
+        private void ResetFictures()
+        {
+            var clubs = _clubService.GetAllClubs();
+            var competitions = _competitionService.GetAllCompetitions();
+            var clubsPerCompetition = _clubPerCompetitionService.GetAll();
+
+            foreach (var competition in competitions)
+            {
+                var listOfClubs = new List<Club>();
+
+                foreach (var club in clubsPerCompetition.Where(c => c.CompetitionId == competition.Id))
+                {
+                    listOfClubs.Add(clubs.FirstOrDefault(c => c.Id == club.ClubId));
+                }
+
+                _fixtureService.GenerateFixtures(listOfClubs, competition.Id);
+            }
+        }
         private void PlayGames()
         {
             LastGames = new ObservableCollection<Game>();
