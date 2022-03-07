@@ -79,7 +79,10 @@ namespace FootballChairman.ViewModels
         private void CreateClubsPerCompetitions()
         {
             if (_clubPerCompetitionService.GetAll().Any())
+            {
+                _clubPerCompetitionService.ResetData();
                 return;
+            }
 
             var competitions = _competitionService.GetAllCompetitions();
             int counter = 0;
