@@ -17,7 +17,12 @@
             <Button Content="End Season"
                     Command="{Binding EndSeasonCommand}"
                     Visibility="{Binding ShowEndSeasonButton}"/>
-            <ListView ItemsSource="{Binding LastGames}">
+            <ComboBox
+                Width="150"
+                ItemsSource="{Binding Competitions}"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding SelectedCompetition}"/>
+            <ListView ItemsSource="{Binding ShowLastGames}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Fixture.RoundNo}">
@@ -43,7 +48,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListView ItemsSource="{Binding NextFixtures}">
+            <ListView ItemsSource="{Binding ShowNextFixtures}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding RoundNo}">

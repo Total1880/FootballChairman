@@ -28,8 +28,8 @@ namespace FootballChairman.Services
             _roundCount = _teams.Count - 1;
             _matchesPerRoundCount = teams.Count / 2;
 
-            var firstHalfSeasonFixtures = GenerateFixtures(0);
-            var secondHalfSeasonFixtures = GenerateFixtures(_teams.Count - 1);
+            var firstHalfSeasonFixtures = GenerateFixtures(0, competitionId);
+            var secondHalfSeasonFixtures = GenerateFixtures(_teams.Count - 1, competitionId);
 
             var list = firstHalfSeasonFixtures;
             list = list.Concat(secondHalfSeasonFixtures).ToList();
@@ -37,7 +37,7 @@ namespace FootballChairman.Services
             return list;
         }
 
-        private IList<Fixture> GenerateFixtures(int roundNoOffset)
+        private IList<Fixture> GenerateFixtures(int roundNoOffset, int competitionId)
         {
             IList<Fixture> fixtures = new List<Fixture>();
             _offsetList = GenerateOffsetArray(_teams.Count);
@@ -60,7 +60,8 @@ namespace FootballChairman.Services
                             HomeOpponentId = _teams[homes[matchIndex]].Id,
                             AwayOpponentId = _teams[aways[matchIndex]].Id,
                             HomeOpponent = _teams[homes[matchIndex]].Name,
-                            AwayOpponent = _teams[aways[matchIndex]].Name
+                            AwayOpponent = _teams[aways[matchIndex]].Name,
+                            CompetitionId = competitionId
                         });
                     }
                     else
@@ -72,7 +73,8 @@ namespace FootballChairman.Services
                             HomeOpponentId = _teams[aways[matchIndex]].Id,
                             AwayOpponentId = _teams[homes[matchIndex]].Id,
                             HomeOpponent = _teams[aways[matchIndex]].Name,
-                            AwayOpponent = _teams[homes[matchIndex]].Name
+                            AwayOpponent = _teams[homes[matchIndex]].Name,
+                            CompetitionId = competitionId
                         });
                     }
 

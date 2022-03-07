@@ -18,18 +18,26 @@ namespace FootballChairman.ViewModels
         private IGameService _gameService;
         private IClubPerCompetitionService _clubPerCompetitionService;
         private IClubService _clubService;
+        private ICompetitionService _competitionService;
         private int _matchDay;
         private ObservableCollection<Game> _lastGames;
+        private ObservableCollection<Game> _showLastGames;
         private ObservableCollection<Fixture> _nextFixtures;
+        private ObservableCollection<Fixture> _showNextFixtures;
         private ObservableCollection<ClubPerCompetition> _ranking;
+        private ObservableCollection<Competition> _competitions;
         private RelayCommand _nextGameCommand;
         private RelayCommand _endSeasonCommand;
         private Visibility _showNextGameButton;
         private Visibility _showEndSeasonButton;
+        private Competition _selectedCompetition;
 
         public ObservableCollection<Game> LastGames { get => _lastGames; set { _lastGames = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Game> ShowLastGames { get => _showLastGames; set { _showLastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Fixture> NextFixtures { get => _nextFixtures; set { _nextFixtures = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Fixture> ShowNextFixtures { get => _showNextFixtures; set { _showNextFixtures = value; RaisePropertyChanged(); } }
         public ObservableCollection<ClubPerCompetition> Ranking { get => _ranking; set { _ranking = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Competition> Competitions { get => _competitions; set { _competitions = value; RaisePropertyChanged(); } }
         public RelayCommand NextGameCommand => _nextGameCommand ??= new RelayCommand(NextGame);
         public RelayCommand EndSeasonCommand => _endSeasonCommand ??= new RelayCommand(EndSeason);
 
@@ -38,29 +46,56 @@ namespace FootballChairman.ViewModels
 
         public string ScoreDevider { get => "-"; }
 
-        public MatchOverviewPageViewModel(IFixtureService fixtureService, IGameService gameService, IClubPerCompetitionService clubPerCompetitionService, IClubService clubService)
+        public Competition SelectedCompetition
+        {
+            get => _selectedCompetition;
+            set
+            {
+                _selectedCompetition = value;
+                if (_selectedCompetition != null)
+                {
+                    LoadFixtureLists();
+                    RefreshRanking();
+                }
+                RaisePropertyChanged();
+            }
+        }
+
+        public MatchOverviewPageViewModel(
+            IFixtureService fixtureService,
+            IGameService gameService,
+            IClubPerCompetitionService clubPerCompetitionService,
+            IClubService clubService,
+            ICompetitionService competitionService)
         {
             _fixtureService = fixtureService;
             _gameService = gameService;
             _clubPerCompetitionService = clubPerCompetitionService;
             _clubService = clubService;
+            _competitionService = competitionService;
 
             ShowEndSeasonButton = Visibility.Collapsed;
             ShowNextGameButton = Visibility.Visible;
             _matchDay = 1;
+            Competitions = new ObservableCollection<Competition>(_competitionService.GetAllCompetitions());
+            SelectedCompetition = Competitions[0];
             LoadFixtureLists();
         }
 
         private void LoadFixtureLists()
         {
             NextFixtures = new ObservableCollection<Fixture>(_fixtureService.LoadFixturesOfMatchday(_matchDay));
+            ShowNextFixtures = new ObservableCollection<Fixture>(NextFixtures.Where(f => f.CompetitionId == SelectedCompetition.Id));
+
+            if (LastGames != null)
+                ShowLastGames = new ObservableCollection<Game>(LastGames.Where(g => g.Fixture.CompetitionId == SelectedCompetition.Id));
         }
 
         private void NextGame()
         {
             _matchDay++;
-            LoadFixtureLists();
             PlayGames();
+            LoadFixtureLists();
             RefreshRanking();
 
             if (!NextFixtures.Any())
@@ -72,7 +107,15 @@ namespace FootballChairman.ViewModels
 
         private void EndSeason()
         {
-            _clubService.UpdateClubsEndOfSeason(Ranking);
+            var originalSelectedCompetitionId = SelectedCompetition.Id;
+
+            foreach (var competition in Competitions)
+            {
+                SelectedCompetition = competition;
+                _clubService.UpdateClubsEndOfSeason(Ranking);
+            }
+
+            SelectedCompetition = Competitions.FirstOrDefault(c => c.Id == originalSelectedCompetitionId);
 
             _clubPerCompetitionService.ResetData();
             ShowEndSeasonButton = Visibility.Collapsed;
@@ -97,6 +140,7 @@ namespace FootballChairman.ViewModels
         private void RefreshRanking()
         {
             Ranking = new ObservableCollection<ClubPerCompetition>(_clubPerCompetitionService.GetAll()
+                .Where(c => c.CompetitionId == SelectedCompetition.Id)
                 .OrderByDescending(c => c.GoalDifference)
                 .OrderByDescending(c => c.Points));
         }

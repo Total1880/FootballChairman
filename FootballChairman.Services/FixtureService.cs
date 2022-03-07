@@ -32,7 +32,11 @@ namespace FootballChairman.Services
 
         public IList<Fixture> GenerateFixtures(IList<Club> teams, int competitionId)
         {
-            return SaveFixtures(_scheduleMakerService.Generate(teams, competitionId));
+            var fixtures = LoadFixtures().Where(f => f.CompetitionId != competitionId).ToList();
+            var newFixtures = _scheduleMakerService.Generate(teams, competitionId);
+
+            fixtures.AddRange(newFixtures);
+            return SaveFixtures(fixtures);
         }
 
         public IList<Fixture> LoadFixturesOfMatchday(int matchday)
