@@ -43,6 +43,7 @@ namespace FootballChairman.Services
                 item.GoalsFor = 0;
                 item.GoalsAgainst = 0;
                 item.Points = 0;
+                item.IsNew = false;
             }
 
             _clubPerCompetitionRepository.Create(list);
@@ -86,13 +87,19 @@ namespace FootballChairman.Services
             for (int i = 0; i < Configuration.PromotionSpots; i++)
             {
                 if (competition.PromotionCompetitionId >= 0)
+                {
+                    list.FirstOrDefault(c => c.CompetitionId == competition.Id && c.ClubId == ranking[i].ClubId).IsNew = true;
                     list.FirstOrDefault(c => c.CompetitionId == competition.Id && c.ClubId == ranking[i].ClubId).CompetitionId = competition.PromotionCompetitionId;
+                }
             }
 
             for (int i = ranking.Count; i > ranking.Count - Configuration.RelegationSpots; i--)
             {
                 if (competition.RelegationCompetitionId >= 0)
+                {
+                    list.FirstOrDefault(c => c.CompetitionId == competition.Id && c.ClubId == ranking[i - 1].ClubId).IsNew = true;
                     list.FirstOrDefault(c => c.CompetitionId == competition.Id && c.ClubId == ranking[i - 1].ClubId).CompetitionId = competition.RelegationCompetitionId;
+                }
             }
 
             _clubPerCompetitionRepository.Create(list);

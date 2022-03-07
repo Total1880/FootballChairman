@@ -118,7 +118,7 @@ namespace FootballChairman.ViewModels
 
             SelectedCompetition = Competitions.FirstOrDefault(c => c.Id == originalSelectedCompetitionId);
 
-            ResetFictures();
+            ResetFixtures();
 
             _clubPerCompetitionService.ResetData();
             ShowEndSeasonButton = Visibility.Collapsed;
@@ -128,7 +128,7 @@ namespace FootballChairman.ViewModels
             RefreshRanking();
         }
 
-        private void ResetFictures()
+        private void ResetFixtures()
         {
             var clubs = _clubService.GetAllClubs();
             var competitions = _competitionService.GetAllCompetitions();
@@ -161,7 +161,7 @@ namespace FootballChairman.ViewModels
         private void RefreshRanking()
         {
             Ranking = new ObservableCollection<ClubPerCompetition>(_clubPerCompetitionService.GetAll()
-                .Where(c => c.CompetitionId == SelectedCompetition.Id)
+                .Where(c => c.CompetitionId == SelectedCompetition.Id && !c.IsNew)
                 .OrderByDescending(c => c.GoalDifference)
                 .OrderByDescending(c => c.Points));
         }

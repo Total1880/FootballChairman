@@ -34,6 +34,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(ClubPerCompetition.Points), clubPerCompetition.Points.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.GoalsFor), clubPerCompetition.GoalsFor.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.GoalsAgainst), clubPerCompetition.GoalsAgainst.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.IsNew), clubPerCompetition.IsNew.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -82,6 +83,7 @@ namespace FootballChairman.Repositories
                         readClubPerCompetition.Points = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Points)));
                         readClubPerCompetition.GoalsFor = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.GoalsFor)));
                         readClubPerCompetition.GoalsAgainst = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.GoalsAgainst)));
+                        readClubPerCompetition.IsNew = bool.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.IsNew)));
 
                         clubPerCompetitionList.Add(readClubPerCompetition);
                     } while (xmlReader.ReadToNextSibling(nameof(ClubPerCompetition)));

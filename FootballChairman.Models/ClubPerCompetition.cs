@@ -15,5 +15,6 @@ namespace FootballChairman.Models
         public int GoalsFor { get; set; }
         public int GoalsAgainst { get; set; }
         public int GoalDifference { get => GoalsFor - GoalsAgainst; }
+        public bool IsNew { get; set; }
     }
 }

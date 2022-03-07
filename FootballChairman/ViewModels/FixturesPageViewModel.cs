@@ -38,8 +38,9 @@ namespace FootballChairman.ViewModels
             if (_competitionService.GetAllCompetitions().Any())
                 return;
 
-            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 6, PromotionCompetitionId = -1, RelegationCompetitionId = 1 });
-            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 3, PromotionCompetitionId = 0, RelegationCompetitionId = -1 });
+            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 9, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10 });
+            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 6, PromotionCompetitionId = 0, RelegationCompetitionId = 2, NumberOfTeams = 8 });
+            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Derde Klasse", Skill = 3, PromotionCompetitionId = 1, RelegationCompetitionId = -1, NumberOfTeams = 8 });
         }
 
         private void CreateClubs()
@@ -65,6 +66,14 @@ namespace FootballChairman.ViewModels
             _clubService.CreateClub(new Club { Id = 15, Skill = 0, Name = "Zulte Waregem" });
             _clubService.CreateClub(new Club { Id = 16, Skill = 0, Name = "Seraing" });
             _clubService.CreateClub(new Club { Id = 17, Skill = 0, Name = "Beerschot" });
+            _clubService.CreateClub(new Club { Id = 18, Skill = 0, Name = "Westerlo" });
+            _clubService.CreateClub(new Club { Id = 19, Skill = 0, Name = "RWDM" });
+            _clubService.CreateClub(new Club { Id = 20, Skill = 0, Name = "Waasland-Beveren" });
+            _clubService.CreateClub(new Club { Id = 21, Skill = 0, Name = "Deinze" });
+            _clubService.CreateClub(new Club { Id = 22, Skill = 0, Name = "Moeskroen" });
+            _clubService.CreateClub(new Club { Id = 23, Skill = 0, Name = "Lierse Kempenzonen" });
+            _clubService.CreateClub(new Club { Id = 24, Skill = 0, Name = "Lommel" });
+            _clubService.CreateClub(new Club { Id = 25, Skill = 0, Name = "Virton" });
         }
 
         private void CreateClubsPerCompetitions()
@@ -74,26 +83,25 @@ namespace FootballChairman.ViewModels
 
             var competitions = _competitionService.GetAllCompetitions();
             int counter = 0;
+            int competitionCounter = 0;
 
             foreach (var club in _clubService.GetAllClubs())
             {
-                if (counter < 10)
-                {
-                    _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = competitions[0].Id, ClubName = club.Name });
-                }
-                else 
-                {
-                    _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = competitions[1].Id, ClubName = club.Name });
-                }
+                _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = competitions[competitionCounter].Id, ClubName = club.Name });
 
                 counter++;
+                if (counter >= competitions[competitionCounter].NumberOfTeams )
+                {
+                    counter = 0;
+                    competitionCounter++;
+                }
             }
         }
 
         private void CreateFixtures()
         {
-            if(_fixtureService.LoadFixtures().Any())
-                return ;
+            if (_fixtureService.LoadFixtures().Any())
+                return;
 
             var clubs = _clubService.GetAllClubs();
             var competitions = _competitionService.GetAllCompetitions();
