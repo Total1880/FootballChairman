@@ -35,6 +35,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Manager.TrainingDefenseSkill), manager.TrainingDefenseSkill.ToString());
                     writer.WriteAttributeString(nameof(Manager.TrainingMidfieldSkill), manager.TrainingMidfieldSkill.ToString());
                     writer.WriteAttributeString(nameof(Manager.TrainingAttackSkill), manager.TrainingAttackSkill.ToString());
+                    writer.WriteAttributeString(nameof(Manager.ClubId), manager.ClubId.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -83,6 +84,7 @@ namespace FootballChairman.Repositories
                         readManager.TrainingDefenseSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingDefenseSkill)));
                         readManager.TrainingMidfieldSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingMidfieldSkill)));
                         readManager.TrainingAttackSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingAttackSkill)));
+                        readManager.ClubId = int.Parse(xmlReader.GetAttribute(nameof(Manager.ClubId)));
 
                         managerList.Add(readManager);
                     } while (xmlReader.ReadToNextSibling(nameof(Club)));

@@ -16,21 +16,30 @@ namespace FootballChairman.ViewModels
         private ICompetitionService _competitionService;
         private IClubService _clubService;
         private IClubPerCompetitionService _clubPerCompetitionService;
+        private IManagerService _managerService;
         private ObservableCollection<Fixture> _fixtures = new ObservableCollection<Fixture>();
 
         public ObservableCollection<Fixture> Fixtures { get => _fixtures; }
 
-        public FixturesPageViewModel(IFixtureService fixtureService, ICompetitionService competitionService, IClubService clubService, IClubPerCompetitionService clubPerCompetitionService)
+        public FixturesPageViewModel(
+            IFixtureService fixtureService,
+            ICompetitionService competitionService,
+            IClubService clubService,
+            IClubPerCompetitionService clubPerCompetitionService, 
+            IManagerService managerService)
         {
             _fixtureService = fixtureService;
             _competitionService = competitionService;
             _clubService = clubService;
             _clubPerCompetitionService = clubPerCompetitionService;
+            _managerService = managerService;
 
             CreateCompetition();
             CreateClubs();
+            CreateManagers();
             CreateClubsPerCompetitions();
             CreateFixtures();
+            _managerService = managerService;
         }
 
         private void CreateCompetition()
@@ -139,6 +148,25 @@ namespace FootballChairman.ViewModels
                 }
 
                 _fixtures = new ObservableCollection<Fixture>(_fixtureService.GenerateFixtures(listOfClubs, competition.Id));
+            }
+        }
+        private void CreateManagers()
+        {
+            var clubs = _clubService.GetAllClubs();
+            var counter = 0;
+            var random = new Random();
+            foreach (var club in clubs)
+            {
+                var newManager = new Manager();
+                newManager.Id = counter;
+                newManager.FirstName = "first" + counter;
+                newManager.LastName = "last" + counter;
+                newManager.TrainingDefenseSkill = random.Next(0, 10);
+                newManager.TrainingAttackSkill = random.Next(0, 10);
+                newManager.TrainingMidfieldSkill = random.Next(0, 10);
+                newManager.ClubId = club.Id;
+                counter++;
+                _managerService.CreateManager(newManager);
             }
         }
     }
