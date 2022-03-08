@@ -72,6 +72,15 @@
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Points}">
                             <GridViewColumnHeader Content="Points"/>
                         </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Win}">
+                            <GridViewColumnHeader Content="Win"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Draw}">
+                            <GridViewColumnHeader Content="Draw"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Lost}">
+                            <GridViewColumnHeader Content="Lost"/>
+                        </GridViewColumn>
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding GoalsFor}">
                             <GridViewColumnHeader Content="Goals For"/>
                         </GridViewColumn>

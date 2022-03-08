@@ -43,6 +43,9 @@ namespace FootballChairman.Services
                 item.GoalsFor = 0;
                 item.GoalsAgainst = 0;
                 item.Points = 0;
+                item.Win = 0;
+                item.Draw = 0;
+                item.Lost = 0;
                 item.IsNew = false;
             }
 
@@ -63,17 +66,26 @@ namespace FootballChairman.Services
             if (game.HomeScore > game.AwayScore)
             {
                 home.Points += Configuration.PointPerWin;
+                home.Win++;
                 away.Points += Configuration.PointPerLoss;
+                away.Lost++;
             }
             else if (game.HomeScore < game.AwayScore)
             {
                 away.Points += Configuration.PointPerWin;
+                away.Win++;
+
                 home.Points += Configuration.PointPerLoss;
+                home.Lost++;
+
             }
             else
             {
                 home.Points += Configuration.PointPerEqual;
+                home.Draw++;
                 away.Points += Configuration.PointPerEqual;
+                away.Draw++;
+
             }
 
             _clubPerCompetitionRepository.Create(list);

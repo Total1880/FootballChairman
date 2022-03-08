@@ -32,6 +32,9 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(ClubPerCompetition.ClubName), clubPerCompetition.ClubName.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.CompetitionId), clubPerCompetition.CompetitionId.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.Points), clubPerCompetition.Points.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.Win), clubPerCompetition.Win.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.Draw), clubPerCompetition.Draw.ToString());
+                    writer.WriteAttributeString(nameof(ClubPerCompetition.Lost), clubPerCompetition.Lost.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.GoalsFor), clubPerCompetition.GoalsFor.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.GoalsAgainst), clubPerCompetition.GoalsAgainst.ToString());
                     writer.WriteAttributeString(nameof(ClubPerCompetition.IsNew), clubPerCompetition.IsNew.ToString());
@@ -81,6 +84,9 @@ namespace FootballChairman.Repositories
                         readClubPerCompetition.ClubName = xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubName));
                         readClubPerCompetition.CompetitionId = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.CompetitionId)));
                         readClubPerCompetition.Points = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Points)));
+                        readClubPerCompetition.Win = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Win)));
+                        readClubPerCompetition.Draw = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Draw)));
+                        readClubPerCompetition.Lost = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Lost)));
                         readClubPerCompetition.GoalsFor = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.GoalsFor)));
                         readClubPerCompetition.GoalsAgainst = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.GoalsAgainst)));
                         readClubPerCompetition.IsNew = bool.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.IsNew)));
