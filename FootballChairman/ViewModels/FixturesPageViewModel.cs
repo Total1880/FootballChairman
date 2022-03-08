@@ -49,49 +49,50 @@ namespace FootballChairman.ViewModels
         {
             if (_clubService.GetAllClubs().Any())
                 return;
+            var random = new Random();
 
-            _clubService.CreateClub(new Club { Id = 0, Skill = 14, Name = "Union" });
-            _clubService.CreateClub(new Club { Id = 1, Skill = 14, Name = "Club Brugge" });
-            _clubService.CreateClub(new Club { Id = 2, Skill = 14, Name = "Antwerp" });
-            _clubService.CreateClub(new Club { Id = 3, Skill = 13, Name = "Anderlecht" });
-            _clubService.CreateClub(new Club { Id = 4, Skill = 13, Name = "AA Gent" });
-            _clubService.CreateClub(new Club { Id = 5, Skill = 13, Name = "KV Mechelen" });
-            _clubService.CreateClub(new Club { Id = 6, Skill = 12, Name = "Charleroi" });
-            _clubService.CreateClub(new Club { Id = 7, Skill = 12, Name = "RC Genk" });
-            _clubService.CreateClub(new Club { Id = 8, Skill = 12, Name = "Cercle Brugge" });
-            _clubService.CreateClub(new Club { Id = 9, Skill = 11, Name = "Sint Truiden" });
-            _clubService.CreateClub(new Club { Id = 10, Skill = 11, Name = "KV Kortrijk" });
-            _clubService.CreateClub(new Club { Id = 11, Skill = 11, Name = "OH Leuven" });
-            _clubService.CreateClub(new Club { Id = 12, Skill = 10, Name = "Standard" });
-            _clubService.CreateClub(new Club { Id = 13, Skill = 10, Name = "KV Oostende" });
-            _clubService.CreateClub(new Club { Id = 14, Skill = 10, Name = "Eupen" });
-            _clubService.CreateClub(new Club { Id = 15, Skill = 9, Name = "Zulte Waregem" });
-            _clubService.CreateClub(new Club { Id = 16, Skill = 9, Name = "Seraing" });
-            _clubService.CreateClub(new Club { Id = 17, Skill = 9, Name = "Beerschot" });
-            _clubService.CreateClub(new Club { Id = 18, Skill = 8, Name = "Westerlo" });
-            _clubService.CreateClub(new Club { Id = 19, Skill = 8, Name = "RWDM" });
-            _clubService.CreateClub(new Club { Id = 20, Skill = 8, Name = "Waasland-Beveren" });
-            _clubService.CreateClub(new Club { Id = 21, Skill = 7, Name = "Deinze" });
-            _clubService.CreateClub(new Club { Id = 22, Skill = 7, Name = "Moeskroen" });
-            _clubService.CreateClub(new Club { Id = 23, Skill = 7, Name = "Lierse Kempenzonen" });
-            _clubService.CreateClub(new Club { Id = 24, Skill = 6, Name = "Lommel" });
-            _clubService.CreateClub(new Club { Id = 25, Skill = 6, Name = "Virton" });
-            _clubService.CreateClub(new Club { Id = 26, Skill = 6, Name = "Dessel" });
-            _clubService.CreateClub(new Club { Id = 27, Skill = 5, Name = "Dender" });
-            _clubService.CreateClub(new Club { Id = 28, Skill = 5, Name = "FC Luik" });
-            _clubService.CreateClub(new Club { Id = 29, Skill = 5, Name = "Patro Eisden" });
-            _clubService.CreateClub(new Club { Id = 30, Skill = 4, Name = "Olympic Charleroi" });
-            _clubService.CreateClub(new Club { Id = 31, Skill = 4, Name = "Wezet" });
-            _clubService.CreateClub(new Club { Id = 32, Skill = 4, Name = "Knokke" });
-            _clubService.CreateClub(new Club { Id = 33, Skill = 3, Name = "Heist" });
-            _clubService.CreateClub(new Club { Id = 34, Skill = 3, Name = "Francs Borains" });
-            _clubService.CreateClub(new Club { Id = 35, Skill = 3, Name = "Sint Eloois-Winkel" });
-            _clubService.CreateClub(new Club { Id = 36, Skill = 2, Name = "Thes" });
-            _clubService.CreateClub(new Club { Id = 37, Skill = 2, Name = "Tienen" });
-            _clubService.CreateClub(new Club { Id = 38, Skill = 2, Name = "Rupel-Boom" });
-            _clubService.CreateClub(new Club { Id = 39, Skill = 1, Name = "Mandel United" });
-            _clubService.CreateClub(new Club { Id = 40, Skill = 1, Name = "La Louvière-Centre" });
-            _clubService.CreateClub(new Club { Id = 41, Skill = 0, Name = "RC Hoboken" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 0, Name = "Union" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 1, Name = "Club Brugge" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 2, Name = "Antwerp" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 3, Name = "Anderlecht" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 4, Name = "AA Gent" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 5, Name = "KV Mechelen" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 6, Name = "Charleroi" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 7, Name = "RC Genk" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 8, Name = "Cercle Brugge" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 9, Name = "Sint Truiden" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 10, Name = "KV Kortrijk" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 11, Name = "OH Leuven" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 12, Name = "Standard" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 13, Name = "KV Oostende" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 14, Name = "Eupen" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 15, Name = "Zulte Waregem" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 16, Name = "Seraing" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 17, Name = "Beerschot" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 18, Name = "Westerlo" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 19, Name = "RWDM" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 20, Name = "Waasland-Beveren" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 21, Name = "Deinze" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 22, Name = "Moeskroen" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 23, Name = "Lierse Kempenzonen" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 24, Name = "Lommel" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 25, Name = "Virton" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 26, Name = "Dessel" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 27, Name = "Dender" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 28, Name = "FC Luik" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 29, Name = "Patro Eisden" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 30, Name = "Olympic Charleroi" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 31, Name = "Wezet" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 32, Name = "Knokke" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 33, Name = "Heist" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 34, Name = "Francs Borains" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 35, Name = "Sint Eloois-Winkel" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 36, Name = "Thes" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 37, Name = "Tienen" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 38, Name = "Rupel-Boom" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 39, Name = "Mandel United" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 40, Name = "La Louvière-Centre" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 41, Name = "RC Hoboken" });
         }
 
         private void CreateClubsPerCompetitions()
@@ -111,7 +112,7 @@ namespace FootballChairman.ViewModels
                 _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = competitions[competitionCounter].Id, ClubName = club.Name });
 
                 counter++;
-                if (counter >= competitions[competitionCounter].NumberOfTeams )
+                if (counter >= competitions[competitionCounter].NumberOfTeams)
                 {
                     counter = 0;
                     competitionCounter++;

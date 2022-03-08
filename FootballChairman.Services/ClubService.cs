@@ -40,42 +40,42 @@ namespace FootballChairman.Services
 
         public void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking)
         {
-            var clubs = GetAllClubs();
+            //var clubs = GetAllClubs();
 
-            // update first club
-            var firstClub = clubs.FirstOrDefault(c => c.Id == ranking[0].ClubId);
-            if (firstClub.Skill < _competitionService.GetAllCompetitions().FirstOrDefault(com => com.Id == ranking[0].CompetitionId).Skill)
-                firstClub.Skill++;
+            //// update first club
+            //var firstClub = clubs.FirstOrDefault(c => c.Id == ranking[0].ClubId);
+            //if (firstClub.Skill < _competitionService.GetAllCompetitions().FirstOrDefault(com => com.Id == ranking[0].CompetitionId).Skill)
+            //    firstClub.Skill++;
 
-            // update last club
-            var lastClub = clubs.FirstOrDefault(c => c.Id == ranking[ranking.Count - 1].ClubId);
-            if(lastClub.Skill >0)
-                lastClub.Skill--;
+            //// update last club
+            //var lastClub = clubs.FirstOrDefault(c => c.Id == ranking[ranking.Count - 1].ClubId);
+            //if(lastClub.Skill >0)
+            //    lastClub.Skill--;
 
-            var random = new Random();
-            int counter = 0;
-            int backCounter = ranking.Count + 1;
-            foreach (var clubPerCompetition in ranking)
-            {
-                counter++;
-                backCounter--;
+            //var random = new Random();
+            //int counter = 0;
+            //int backCounter = ranking.Count + 1;
+            //foreach (var clubPerCompetition in ranking)
+            //{
+            //    counter++;
+            //    backCounter--;
 
-                if (counter != 1 || counter == ranking.Count)
-                {
-                    if (random.Next(counter) == 0)
-                    {
-                        if (clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill < _competitionService.GetAllCompetitions().FirstOrDefault(com => com.Id == ranking[0].CompetitionId).Skill)
-                            clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill++;
-                    }
-                    else if (random.Next(backCounter) == 0)
-                    {
-                        if (clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill > 0)
-                            clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill--;
-                    }
-                }
-            }
+            //    if (counter != 1 || counter == ranking.Count)
+            //    {
+            //        if (random.Next(counter) == 0)
+            //        {
+            //            if (clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill < _competitionService.GetAllCompetitions().FirstOrDefault(com => com.Id == ranking[0].CompetitionId).Skill)
+            //                clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill++;
+            //        }
+            //        else if (random.Next(backCounter) == 0)
+            //        {
+            //            if (clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill > 0)
+            //                clubs.FirstOrDefault(c => c.Id == clubPerCompetition.ClubId).Skill--;
+            //        }
+            //    }
+            //}
 
-            _clubRepository.Create(clubs);
+            //_clubRepository.Create(clubs);
         }
     }
 }
