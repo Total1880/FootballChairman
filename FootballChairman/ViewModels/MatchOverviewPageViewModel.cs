@@ -19,6 +19,7 @@ namespace FootballChairman.ViewModels
         private IClubPerCompetitionService _clubPerCompetitionService;
         private IClubService _clubService;
         private ICompetitionService _competitionService;
+        private IManagerService _managerService;
         private int _matchDay;
         private ObservableCollection<Game> _lastGames;
         private ObservableCollection<Game> _showLastGames;
@@ -66,13 +67,15 @@ namespace FootballChairman.ViewModels
             IGameService gameService,
             IClubPerCompetitionService clubPerCompetitionService,
             IClubService clubService,
-            ICompetitionService competitionService)
+            ICompetitionService competitionService,
+            IManagerService managerService)
         {
             _fixtureService = fixtureService;
             _gameService = gameService;
             _clubPerCompetitionService = clubPerCompetitionService;
             _clubService = clubService;
             _competitionService = competitionService;
+            _managerService = managerService;
 
             ShowEndSeasonButton = Visibility.Collapsed;
             ShowNextGameButton = Visibility.Visible;
@@ -110,6 +113,7 @@ namespace FootballChairman.ViewModels
             var originalSelectedCompetitionId = SelectedCompetition.Id;
 
             _clubService.UpdateClubsEndOfSeasonTroughManager();
+            _clubService.UpdateClubsWithNewManagers(_managerService.UpdateManagersEndSeason());
 
             foreach (var competition in Competitions)
             {

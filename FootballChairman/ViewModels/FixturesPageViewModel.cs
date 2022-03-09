@@ -150,22 +150,14 @@ namespace FootballChairman.ViewModels
         }
         private void CreateManagers()
         {
+            if (_managerService.GetAllManagers().Any())
+                return;
+
             var clubs = _clubService.GetAllClubs();
-            var counter = 0;
-            var random = new Random();
+
             foreach (var club in clubs)
             {
-                var newManager = new Manager();
-                newManager.Id = counter;
-                newManager.FirstName = "first" + counter;
-                newManager.LastName = "last" + counter;
-                newManager.TrainingDefenseSkill = random.Next(1, 11);
-                newManager.TrainingAttackSkill = random.Next(1, 11);
-                newManager.TrainingMidfieldSkill = random.Next(1, 11);
-                newManager.ClubId = club.Id;
-                _managerService.CreateManager(newManager);
-                club.ManagerId = counter;
-                counter++;
+                club.ManagerId = _managerService.GenerateManager(club.Id).Id;
             }
             _clubService.CreateAllClubs(clubs);
         }

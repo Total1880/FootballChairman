@@ -43,6 +43,11 @@ namespace FootballChairman.Services
             return GetAllClubs().FirstOrDefault(c => c.Id == id);
         }
 
+        public Club UpdateClub(Club club)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking)
         {
             //var clubs = GetAllClubs();
@@ -84,6 +89,11 @@ namespace FootballChairman.Services
         }
 
         public void UpdateClubsEndOfSeasonTroughManager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateClubsWithNewManagers(IList<Manager> newManagers)
         {
             throw new NotImplementedException();
         }
