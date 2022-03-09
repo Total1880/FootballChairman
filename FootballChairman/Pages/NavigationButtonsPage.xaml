@@ -19,6 +19,10 @@
                 Content="Fixtures"
                 Width="100"
                 Command="{Binding OpenFixturesPageCommand}"/>
+            <Button 
+                Content="Club"
+                Width="100"
+                Command="{Binding OpenClubPageCommand}"/>
         </StackPanel>
     </Grid>
 </Page>

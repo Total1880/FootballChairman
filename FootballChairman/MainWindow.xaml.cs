@@ -25,11 +25,13 @@ namespace FootballChairman
     {
         private FixturesPage _fixturesPage;
         private NavigationButtonsPage _navigationButtonsPage;
-        public MatchOverviewPage _matchOverviewPage;
+        private MatchOverviewPage _matchOverviewPage;
+        private ClubPage _clubPage;
 
         public FixturesPage FixturesPage => _fixturesPage ??= new FixturesPage();
         public NavigationButtonsPage NavigationButtonsPage => _navigationButtonsPage ??= new NavigationButtonsPage();
         public MatchOverviewPage MatchOverviewPage => _matchOverviewPage ??= new MatchOverviewPage();
+        public ClubPage ClubPage => _clubPage ??= new ClubPage();
 
         public MainWindow()
         {
@@ -39,7 +41,7 @@ namespace FootballChairman
 
             Messenger.Default.Register<OpenFixturesPageMessage>(this, OpenFixturePage);
             Messenger.Default.Register<OpenMatchOverviewPageMessage>(this, OpenMatchOverviewPage);
-
+            Messenger.Default.Register<OpenClubPageMessage>(this, OpenClubPage);
         }
 
         private void OpenFixturePage(OpenFixturesPageMessage obj)
@@ -50,6 +52,11 @@ namespace FootballChairman
         private void OpenMatchOverviewPage(OpenMatchOverviewPageMessage obj)
         {
             MainFrame.NavigationService.Navigate(MatchOverviewPage);
+        }
+
+        private void OpenClubPage(OpenClubPageMessage obj)
+        {
+            MainFrame.NavigationService.Navigate(ClubPage);
         }
     }
 }

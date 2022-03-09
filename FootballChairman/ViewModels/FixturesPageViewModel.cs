@@ -99,7 +99,7 @@ namespace FootballChairman.ViewModels
             _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 38, Name = "Rupel-Boom" });
             _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 39, Name = "Mandel United" });
             _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 40, Name = "La Louvière-Centre" });
-            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 41, Name = "RC Hoboken" });
+            _clubService.CreateClub(new Club { SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 41, Name = "RC Hoboken", IsPlayer = true });
         }
 
         private void CreateClubsPerCompetitions()
