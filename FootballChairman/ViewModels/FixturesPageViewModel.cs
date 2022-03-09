@@ -47,11 +47,9 @@ namespace FootballChairman.ViewModels
             if (_competitionService.GetAllCompetitions().Any())
                 return;
 
-            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10 });
+            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 18 });
             _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 12, PromotionCompetitionId = 0, RelegationCompetitionId = 2, NumberOfTeams = 8 });
-            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Derde Klasse", Skill = 9, PromotionCompetitionId = 1, RelegationCompetitionId = 3, NumberOfTeams = 8 });
-            _competitionService.CreateCompetition(new Competition { Id = 3, Name = "Vierde Klasse", Skill = 6, PromotionCompetitionId = 2, RelegationCompetitionId = 4, NumberOfTeams = 8 });
-            _competitionService.CreateCompetition(new Competition { Id = 4, Name = "Vijfde Klasse", Skill = 3, PromotionCompetitionId = 3, RelegationCompetitionId = -1, NumberOfTeams = 8 });
+            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Derde Klasse", Skill = 9, PromotionCompetitionId = 1, RelegationCompetitionId = -1, NumberOfTeams = 16 });
         }
 
         private void CreateClubs()
