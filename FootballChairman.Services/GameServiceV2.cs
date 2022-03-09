@@ -40,7 +40,7 @@ namespace FootballChairman.Services
                         if (RandomInt(0, homeClub.SkillAttack) != 0)
                         {
                             // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 2)) == 0)
+                            if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 3)) == 0)
                             {
                                 // Defence fails, goal
                                 game.HomeScore++;
@@ -53,7 +53,7 @@ namespace FootballChairman.Services
                         if (RandomInt(0, awayClub.SkillAttack) != 0)
                         {
                             // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 2)) == 0)
+                            if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 3)) == 0)
                             {
                                 // Defence fails, goal
                                 game.AwayScore++;
@@ -70,7 +70,7 @@ namespace FootballChairman.Services
                         if (RandomInt(0, awayClub.SkillAttack) != 0)
                         {
                             // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 2)) == 0)
+                            if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 3)) == 0)
                             {
                                 // Defence fails, goal
                                 game.AwayScore++;
@@ -83,7 +83,7 @@ namespace FootballChairman.Services
                         if (RandomInt(0, homeClub.SkillAttack) != 0)
                         {
                             // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 2)) == 0)
+                            if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 3)) == 0)
                             {
                                 // Defence fails, goal
                                 game.HomeScore++;
