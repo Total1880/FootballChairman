@@ -109,10 +109,11 @@ namespace FootballChairman.ViewModels
         {
             var originalSelectedCompetitionId = SelectedCompetition.Id;
 
+            _clubService.UpdateClubsEndOfSeasonTroughManager();
+
             foreach (var competition in Competitions)
             {
                 SelectedCompetition = competition;
-                _clubService.UpdateClubsEndOfSeason(Ranking);
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
             }
 

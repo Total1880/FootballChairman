@@ -14,5 +14,6 @@ namespace FootballChairman.Services.Interfaces
         IList<Club> GetAllClubs();
         IList<Club> CreateAllClubs(IList<Club> clubs);
         void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking);
+        void UpdateClubsEndOfSeasonTroughManager();
     }
 }

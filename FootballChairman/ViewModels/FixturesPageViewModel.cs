@@ -161,13 +161,13 @@ namespace FootballChairman.ViewModels
                 newManager.Id = counter;
                 newManager.FirstName = "first" + counter;
                 newManager.LastName = "last" + counter;
-                newManager.TrainingDefenseSkill = random.Next(0, 10);
-                newManager.TrainingAttackSkill = random.Next(0, 10);
-                newManager.TrainingMidfieldSkill = random.Next(0, 10);
+                newManager.TrainingDefenseSkill = random.Next(1, 11);
+                newManager.TrainingAttackSkill = random.Next(1, 11);
+                newManager.TrainingMidfieldSkill = random.Next(1, 11);
                 newManager.ClubId = club.Id;
-                counter++;
                 _managerService.CreateManager(newManager);
                 club.ManagerId = counter;
+                counter++;
             }
             _clubService.CreateAllClubs(clubs);
         }

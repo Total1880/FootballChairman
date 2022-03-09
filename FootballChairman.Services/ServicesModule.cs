@@ -17,7 +17,7 @@ namespace FootballChairman.Services
             builder.RegisterType<ScheduleMakerService>().AsImplementedInterfaces();
             builder.RegisterType<FixtureService>().AsImplementedInterfaces();
             builder.RegisterType<GameServiceV2>().AsImplementedInterfaces();
-            builder.RegisterType<ClubService>().AsImplementedInterfaces();
+            builder.RegisterType<ClubServiceV2>().AsImplementedInterfaces();
             builder.RegisterType<ClubPerCompetitionService>().AsImplementedInterfaces();
             builder.RegisterType<CompetitionService>().AsImplementedInterfaces();
             builder.RegisterType<ManagerService>().AsImplementedInterfaces();

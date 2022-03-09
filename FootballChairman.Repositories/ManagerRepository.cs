@@ -28,7 +28,7 @@ namespace FootballChairman.Repositories
 
                 foreach (var manager in itemList)
                 {
-                    writer.WriteStartElement(nameof(Club));
+                    writer.WriteStartElement(nameof(Manager));
                     writer.WriteAttributeString(nameof(Manager.Id), manager.Id.ToString());
                     writer.WriteAttributeString(nameof(Manager.FirstName), manager.FirstName.ToString());
                     writer.WriteAttributeString(nameof(Manager.LastName), manager.LastName.ToString());
@@ -87,7 +87,7 @@ namespace FootballChairman.Repositories
                         readManager.ClubId = int.Parse(xmlReader.GetAttribute(nameof(Manager.ClubId)));
 
                         managerList.Add(readManager);
-                    } while (xmlReader.ReadToNextSibling(nameof(Club)));
+                    } while (xmlReader.ReadToNextSibling(nameof(Manager)));
                 }
             }
 
