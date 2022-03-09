@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:FootballChairman.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClubPage">
+      Title="ClubPage"
+      DataContext="{Binding ClubPage, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,19 +27,19 @@
                 <Label 
                 Content="Defence: "/>
                 <Label 
-                Content="0"/>
+                Content="{Binding SelectedClub.SkillDefense}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Midfield: "/>
                 <Label 
-                Content="0"/>
+                Content="{Binding SelectedClub.SkillMidfield}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Attack: "/>
                 <Label 
-                Content="0"/>
+                Content="{Binding SelectedClub.SkillAttack}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="2">
@@ -46,26 +47,34 @@
                 <Label 
                 Content="Manager: "/>
                 <Label 
-                Content="name"/>
+                Content="{Binding SelectedManager.LastName}"/>
+                <Label 
+                Content="{Binding SelectedManager.FirstName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label 
+                Content="Age: "/>
+                <Label 
+                Content="{Binding SelectedManager.Age}"/>
             </StackPanel>
             <Label Content="Stats"/>
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Defence: "/>
                 <Label 
-                Content="0"/>
+                Content="{Binding SelectedManager.TrainingDefenseSkill}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Midfield: "/>
                 <Label 
-                Content="0"/>
+                Content="{Binding SelectedManager.TrainingMidfieldSkill}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Attack: "/>
                 <Label 
-                Content="0"/>
+                Content="{Binding SelectedManager.TrainingAttackSkill}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

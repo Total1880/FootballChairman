@@ -22,6 +22,7 @@ namespace FootballChairman
             builder.RegisterType<FixturesPageViewModel>().SingleInstance();
             builder.RegisterType<NavigationButtonsViewModel>().SingleInstance();
             builder.RegisterType<MatchOverviewPageViewModel>().SingleInstance();
+            builder.RegisterType<ClubPageViewModel>().SingleInstance();
 
             _container = builder.Build();
         }
@@ -29,5 +30,6 @@ namespace FootballChairman
         public FixturesPageViewModel FixturesPage => _container.Resolve<FixturesPageViewModel>();
         public NavigationButtonsViewModel NavigationButtons => _container.Resolve<NavigationButtonsViewModel>();
         public MatchOverviewPageViewModel MatchOverviewPage => _container.Resolve<MatchOverviewPageViewModel>();
+        public ClubPageViewModel ClubPage => _container.Resolve<ClubPageViewModel>();
     }
 }

@@ -18,6 +18,7 @@ namespace FootballChairman.Repositories
         }
         public IList<Club> Create(IList<Club> itemList)
         {
+            itemList = itemList.OrderBy(x => x.Name).ToList();
             var stream = new StringWriter();
 
             using (var writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true }))

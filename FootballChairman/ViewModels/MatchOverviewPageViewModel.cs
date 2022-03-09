@@ -1,4 +1,5 @@
-﻿using FootballChairman.Models;
+﻿using FootballChairman.Messages;
+using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -131,6 +132,8 @@ namespace FootballChairman.ViewModels
             _matchDay = 1;
             LoadFixtureLists();
             RefreshRanking();
+
+            MessengerInstance.Send(new RefreshYourClubDataMessage());
         }
 
         private void ResetFixtures()
@@ -167,6 +170,7 @@ namespace FootballChairman.ViewModels
         {
             Ranking = new ObservableCollection<ClubPerCompetition>(_clubPerCompetitionService.GetAll()
                 .Where(c => c.CompetitionId == SelectedCompetition.Id && !c.IsNew)
+                .OrderBy(c => c.ClubName)
                 .OrderByDescending(c => c.GoalDifference)
                 .OrderByDescending(c => c.Points));
         }
