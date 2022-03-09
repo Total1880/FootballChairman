@@ -20,6 +20,11 @@ namespace FootballChairman.Services
             _competitionService = competitionService;
         }
 
+        public IList<Club> CreateAllClubs(IList<Club> clubs)
+        {
+            return _clubRepository.Create(clubs);
+        }
+
         public Club CreateClub(Club club)
         {
             var list = GetAllClubs();

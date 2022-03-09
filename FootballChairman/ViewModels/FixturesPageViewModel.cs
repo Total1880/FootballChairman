@@ -167,7 +167,9 @@ namespace FootballChairman.ViewModels
                 newManager.ClubId = club.Id;
                 counter++;
                 _managerService.CreateManager(newManager);
+                club.ManagerId = counter;
             }
+            _clubService.CreateAllClubs(clubs);
         }
     }
 }

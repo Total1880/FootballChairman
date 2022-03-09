@@ -11,13 +11,14 @@ namespace FootballChairman.Services
     public class GameServiceV2 : IGameService
     {
         private readonly IClubService _clubService;
-        private readonly ICompetitionService _competitionService;
+        private readonly IManagerService _managerService;
 
-        public GameServiceV2(IClubService clubService, ICompetitionService competitionService)
+        public GameServiceV2(IClubService clubService, IManagerService managerService)
         {
             _clubService = clubService;
-            _competitionService = competitionService;
+            _managerService = managerService;
         }
+
         public Game PlayGame(Fixture fixture)
         {
             var game = new Game();
