@@ -35,6 +35,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Competition.PromotionCompetitionId), competition.PromotionCompetitionId.ToString());
                     writer.WriteAttributeString(nameof(Competition.RelegationCompetitionId), competition.RelegationCompetitionId.ToString());
                     writer.WriteAttributeString(nameof(Competition.NumberOfTeams), competition.NumberOfTeams.ToString());
+                    writer.WriteAttributeString(nameof(Competition.CountryId), competition.CountryId.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -83,6 +84,7 @@ namespace FootballChairman.Repositories
                         readCompetition.PromotionCompetitionId = int.Parse(xmlReader.GetAttribute(nameof(Competition.PromotionCompetitionId)));
                         readCompetition.RelegationCompetitionId = int.Parse(xmlReader.GetAttribute(nameof(Competition.RelegationCompetitionId)));
                         readCompetition.NumberOfTeams = int.Parse(xmlReader.GetAttribute(nameof(Competition.NumberOfTeams)));
+                        readCompetition.CountryId = int.Parse(xmlReader.GetAttribute(nameof(Competition.CountryId)));
 
                         competitionList.Add(readCompetition);
                     } while (xmlReader.ReadToNextSibling(nameof(Competition)));

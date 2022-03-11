@@ -21,6 +21,7 @@ namespace FootballChairman.Services
             builder.RegisterType<ClubPerCompetitionService>().AsImplementedInterfaces();
             builder.RegisterType<CompetitionService>().AsImplementedInterfaces();
             builder.RegisterType<ManagerService>().AsImplementedInterfaces();
+            builder.RegisterType<CounrtyService>().AsImplementedInterfaces();
         }
     }
 }

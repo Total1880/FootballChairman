@@ -14,6 +14,7 @@ namespace FootballChairman.Models
         public int SkillAttack { get; set; }
         public int SkillMidfield { get; set; }
         public int ManagerId { get; set; }
+        public int CountryId { get; set; }
         public bool IsPlayer { get; set; }
     }
 }

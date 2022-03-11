@@ -21,6 +21,7 @@ namespace FootballChairman.ViewModels
         private IClubService _clubService;
         private ICompetitionService _competitionService;
         private IManagerService _managerService;
+        private ICountryService _countryService;
         private int _matchDay;
         private ObservableCollection<Game> _lastGames;
         private ObservableCollection<Game> _showLastGames;
@@ -28,11 +29,13 @@ namespace FootballChairman.ViewModels
         private ObservableCollection<Fixture> _showNextFixtures;
         private ObservableCollection<ClubPerCompetition> _ranking;
         private ObservableCollection<Competition> _competitions;
+        private ObservableCollection<Country> _countries;
         private RelayCommand _nextGameCommand;
         private RelayCommand _endSeasonCommand;
         private Visibility _showNextGameButton;
         private Visibility _showEndSeasonButton;
         private Competition _selectedCompetition;
+        private Country _selectedCountry;
 
         public ObservableCollection<Game> LastGames { get => _lastGames; set { _lastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Game> ShowLastGames { get => _showLastGames; set { _showLastGames = value; RaisePropertyChanged(); } }
@@ -40,6 +43,7 @@ namespace FootballChairman.ViewModels
         public ObservableCollection<Fixture> ShowNextFixtures { get => _showNextFixtures; set { _showNextFixtures = value; RaisePropertyChanged(); } }
         public ObservableCollection<ClubPerCompetition> Ranking { get => _ranking; set { _ranking = value; RaisePropertyChanged(); } }
         public ObservableCollection<Competition> Competitions { get => _competitions; set { _competitions = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Country> Countries { get => _countries; set { _countries = value; RaisePropertyChanged(); } }
         public RelayCommand NextGameCommand => _nextGameCommand ??= new RelayCommand(NextGame);
         public RelayCommand EndSeasonCommand => _endSeasonCommand ??= new RelayCommand(EndSeason);
 
@@ -63,13 +67,24 @@ namespace FootballChairman.ViewModels
             }
         }
 
+        public Country SelectedCountry
+        {
+            get => _selectedCountry;
+            set
+            {
+                _selectedCountry = value;
+                LoadCompetitions();
+            }
+        }
+
         public MatchOverviewPageViewModel(
             IFixtureService fixtureService,
             IGameService gameService,
             IClubPerCompetitionService clubPerCompetitionService,
             IClubService clubService,
             ICompetitionService competitionService,
-            IManagerService managerService)
+            IManagerService managerService,
+            ICountryService countryService)
         {
             _fixtureService = fixtureService;
             _gameService = gameService;
@@ -77,12 +92,14 @@ namespace FootballChairman.ViewModels
             _clubService = clubService;
             _competitionService = competitionService;
             _managerService = managerService;
+            _countryService = countryService;
 
             ShowEndSeasonButton = Visibility.Collapsed;
             ShowNextGameButton = Visibility.Visible;
             _matchDay = 1;
-            Competitions = new ObservableCollection<Competition>(_competitionService.GetAllCompetitions());
-            SelectedCompetition = Competitions[0];
+            Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
+            SelectedCountry = Countries.FirstOrDefault();
+            LoadCompetitions();
             LoadFixtureLists();
         }
 
@@ -173,6 +190,11 @@ namespace FootballChairman.ViewModels
                 .OrderBy(c => c.ClubName)
                 .OrderByDescending(c => c.GoalDifference)
                 .OrderByDescending(c => c.Points));
+        }
+        private void LoadCompetitions()
+        {
+            Competitions = new ObservableCollection<Competition>(_competitionService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id));
+            SelectedCompetition = Competitions[0];
         }
     }
 }
