@@ -18,6 +18,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox
+                Width="150"
+                ItemsSource="{Binding Countries}"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding SelectedCountry}"/>
+            </StackPanel>
             <ComboBox
                 Width="150"
                 ItemsSource="{Binding Clubs}"

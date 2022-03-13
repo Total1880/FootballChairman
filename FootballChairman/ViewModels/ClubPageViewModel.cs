@@ -16,12 +16,26 @@ namespace FootballChairman.ViewModels
     {
         private readonly IClubService _clubService;
         private readonly IManagerService _managerService;
+        private readonly ICountryService _countryService;
         private Club _selectedClub;
         private Manager _selectedManager;
+        private Country _selectedCountry;
 
         private ObservableCollection<Club> _clubs;
+        private ObservableCollection<Country> _countries;
 
         public ObservableCollection<Club> Clubs { get => _clubs; set { _clubs = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Country> Countries { get => _countries; set { _countries = value; RaisePropertyChanged(); } }
+        public Country SelectedCountry
+        {
+            get => _selectedCountry;
+            set
+            {
+                _selectedCountry = value;
+                LoadData(new RefreshYourClubDataMessage());
+                RaisePropertyChanged();
+            }
+        }
 
         public Club SelectedClub
         {
@@ -48,11 +62,13 @@ namespace FootballChairman.ViewModels
         }
 
 
-        public ClubPageViewModel(IClubService clubService, IManagerService managerService)
+        public ClubPageViewModel(IClubService clubService, IManagerService managerService, ICountryService countryService)
         {
             _clubService = clubService;
             _managerService = managerService;
+            _countryService = countryService;
 
+            Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             LoadData(new RefreshYourClubDataMessage());
             Messenger.Default.Register<RefreshYourClubDataMessage>(this, LoadData);
         }
@@ -62,13 +78,17 @@ namespace FootballChairman.ViewModels
             int placeholderId = 0;
             if (SelectedClub != null)
              placeholderId = SelectedClub.Id;
+            if (SelectedCountry == null)
+                SelectedCountry = Countries.FirstOrDefault();
 
-            Clubs = new ObservableCollection<Club>(_clubService.GetAllClubs());
+            Clubs = new ObservableCollection<Club>(_clubService.GetAllClubs().Where(c => c.CountryId == SelectedCountry.Id));
 
             if (SelectedClub != null)
                 SelectedClub = Clubs.FirstOrDefault(c => c.Id == placeholderId);
-            else
+            else if (Clubs.Any(c => c.IsPlayer))
                 SelectedClub = Clubs.FirstOrDefault(c => c.IsPlayer);
+            else
+                SelectedClub = Clubs.FirstOrDefault();
         }
     }
 }
