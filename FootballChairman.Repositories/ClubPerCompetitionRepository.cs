@@ -78,10 +78,8 @@ namespace FootballChairman.Repositories
 
                     do
                     {
-                        var readClubPerCompetition = new ClubPerCompetition();
+                        var readClubPerCompetition = new ClubPerCompetition(int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubId))), xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubName)));
 
-                        readClubPerCompetition.ClubId = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubId)));
-                        readClubPerCompetition.ClubName = xmlReader.GetAttribute(nameof(ClubPerCompetition.ClubName));
                         readClubPerCompetition.CompetitionId = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.CompetitionId)));
                         readClubPerCompetition.Points = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Points)));
                         readClubPerCompetition.Win = int.Parse(xmlReader.GetAttribute(nameof(ClubPerCompetition.Win)));

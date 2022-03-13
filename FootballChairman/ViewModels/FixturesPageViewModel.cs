@@ -120,7 +120,7 @@ namespace FootballChairman.ViewModels
                 int competitionCounter = 0;
                 foreach (var club in _clubService.GetAllClubs().Where(c => c.CountryId == country.Id))
                 {
-                    _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition { ClubId = club.Id, CompetitionId = competitions[competitionCounter].Id, ClubName = club.Name });
+                    _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = competitions[competitionCounter].Id });
 
                     counter++;
                     if (counter >= competitions[competitionCounter].NumberOfTeams)

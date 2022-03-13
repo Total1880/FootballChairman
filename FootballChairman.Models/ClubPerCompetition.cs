@@ -8,8 +8,10 @@ namespace FootballChairman.Models
 {
     public class ClubPerCompetition
     {
-        public int ClubId { get; set; }
-        public string ClubName { get; set; }
+        private readonly int _clubId;
+        public readonly string _clubName;
+        public int ClubId { get => _clubId;}
+        public string ClubName { get => _clubName; }
         public int CompetitionId { get; set; }
         public int Points { get; set; }
         public int Win { get; set; }
@@ -19,5 +21,11 @@ namespace FootballChairman.Models
         public int GoalsAgainst { get; set; }
         public int GoalDifference { get => GoalsFor - GoalsAgainst; }
         public bool IsNew { get; set; }
+
+        public ClubPerCompetition(int clubId, string clubName)
+        {
+            _clubId = clubId;
+            _clubName = clubName;
+        }
     }
 }

@@ -132,8 +132,10 @@ namespace FootballChairman.ViewModels
 
             _clubService.UpdateClubsEndOfSeasonTroughManager();
             _clubService.UpdateClubsWithNewManagers(_managerService.UpdateManagersEndSeason());
-            throw new Exception("not all competitions are loaded. relegation and promotion is something wrong");
-            foreach (var competition in Competitions)
+
+            var competitions = _competitionService.GetAllCompetitions();
+
+            foreach (var competition in competitions)
             {
                 SelectedCompetition = competition;
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
