@@ -24,12 +24,12 @@
                 ItemsSource="{Binding Countries}"
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding SelectedCountry}"/>
-            </StackPanel>
-            <ComboBox
+                <ComboBox
                 Width="150"
                 ItemsSource="{Binding Clubs}"
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding SelectedClub}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Defence: "/>
