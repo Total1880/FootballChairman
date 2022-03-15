@@ -30,9 +30,9 @@ namespace FootballChairman.Repositories
                 {
                     writer.WriteStartElement(nameof(HistoryItem));
                     writer.WriteAttributeString(nameof(HistoryItem.Id), historyItem.Id.ToString());
-                    writer.WriteAttributeString(nameof(HistoryItem.Id), historyItem.ClubId.ToString());
-                    writer.WriteAttributeString(nameof(HistoryItem.Id), historyItem.CompetitionId.ToString());
-                    writer.WriteAttributeString(nameof(HistoryItem.Id), historyItem.Year.ToString());
+                    writer.WriteAttributeString(nameof(HistoryItem.ClubId), historyItem.ClubId.ToString());
+                    writer.WriteAttributeString(nameof(HistoryItem.CompetitionId), historyItem.CompetitionId.ToString());
+                    writer.WriteAttributeString(nameof(HistoryItem.Year), historyItem.Year.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -76,9 +76,9 @@ namespace FootballChairman.Repositories
                         var readHistoryItem = new HistoryItem();
 
                         readHistoryItem.Id = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.Id)));
-                        readHistoryItem.Id = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.ClubId)));
-                        readHistoryItem.Id = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.CompetitionId)));
-                        readHistoryItem.Id = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.Year)));
+                        readHistoryItem.ClubId = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.ClubId)));
+                        readHistoryItem.CompetitionId = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.CompetitionId)));
+                        readHistoryItem.Year = int.Parse(xmlReader.GetAttribute(nameof(HistoryItem.Year)));
 
                         historyItemList.Add(readHistoryItem);
                     } while (xmlReader.ReadToNextSibling(nameof(HistoryItem)));

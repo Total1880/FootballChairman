@@ -24,6 +24,10 @@ namespace FootballChairman.Services
             if (list.Any(hi => hi.Year == historyItem.Year && hi.CompetitionId == historyItem.CompetitionId))
                 throw new Exception("item already exist!");
 
+            if (list.Any())
+                historyItem.Id = list.Max(hi => hi.Id) + 1;
+            else
+                historyItem.Id = 0;
             list.Add(historyItem);
             _historyItemRepository.Create(list);
 

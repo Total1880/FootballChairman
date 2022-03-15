@@ -22,6 +22,7 @@ namespace FootballChairman.ViewModels
         private ICompetitionService _competitionService;
         private IManagerService _managerService;
         private ICountryService _countryService;
+        private IHistoryItemService _historyItemService;
         private int _matchDay;
         private ObservableCollection<Game> _lastGames;
         private ObservableCollection<Game> _showLastGames;
@@ -36,6 +37,7 @@ namespace FootballChairman.ViewModels
         private Visibility _showEndSeasonButton;
         private Competition _selectedCompetition;
         private Country _selectedCountry;
+        private int _year = 1;
 
         public ObservableCollection<Game> LastGames { get => _lastGames; set { _lastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Game> ShowLastGames { get => _showLastGames; set { _showLastGames = value; RaisePropertyChanged(); } }
@@ -84,7 +86,7 @@ namespace FootballChairman.ViewModels
             IClubService clubService,
             ICompetitionService competitionService,
             IManagerService managerService,
-            ICountryService countryService)
+            ICountryService countryService, IHistoryItemService historyItemService)
         {
             _fixtureService = fixtureService;
             _gameService = gameService;
@@ -93,6 +95,7 @@ namespace FootballChairman.ViewModels
             _competitionService = competitionService;
             _managerService = managerService;
             _countryService = countryService;
+            _historyItemService = historyItemService;
 
             ShowEndSeasonButton = Visibility.Collapsed;
             ShowNextGameButton = Visibility.Visible;
@@ -101,6 +104,11 @@ namespace FootballChairman.ViewModels
             SelectedCountry = Countries.FirstOrDefault();
             LoadCompetitions();
             LoadFixtureLists();
+
+            //load gameyear
+            var list = _historyItemService.GetHistoryItemsOfCompetition(Competitions[0].Id);
+            if (list.Any())
+                _year = list.Max(x => x.Year) + 1;
         }
 
         private void LoadFixtureLists()
@@ -138,6 +146,7 @@ namespace FootballChairman.ViewModels
             foreach (var competition in competitions)
             {
                 SelectedCompetition = competition;
+                _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = Ranking[0].ClubId, CompetitionId = competition.Id, Year = _year });
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
             }
 
@@ -153,6 +162,7 @@ namespace FootballChairman.ViewModels
             RefreshRanking();
 
             MessengerInstance.Send(new RefreshYourClubDataMessage());
+            _year++;
         }
 
         private void ResetFixtures()
