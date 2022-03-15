@@ -14,10 +14,12 @@ namespace FootballChairman.ViewModels
         private RelayCommand _openFixturesPageCommand;
         private RelayCommand _openMatchOverviewPageCommand;
         private RelayCommand _openClubPageCommand;
+        private RelayCommand _openHistoryPageCommand;
 
         public RelayCommand OpenFixturesPageCommand => _openFixturesPageCommand ??= new RelayCommand(OpenFixturesPage);
         public RelayCommand OpenMatchOverviewPageCommand => _openMatchOverviewPageCommand ??= new RelayCommand(OpenMatchOverviewPage);
         public RelayCommand OpenClubPageCommand => _openClubPageCommand ??= new RelayCommand(OpenClubPage);
+        public RelayCommand OpenHistoryPageCommand => _openHistoryPageCommand ??= new RelayCommand(OpenHistoryPage);
 
         private void OpenFixturesPage()
         {
@@ -31,6 +33,12 @@ namespace FootballChairman.ViewModels
         private void OpenClubPage()
         {
             MessengerInstance.Send(new OpenClubPageMessage());
+        }
+
+        private void OpenHistoryPage()
+        {
+            MessengerInstance.Send(new OpenHistoryPageMessage());
+
         }
     }
 }

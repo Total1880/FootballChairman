@@ -23,6 +23,10 @@
                 Content="Club"
                 Width="100"
                 Command="{Binding OpenClubPageCommand}"/>
+            <Button 
+                Content="History"
+                Width="100"
+                Command="{Binding OpenHistoryPageCommand}"/>
         </StackPanel>
     </Grid>
 </Page>
