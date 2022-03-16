@@ -127,11 +127,11 @@ namespace FootballChairman.ViewModels
             _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 54, Name = "Real Betis" });
             _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 55, Name = "Real Sociedad" });
             _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Bayern" });
-            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Dortmund" });
-            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Leverkusen" });
-            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "RB Leipzig" });
-            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Freiburg" });
-            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Hoffenheim" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 57, Name = "Dortmund" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 58, Name = "Leverkusen" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 59, Name = "RB Leipzig" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 60, Name = "Freiburg" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 61, Name = "Hoffenheim" });
         }
 
         private void CreateClubsPerCompetitions()

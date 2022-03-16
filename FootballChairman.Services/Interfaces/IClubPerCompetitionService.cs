@@ -10,6 +10,7 @@ namespace FootballChairman.Services.Interfaces
     public interface IClubPerCompetitionService
     {
         ClubPerCompetition CreateClubPerCompetition(ClubPerCompetition clubPerCompetition);
+        void CreateInternationalClubPerCompetitionsForChampions(IList<Club> clubs, int competitionId);
         IList<ClubPerCompetition> GetAll();
         void UpdateData(Game game);
         void ResetData();

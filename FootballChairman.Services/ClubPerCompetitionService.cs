@@ -29,6 +29,17 @@ namespace FootballChairman.Services
             return clubPerCompetition;
         }
 
+        public void CreateInternationalClubPerCompetitionsForChampions(IList<Club> clubs, int competitionId)
+        {
+            var list = GetAll().Where(cpc => cpc.CompetitionId != competitionId).ToList();
+            _clubPerCompetitionRepository.Create(list);
+
+            foreach (var club in clubs)
+            {
+                CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = competitionId});
+            }
+        }
+
         public IList<ClubPerCompetition> GetAll()
         {
             return _clubPerCompetitionRepository.Get();

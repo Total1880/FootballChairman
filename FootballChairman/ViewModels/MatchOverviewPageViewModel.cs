@@ -144,13 +144,13 @@ namespace FootballChairman.ViewModels
 
             var competitions = _competitionService.GetAllCompetitions();
 
-            foreach (var competition in competitions.Where(com => com.CompetitionType == CompetitionType.NationalCompetition))
+            foreach (var competition in competitions)
             {
                 SelectedCompetition = competition;
                 _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = Ranking[0].ClubId, CompetitionId = competition.Id, Year = _year });
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
             }
-
+            CreateInternationalFixtures();
             SelectedCompetition = Competitions.FirstOrDefault(c => c.Id == originalSelectedCompetitionId);
 
             ResetFixtures();
@@ -208,6 +208,17 @@ namespace FootballChairman.ViewModels
         {
             Competitions = new ObservableCollection<Competition>(_competitionService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id));
             SelectedCompetition = Competitions[0];
+        }
+        private void CreateInternationalFixtures()
+        {
+            var clubs = new List<Club>();
+            foreach (var competition in _competitionService.GetAllCompetitions().Where(comp => comp.CompetitionType == CompetitionType.NationalCompetition && comp.PromotionCompetitionId == -1))
+            {
+                    var historyItem = _historyItemService.GetHistoryItemsOfCompetition(competition.Id).FirstOrDefault(hi => hi.Year == _year);
+                    clubs.Add(_clubService.GetClub(historyItem.ClubId));
+            }
+
+            _clubPerCompetitionService.CreateInternationalClubPerCompetitionsForChampions(clubs, _competitionService.GetAllCompetitions().FirstOrDefault(c => c.CompetitionType == CompetitionType.InternationalCompetition).Id);
         }
     }
 }
