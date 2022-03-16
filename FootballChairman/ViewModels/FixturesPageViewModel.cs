@@ -27,7 +27,7 @@ namespace FootballChairman.ViewModels
             IFixtureService fixtureService,
             ICompetitionService competitionService,
             IClubService clubService,
-            IClubPerCompetitionService clubPerCompetitionService, 
+            IClubPerCompetitionService clubPerCompetitionService,
             IManagerService managerService,
             ICountryService countryService)
         {
@@ -56,11 +56,12 @@ namespace FootballChairman.ViewModels
             _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 12, PromotionCompetitionId = 0, RelegationCompetitionId = -1, NumberOfTeams = 8, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Premier League", Skill = 12, PromotionCompetitionId = -1, RelegationCompetitionId = 3, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 3, Name = "The Championship", Skill = 12, PromotionCompetitionId = 2, RelegationCompetitionId = -1, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 4, Name = "Champions League", Skill = 99, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 2, CountryId = 2, CompetitionType = CompetitionType.InternationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 4, Name = "Champions League", Skill = 99, PromotionCompetitionId = -1, RelegationCompetitionId = -1, CountryId = 2, CompetitionType = CompetitionType.InternationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 5, Name = "Eredivisie", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 3, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 6, Name = "Ligue 1", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 4, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 7, Name = "Primera Division", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 5, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 8, Name = "1. Bundesliga", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 6, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 9, Name = "Croky Cup", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, CountryId = 0, CompetitionType = CompetitionType.NationalCup });
 
         }
 
@@ -72,7 +73,7 @@ namespace FootballChairman.ViewModels
 
             _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 0, Name = "Union" });
             _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 1, Name = "Club Brugge" });
-            _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 2, Name = "Antwerp", IsPlayer = true }) ;
+            _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 2, Name = "Antwerp", IsPlayer = true });
             _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 3, Name = "Anderlecht" });
             _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 4, Name = "AA Gent" });
             _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 5, Name = "KV Mechelen" });
@@ -146,12 +147,15 @@ namespace FootballChairman.ViewModels
 
             foreach (var country in countries)
             {
-                var competitions = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id && com.CompetitionType != CompetitionType.InternationalCompetition).ToList();
+                var competitions = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id && com.CompetitionType == CompetitionType.NationalCompetition).ToList();
+                var cupcCompetition = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id && com.CompetitionType == CompetitionType.NationalCup).FirstOrDefault();
                 int counter = 0;
                 int competitionCounter = 0;
                 foreach (var club in _clubService.GetAllClubs().Where(c => c.CountryId == country.Id))
                 {
                     _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = competitions[competitionCounter].Id });
+                    if (cupcCompetition != null)
+                        _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = cupcCompetition.Id });
 
                     counter++;
                     if (counter >= competitions[competitionCounter].NumberOfTeams)
@@ -160,6 +164,9 @@ namespace FootballChairman.ViewModels
                         competitionCounter++;
                     }
                 }
+
+
+
             }
 
         }
@@ -173,7 +180,7 @@ namespace FootballChairman.ViewModels
             var competitions = _competitionService.GetAllCompetitions();
             var clubsPerCompetition = _clubPerCompetitionService.GetAll();
 
-            foreach (var competition in competitions)
+            foreach (var competition in competitions.Where(com => com.CompetitionType != CompetitionType.NationalCup))
             {
                 var listOfClubs = new List<Club>();
 

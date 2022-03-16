@@ -142,11 +142,15 @@ namespace FootballChairman.ViewModels
             _clubService.UpdateClubsEndOfSeasonTroughManager();
             _clubService.UpdateClubsWithNewManagers(_managerService.UpdateManagersEndSeason());
 
-            var competitions = _competitionService.GetAllCompetitions();
+            var competitions = _competitionService.GetAllCompetitions().Where(com => com.CompetitionType != CompetitionType.NationalCup);
 
             foreach (var competition in competitions)
             {
                 SelectedCompetition = competition;
+
+                if (Ranking == null || Ranking.Count < 1)
+                    continue;
+
                 _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = Ranking[0].ClubId, CompetitionId = competition.Id, Year = _year });
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
             }
@@ -169,7 +173,7 @@ namespace FootballChairman.ViewModels
         private void ResetFixtures()
         {
             var clubs = _clubService.GetAllClubs();
-            var competitions = _competitionService.GetAllCompetitions();
+            var competitions = _competitionService.GetAllCompetitions().Where(com => com.CompetitionType != CompetitionType.NationalCup);
             var clubsPerCompetition = _clubPerCompetitionService.GetAll();
 
             foreach (var competition in competitions)
