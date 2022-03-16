@@ -1,4 +1,5 @@
 ﻿using FootballChairman.Models;
+using FootballChairman.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Competition.RelegationCompetitionId), competition.RelegationCompetitionId.ToString());
                     writer.WriteAttributeString(nameof(Competition.NumberOfTeams), competition.NumberOfTeams.ToString());
                     writer.WriteAttributeString(nameof(Competition.CountryId), competition.CountryId.ToString());
+                    writer.WriteAttributeString(nameof(Competition.CompetitionType), competition.CompetitionType.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -85,6 +87,7 @@ namespace FootballChairman.Repositories
                         readCompetition.RelegationCompetitionId = int.Parse(xmlReader.GetAttribute(nameof(Competition.RelegationCompetitionId)));
                         readCompetition.NumberOfTeams = int.Parse(xmlReader.GetAttribute(nameof(Competition.NumberOfTeams)));
                         readCompetition.CountryId = int.Parse(xmlReader.GetAttribute(nameof(Competition.CountryId)));
+                        readCompetition.CompetitionType = (CompetitionType)Enum.Parse(typeof(CompetitionType), xmlReader.GetAttribute(nameof(Competition.CompetitionType)));
 
                         competitionList.Add(readCompetition);
                     } while (xmlReader.ReadToNextSibling(nameof(Competition)));

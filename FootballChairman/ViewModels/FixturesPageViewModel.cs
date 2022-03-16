@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FootballChairman.Models;
+using FootballChairman.Models.Enums;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 
@@ -51,10 +52,16 @@ namespace FootballChairman.ViewModels
             if (_competitionService.GetAllCompetitions().Any())
                 return;
 
-            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10, CountryId = 0 });
-            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 12, PromotionCompetitionId = 0, RelegationCompetitionId = -1, NumberOfTeams = 8, CountryId = 0 });
-            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Premier League", Skill = 12, PromotionCompetitionId = -1, RelegationCompetitionId = 3, NumberOfTeams = 10, CountryId = 1 });
-            _competitionService.CreateCompetition(new Competition { Id = 3, Name = "The Championship", Skill = 12, PromotionCompetitionId = 2, RelegationCompetitionId = -1, NumberOfTeams = 10, CountryId = 1 });
+            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 12, PromotionCompetitionId = 0, RelegationCompetitionId = -1, NumberOfTeams = 8, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Premier League", Skill = 12, PromotionCompetitionId = -1, RelegationCompetitionId = 3, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 3, Name = "The Championship", Skill = 12, PromotionCompetitionId = 2, RelegationCompetitionId = -1, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 4, Name = "Champions League", Skill = 99, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 2, CountryId = 2, CompetitionType = CompetitionType.InternationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 5, Name = "Eredivisie", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 3, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 6, Name = "Ligue 1", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 4, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 7, Name = "Primera Division", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 5, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 8, Name = "1. Bundesliga", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 6, CompetitionType = CompetitionType.NationalCompetition });
+
         }
 
         private void CreateClubs()
@@ -101,6 +108,30 @@ namespace FootballChairman.ViewModels
             _clubService.CreateClub(new Club { CountryId = 1, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 35, Name = "Burnley" });
             _clubService.CreateClub(new Club { CountryId = 1, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 36, Name = "Watford" });
             _clubService.CreateClub(new Club { CountryId = 1, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 37, Name = "Norwich City" });
+            _clubService.CreateClub(new Club { CountryId = 3, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 38, Name = "Ajax" });
+            _clubService.CreateClub(new Club { CountryId = 3, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 39, Name = "PSV" });
+            _clubService.CreateClub(new Club { CountryId = 3, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 40, Name = "Feyenoord" });
+            _clubService.CreateClub(new Club { CountryId = 3, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 41, Name = "AZ" });
+            _clubService.CreateClub(new Club { CountryId = 3, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 42, Name = "Twente" });
+            _clubService.CreateClub(new Club { CountryId = 3, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 43, Name = "Vitesse" });
+            _clubService.CreateClub(new Club { CountryId = 4, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 44, Name = "PSG" });
+            _clubService.CreateClub(new Club { CountryId = 4, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 45, Name = "Marseille" });
+            _clubService.CreateClub(new Club { CountryId = 4, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 46, Name = "Nice" });
+            _clubService.CreateClub(new Club { CountryId = 4, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 47, Name = "Rennes" });
+            _clubService.CreateClub(new Club { CountryId = 4, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 48, Name = "Strasbourg" });
+            _clubService.CreateClub(new Club { CountryId = 4, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 49, Name = "LOSC" });
+            _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 50, Name = "Real Madrid" });
+            _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 51, Name = "Sevilla" });
+            _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 52, Name = "Barcelona" });
+            _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 53, Name = "Atlético Madrid" });
+            _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 54, Name = "Real Betis" });
+            _clubService.CreateClub(new Club { CountryId = 5, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 55, Name = "Real Sociedad" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Bayern" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Dortmund" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Leverkusen" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "RB Leipzig" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Freiburg" });
+            _clubService.CreateClub(new Club { CountryId = 6, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), Id = 56, Name = "Hoffenheim" });
         }
 
         private void CreateClubsPerCompetitions()
@@ -115,7 +146,7 @@ namespace FootballChairman.ViewModels
 
             foreach (var country in countries)
             {
-                var competitions = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id).ToList();
+                var competitions = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id && com.CompetitionType != CompetitionType.InternationalCompetition).ToList();
                 int counter = 0;
                 int competitionCounter = 0;
                 foreach (var club in _clubService.GetAllClubs().Where(c => c.CountryId == country.Id))
@@ -174,6 +205,11 @@ namespace FootballChairman.ViewModels
 
             _countryService.CreateCountry(new Country { Id = 0, Name = "Belgium" });
             _countryService.CreateCountry(new Country { Id = 1, Name = "England" });
+            _countryService.CreateCountry(new Country { Id = 2, Name = "International" });
+            _countryService.CreateCountry(new Country { Id = 3, Name = "Nederland" });
+            _countryService.CreateCountry(new Country { Id = 4, Name = "Frankrijk" });
+            _countryService.CreateCountry(new Country { Id = 5, Name = "Spanje" });
+            _countryService.CreateCountry(new Country { Id = 6, Name = "Duitsland" });
         }
     }
 }

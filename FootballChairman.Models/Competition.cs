@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballChairman.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,6 @@ namespace FootballChairman.Models
         public int RelegationCompetitionId { get; set; }
         public int NumberOfTeams { get; set; }
         public int CountryId { get; set; }
+        public CompetitionType CompetitionType { get; set; }
     }
 }

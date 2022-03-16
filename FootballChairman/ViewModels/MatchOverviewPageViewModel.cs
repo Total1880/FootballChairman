@@ -1,5 +1,6 @@
 ﻿using FootballChairman.Messages;
 using FootballChairman.Models;
+using FootballChairman.Models.Enums;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -143,7 +144,7 @@ namespace FootballChairman.ViewModels
 
             var competitions = _competitionService.GetAllCompetitions();
 
-            foreach (var competition in competitions)
+            foreach (var competition in competitions.Where(com => com.CompetitionType == CompetitionType.NationalCompetition))
             {
                 SelectedCompetition = competition;
                 _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = Ranking[0].ClubId, CompetitionId = competition.Id, Year = _year });
