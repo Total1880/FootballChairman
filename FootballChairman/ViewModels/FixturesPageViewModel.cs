@@ -19,6 +19,7 @@ namespace FootballChairman.ViewModels
         private IClubPerCompetitionService _clubPerCompetitionService;
         private IManagerService _managerService;
         private ICountryService _countryService;
+        private ICompetitionCupService _competitionCupService;
         private ObservableCollection<Fixture> _fixtures = new ObservableCollection<Fixture>();
 
         public ObservableCollection<Fixture> Fixtures { get => _fixtures; }
@@ -29,7 +30,8 @@ namespace FootballChairman.ViewModels
             IClubService clubService,
             IClubPerCompetitionService clubPerCompetitionService,
             IManagerService managerService,
-            ICountryService countryService)
+            ICountryService countryService,
+            ICompetitionCupService competitionCupService)
         {
             _fixtureService = fixtureService;
             _competitionService = competitionService;
@@ -37,6 +39,7 @@ namespace FootballChairman.ViewModels
             _clubPerCompetitionService = clubPerCompetitionService;
             _managerService = managerService;
             _countryService = countryService;
+            _competitionCupService = competitionCupService;
 
             CreateCountries();
             CreateCompetition();

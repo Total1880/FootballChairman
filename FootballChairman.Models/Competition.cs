@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace FootballChairman.Models
 {
-    public class Competition
+    public class Competition : CompetitionBase
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Skill { get; set; }
+
         public int PromotionCompetitionId { get; set; }
         public int RelegationCompetitionId { get; set; }
         public int NumberOfTeams { get; set; }
-        public int CountryId { get; set; }
-        public CompetitionType CompetitionType { get; set; }
+        
+
     }
 }
