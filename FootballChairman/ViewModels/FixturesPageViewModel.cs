@@ -208,7 +208,7 @@ namespace FootballChairman.ViewModels
                 {
                     listOfClubs.Add(clubs.FirstOrDefault(c => c.Id == club.ClubId));
                 }
-                var test = _fixtureService.GenerateCupFixtures(listOfClubs, competition);
+                _fixtureService.GenerateCupFixtures(listOfClubs, competition);
             }
         }
         private void CreateManagers()

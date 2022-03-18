@@ -21,6 +21,7 @@ namespace FootballChairman.ViewModels
         private IClubPerCompetitionService _clubPerCompetitionService;
         private IClubService _clubService;
         private ICompetitionService _competitionService;
+        private ICompetitionCupService _competitionCupService;
         private IManagerService _managerService;
         private ICountryService _countryService;
         private IHistoryItemService _historyItemService;
@@ -86,6 +87,7 @@ namespace FootballChairman.ViewModels
             IClubPerCompetitionService clubPerCompetitionService,
             IClubService clubService,
             ICompetitionService competitionService,
+            ICompetitionCupService competitionCupService,
             IManagerService managerService,
             ICountryService countryService, IHistoryItemService historyItemService)
         {
@@ -94,6 +96,7 @@ namespace FootballChairman.ViewModels
             _clubPerCompetitionService = clubPerCompetitionService;
             _clubService = clubService;
             _competitionService = competitionService;
+            _competitionCupService = competitionCupService;
             _managerService = managerService;
             _countryService = countryService;
             _historyItemService = historyItemService;
@@ -187,16 +190,31 @@ namespace FootballChairman.ViewModels
 
                 _fixtureService.GenerateFixtures(listOfClubs, competition.Id);
             }
+
+            var competitionsCup = _competitionCupService.GetAllCompetitions();
+            foreach (var competition in competitionsCup)
+            {
+                var listOfClubs = new List<Club>();
+
+                foreach (var club in clubsPerCompetition.Where(c => c.CompetitionId == competition.Id).OrderByDescending(c => c.ClubId))
+                {
+                    listOfClubs.Add(clubs.FirstOrDefault(c => c.Id == club.ClubId));
+                }
+                _fixtureService.GenerateCupFixtures(listOfClubs, competition);
+            }
         }
         private void PlayGames()
         {
             LastGames = new ObservableCollection<Game>();
 
-            foreach (var fixture in _fixtureService.LoadFixturesOfMatchday(_matchDay - 1))
+            foreach (var competition in Competitions)
             {
-                var game = _gameService.PlayGame(fixture);
-                LastGames.Add(game);
-                _clubPerCompetitionService.UpdateData(game);
+                foreach (var fixture in _fixtureService.LoadFixturesOfMatchday(_matchDay - 1).Where(f => f.CompetitionId == competition.Id))
+                {
+                    var game = _gameService.PlayGame(fixture);
+                    LastGames.Add(game);
+                    _clubPerCompetitionService.UpdateData(game);
+                }
             }
         }
 
