@@ -13,5 +13,6 @@ namespace FootballChairman.Services.Interfaces
         IList<Fixture> LoadFixtures();
         IList<Fixture> LoadFixturesOfMatchday(int matchday);
         IList<Fixture> GenerateFixtures(IList<Club> teams, int competitionId);
+        IList<Fixture> GenerateCupFixtures(IList<Club> teams, CompetitionCup competitionCup);
     }
 }

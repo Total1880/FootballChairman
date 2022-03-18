@@ -18,6 +18,7 @@ namespace FootballChairman.Repositories
             builder.RegisterType<ManagerRepository>().AsImplementedInterfaces();
             builder.RegisterType<CountryRepository>().AsImplementedInterfaces();
             builder.RegisterType<HistoryItemRepository>().AsImplementedInterfaces();
+            builder.RegisterType<CompetitionCupRepository>().AsImplementedInterfaces();
         }
     }
 }

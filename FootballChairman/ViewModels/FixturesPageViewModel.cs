@@ -64,8 +64,13 @@ namespace FootballChairman.ViewModels
             _competitionService.CreateCompetition(new Competition { Id = 6, Name = "Ligue 1", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 4, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 7, Name = "Primera Division", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 5, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 8, Name = "1. Bundesliga", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 6, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 9, Name = "Croky Cup", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, CountryId = 0, CompetitionType = CompetitionType.NationalCup });
 
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 9, Name = "Croky Cup", Skill = 15, CountryId = 0, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 10, Name = "FA Cup", Skill = 15, CountryId = 1, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 11, Name = "KNVB Cup", Skill = 15, CountryId = 3, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 12, Name = "Coupe de France", Skill = 15, CountryId = 4, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 13, Name = "Copa Del Rey", Skill = 15, CountryId = 5, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 14, Name = "DFB Pokal", Skill = 15, CountryId = 6, CompetitionType = CompetitionType.NationalCup });
         }
 
         private void CreateClubs()
@@ -151,14 +156,13 @@ namespace FootballChairman.ViewModels
             foreach (var country in countries)
             {
                 var competitions = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id && com.CompetitionType == CompetitionType.NationalCompetition).ToList();
-                var cupcCompetition = _competitionService.GetAllCompetitions().Where(com => com.CountryId == country.Id && com.CompetitionType == CompetitionType.NationalCup).FirstOrDefault();
+                var cupCompetition = _competitionCupService.GetAllCompetitions();
                 int counter = 0;
                 int competitionCounter = 0;
                 foreach (var club in _clubService.GetAllClubs().Where(c => c.CountryId == country.Id))
                 {
                     _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = competitions[competitionCounter].Id });
-                    if (cupcCompetition != null)
-                        _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = cupcCompetition.Id });
+                    _clubPerCompetitionService.CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = cupCompetition.FirstOrDefault(com => com.CountryId == club.CountryId).Id });
 
                     counter++;
                     if (counter >= competitions[competitionCounter].NumberOfTeams)
@@ -193,6 +197,18 @@ namespace FootballChairman.ViewModels
                 }
 
                 _fixtures = new ObservableCollection<Fixture>(_fixtureService.GenerateFixtures(listOfClubs, competition.Id));
+            }
+
+            var competitionsCup = _competitionCupService.GetAllCompetitions();
+            foreach (var competition in competitionsCup)
+            {
+                var listOfClubs = new List<Club>();
+
+                foreach (var club in clubsPerCompetition.Where(c => c.CompetitionId == competition.Id))
+                {
+                    listOfClubs.Add(clubs.FirstOrDefault(c => c.Id == club.ClubId));
+                }
+                var test = _fixtureService.GenerateCupFixtures(listOfClubs, competition);
             }
         }
         private void CreateManagers()

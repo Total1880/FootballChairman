@@ -48,5 +48,14 @@ namespace FootballChairman.Services
 
             return LoadFixtures().Where(f => f.RoundNo == matchday).ToList();
         }
+
+        public IList<Fixture> GenerateCupFixtures(IList<Club> teams, CompetitionCup competition)
+        {
+            var fixtures = LoadFixtures().Where(f => f.CompetitionId != competition.Id).ToList();
+            var newFixtures = _scheduleMakerService.GenerateCup(teams, competition);
+
+            fixtures.AddRange(newFixtures);
+            return SaveFixtures(fixtures);
+        }
     }
 }

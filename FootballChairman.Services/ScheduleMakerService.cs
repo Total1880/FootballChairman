@@ -122,5 +122,100 @@ namespace FootballChairman.Services
             offsetArray = offsetArray.Concat(offsetArray).ToList();
             return offsetArray;
         }
+
+        public IList<Fixture> GenerateCup(IList<Club> teams, CompetitionCup competitionCup)
+        {
+            int totalNumberOfTeams = teams.Count;
+            var fixtures = new List<Fixture>();
+            var cupround = 0;
+            int counter = 0;
+
+            if (totalNumberOfTeams % 2 != 0)
+            {
+                teams.Add(new Club { Id = -1, Name = "bye"});
+            }
+            competitionCup.Rounds = (int)Math.Ceiling(Math.Sqrt(totalNumberOfTeams));
+
+            var extrateams = 0;
+            var nextRoundTeams = totalNumberOfTeams;
+            while (Math.Ceiling(Math.Sqrt(nextRoundTeams)) != Math.Sqrt(nextRoundTeams))
+            {
+                extrateams++;
+                nextRoundTeams--;
+            }
+
+            //Create extra round
+            if (extrateams > 0)
+            {
+                for (int i = 0; i < extrateams * 2; i += 2)
+                {
+                    Fixture fixture = new Fixture();
+                    counter++;
+
+                    fixture.AwayOpponentId = teams[i].Id;
+                    fixture.HomeOpponentId = teams[i + 1].Id;
+                    fixture.RoundNo = cupround;
+                    fixture.MatchNo = counter;
+                    fixture.AwayOpponent = teams[i].Name;
+                    fixture.HomeOpponent = teams[i + 1].Name;
+                    fixture.CompetitionId = competitionCup.Id;
+
+                    fixtures.Add(fixture);
+                }
+                cupround++;
+                counter = 0;
+            }
+
+            //Create first round
+            for (int i = 0; i < nextRoundTeams /** 2 - extrateams*/; i += 2)
+            {
+                Fixture fixture = new Fixture();
+
+                fixture.RoundNo = cupround;
+                fixture.MatchNo = counter;
+                fixture.CompetitionId = competitionCup.Id;
+
+                if (extrateams > i)
+                {
+                    fixture.CupPreviousFixtureHomeTeam = fixtures[i].IdString;
+                    fixture.CupPreviousFixtureAwayTeam = fixtures[i+1].IdString;
+                }
+                else
+                {
+                    fixture.AwayOpponentId = teams[i + extrateams].Id;
+                    fixture.HomeOpponentId = teams[i + extrateams + 1].Id;
+                    fixture.AwayOpponent = teams[i + extrateams].Name;
+                    fixture.HomeOpponent = teams[i + extrateams + 1].Name;
+                }
+                fixtures.Add(fixture);
+                counter++;
+            }
+            cupround++;
+
+            while (cupround < competitionCup.Rounds)
+            {
+                var roundMatches = fixtures.Where(f => f.RoundNo == cupround - 1).Count();
+                var newFixtures = new List<Fixture>();
+                counter = 0;
+
+                for (int i = 0; i < roundMatches; i += 2)
+                {
+                    Fixture fixture = new Fixture();
+
+                    fixture.RoundNo = cupround;
+                    fixture.MatchNo = counter;
+                    fixture.CompetitionId = competitionCup.Id;
+                    fixture.CupPreviousFixtureHomeTeam = fixtures[fixtures.Count() - i - 1].IdString;
+                    fixture.CupPreviousFixtureAwayTeam = fixtures[fixtures.Count() - i - 2].IdString;
+                    newFixtures.Add(fixture);
+                    counter++;
+                }
+                fixtures.AddRange(newFixtures);
+
+                cupround++;
+            }
+
+            return fixtures;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using FootballChairman.Services.Interfaces;
+﻿using FootballChairman.Models;
+using FootballChairman.Repositories;
+using FootballChairman.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,32 +11,23 @@ namespace FootballChairman.Services
 {
     public class CompetitionCupService : ICompetitionCupService
     {
-        public CompetitionCupService()
+        IRepository<CompetitionCup> _competitionCupRepository;
+        public CompetitionCupService(IRepository<CompetitionCup> competitionCupRepository)
         {
-            CalculateRounds();
+            _competitionCupRepository = competitionCupRepository;
         }
-        private void CalculateRounds()
+
+        public CompetitionCup CreateCompetition(CompetitionCup competition)
         {
-            var testNumberOfClubs = 18;
-            var test = Math.Sqrt(testNumberOfClubs);
-            var testPow = Math.Pow(2, testNumberOfClubs);
+            var list = GetAllCompetitions();
+            list.Add(competition);
+            _competitionCupRepository.Create(list);
+            return competition;
+        }
 
-            testNumberOfClubs = 10;
-            var test2 = Math.Sqrt(testNumberOfClubs);
-            var testPow2 = Math.Pow(2, testNumberOfClubs);
-
-            testNumberOfClubs = 36;
-            var test3 = Math.Sqrt(testNumberOfClubs);
-            var testPow3 = Math.Pow(2, testNumberOfClubs);
-
-            testNumberOfClubs = 8;
-            var test4 = Math.Sqrt(testNumberOfClubs);
-            var testPow4 = Math.Pow(2, testNumberOfClubs);
-
-            testNumberOfClubs = 21;
-            var test5 = Math.Sqrt(testNumberOfClubs);
-            var testPow5 = Math.Pow(2, testNumberOfClubs);
-
+        public IList<CompetitionCup> GetAllCompetitions()
+        {
+            return _competitionCupRepository.Get();
         }
     }
 }

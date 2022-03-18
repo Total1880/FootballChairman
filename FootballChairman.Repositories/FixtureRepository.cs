@@ -32,6 +32,8 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Fixture.HomeOpponent), fixture.HomeOpponent.ToString());
                     writer.WriteAttributeString(nameof(Fixture.AwayOpponent), fixture.AwayOpponent.ToString());
                     writer.WriteAttributeString(nameof(Fixture.CompetitionId), fixture.CompetitionId.ToString());
+                    writer.WriteAttributeString(nameof(Fixture.CupPreviousFixtureHomeTeam), fixture.CupPreviousFixtureHomeTeam.ToString());
+                    writer.WriteAttributeString(nameof(Fixture.CupPreviousFixtureAwayTeam), fixture.CupPreviousFixtureAwayTeam.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -81,6 +83,9 @@ namespace FootballChairman.Repositories
                         readFixture.HomeOpponent = xmlReader.GetAttribute(nameof(Fixture.HomeOpponent));
                         readFixture.AwayOpponent = xmlReader.GetAttribute(nameof(Fixture.AwayOpponent));
                         readFixture.CompetitionId = int.Parse(xmlReader.GetAttribute(nameof(Fixture.CompetitionId)));
+                        readFixture.CupPreviousFixtureHomeTeam = xmlReader.GetAttribute(nameof(Fixture.CupPreviousFixtureHomeTeam));
+                        readFixture.CupPreviousFixtureAwayTeam = xmlReader.GetAttribute(nameof(Fixture.CupPreviousFixtureAwayTeam));
+
 
                         fixtureList.Add(readFixture);
                     } while (xmlReader.ReadToNextSibling(nameof(Fixture)));
