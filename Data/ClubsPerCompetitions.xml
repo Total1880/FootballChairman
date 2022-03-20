@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-16"?>
+<IList>
+  <ClubPerCompetition ClubId="4" ClubName="AA Gent" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="4" ClubName="AA Gent" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="3" ClubName="Anderlecht" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="3" ClubName="Anderlecht" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="2" ClubName="Antwerp" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="2" ClubName="Antwerp" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="17" ClubName="Beerschot" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="17" ClubName="Beerschot" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="8" ClubName="Cercle Brugge" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="8" ClubName="Cercle Brugge" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="6" ClubName="Charleroi" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="6" ClubName="Charleroi" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="1" ClubName="Club Brugge" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="1" ClubName="Club Brugge" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="14" ClubName="Eupen" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="14" ClubName="Eupen" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="10" ClubName="KV Kortrijk" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="10" ClubName="KV Kortrijk" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="5" ClubName="KV Mechelen" CompetitionId="0" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="5" ClubName="KV Mechelen" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="13" ClubName="KV Oostende" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="13" ClubName="KV Oostende" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="11" ClubName="OH Leuven" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="11" ClubName="OH Leuven" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="7" ClubName="RC Genk" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="7" ClubName="RC Genk" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="16" ClubName="Seraing" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="16" ClubName="Seraing" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="9" ClubName="Sint Truiden" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="9" ClubName="Sint Truiden" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="12" ClubName="Standard" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="12" ClubName="Standard" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="0" ClubName="Union" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="0" ClubName="Union" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="15" ClubName="Zulte Waregem" CompetitionId="1" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="15" ClubName="Zulte Waregem" CompetitionId="9" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="21" ClubName="Arsenal" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="21" ClubName="Arsenal" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="26" ClubName="Aston Villa" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="26" ClubName="Aston Villa" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="32" ClubName="Brentford" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="32" ClubName="Brentford" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="30" ClubName="Brighton" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="30" ClubName="Brighton" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="35" ClubName="Burnley" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="35" ClubName="Burnley" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="20" ClubName="Chelsea" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="20" ClubName="Chelsea" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="28" ClubName="Crystal Palace" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="28" ClubName="Crystal Palace" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="34" ClubName="Everton" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="34" ClubName="Everton" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="33" ClubName="Leeds" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="33" ClubName="Leeds" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="29" ClubName="Leicester City" CompetitionId="2" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="29" ClubName="Leicester City" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="19" ClubName="Liverpool" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="19" ClubName="Liverpool" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="18" ClubName="Manchester City" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="18" ClubName="Manchester City" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="22" ClubName="Manchester United" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="22" ClubName="Manchester United" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="31" ClubName="Newcastle United" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="31" ClubName="Newcastle United" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="37" ClubName="Norwich City" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="37" ClubName="Norwich City" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="27" ClubName="Southampton" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="27" ClubName="Southampton" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="24" ClubName="Tottenham" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="24" ClubName="Tottenham" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="36" ClubName="Watford" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="36" ClubName="Watford" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="23" ClubName="West Ham United" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="23" ClubName="West Ham United" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="25" ClubName="Wolves" CompetitionId="3" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="25" ClubName="Wolves" CompetitionId="10" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="38" ClubName="Ajax" CompetitionId="5" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="38" ClubName="Ajax" CompetitionId="11" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="41" ClubName="AZ" CompetitionId="5" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="41" ClubName="AZ" CompetitionId="11" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="40" ClubName="Feyenoord" CompetitionId="5" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="40" ClubName="Feyenoord" CompetitionId="11" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="39" ClubName="PSV" CompetitionId="5" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="39" ClubName="PSV" CompetitionId="11" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="42" ClubName="Twente" CompetitionId="5" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="42" ClubName="Twente" CompetitionId="11" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="43" ClubName="Vitesse" CompetitionId="5" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="43" ClubName="Vitesse" CompetitionId="11" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="49" ClubName="LOSC" CompetitionId="6" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="49" ClubName="LOSC" CompetitionId="12" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="45" ClubName="Marseille" CompetitionId="6" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="45" ClubName="Marseille" CompetitionId="12" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="46" ClubName="Nice" CompetitionId="6" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="46" ClubName="Nice" CompetitionId="12" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="44" ClubName="PSG" CompetitionId="6" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="44" ClubName="PSG" CompetitionId="12" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="47" ClubName="Rennes" CompetitionId="6" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="47" ClubName="Rennes" CompetitionId="12" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="48" ClubName="Strasbourg" CompetitionId="6" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="48" ClubName="Strasbourg" CompetitionId="12" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="53" ClubName="Atlético Madrid" CompetitionId="7" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="53" ClubName="Atlético Madrid" CompetitionId="13" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="52" ClubName="Barcelona" CompetitionId="7" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="52" ClubName="Barcelona" CompetitionId="13" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="54" ClubName="Real Betis" CompetitionId="7" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="54" ClubName="Real Betis" CompetitionId="13" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="50" ClubName="Real Madrid" CompetitionId="7" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="50" ClubName="Real Madrid" CompetitionId="13" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="55" ClubName="Real Sociedad" CompetitionId="7" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="55" ClubName="Real Sociedad" CompetitionId="13" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="51" ClubName="Sevilla" CompetitionId="7" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="51" ClubName="Sevilla" CompetitionId="13" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="56" ClubName="Bayern" CompetitionId="8" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="56" ClubName="Bayern" CompetitionId="14" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="57" ClubName="Dortmund" CompetitionId="8" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="57" ClubName="Dortmund" CompetitionId="14" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="60" ClubName="Freiburg" CompetitionId="8" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="60" ClubName="Freiburg" CompetitionId="14" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="61" ClubName="Hoffenheim" CompetitionId="8" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="61" ClubName="Hoffenheim" CompetitionId="14" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="58" ClubName="Leverkusen" CompetitionId="8" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="58" ClubName="Leverkusen" CompetitionId="14" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="59" ClubName="RB Leipzig" CompetitionId="8" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+  <ClubPerCompetition ClubId="59" ClubName="RB Leipzig" CompetitionId="14" Points="0" Win="0" Draw="0" Lost="0" GoalsFor="0" GoalsAgainst="0" IsNew="False" />
+</IList>

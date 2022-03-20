@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<IList>
+  <CompetitionCup Id="9" Name="Croky Cup" Skill="15" CountryId="0" CompetitionType="NationalCup" Rounds="0" />
+  <CompetitionCup Id="10" Name="FA Cup" Skill="15" CountryId="1" CompetitionType="NationalCup" Rounds="0" />
+  <CompetitionCup Id="11" Name="KNVB Cup" Skill="15" CountryId="3" CompetitionType="NationalCup" Rounds="0" />
+  <CompetitionCup Id="12" Name="Coupe de France" Skill="15" CountryId="4" CompetitionType="NationalCup" Rounds="0" />
+  <CompetitionCup Id="13" Name="Copa Del Rey" Skill="15" CountryId="5" CompetitionType="NationalCup" Rounds="0" />
+  <CompetitionCup Id="14" Name="DFB Pokal" Skill="15" CountryId="6" CompetitionType="NationalCup" Rounds="0" />
+</IList>

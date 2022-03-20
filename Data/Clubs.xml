@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-16"?>
+<IList>
+  <Club Id="4" Name="AA Gent" SkillDefense="84" SkillAttack="7" SkillMidfield="2" ManagerId="0" CountryId="0" IsPlayer="False" />
+  <Club Id="38" Name="Ajax" SkillDefense="42" SkillAttack="20" SkillMidfield="6" ManagerId="1" CountryId="3" IsPlayer="False" />
+  <Club Id="3" Name="Anderlecht" SkillDefense="57" SkillAttack="92" SkillMidfield="58" ManagerId="2" CountryId="0" IsPlayer="False" />
+  <Club Id="2" Name="Antwerp" SkillDefense="35" SkillAttack="15" SkillMidfield="83" ManagerId="3" CountryId="0" IsPlayer="True" />
+  <Club Id="21" Name="Arsenal" SkillDefense="10" SkillAttack="68" SkillMidfield="41" ManagerId="4" CountryId="1" IsPlayer="False" />
+  <Club Id="26" Name="Aston Villa" SkillDefense="45" SkillAttack="31" SkillMidfield="68" ManagerId="5" CountryId="1" IsPlayer="False" />
+  <Club Id="53" Name="Atlético Madrid" SkillDefense="28" SkillAttack="47" SkillMidfield="2" ManagerId="6" CountryId="5" IsPlayer="False" />
+  <Club Id="41" Name="AZ" SkillDefense="7" SkillAttack="61" SkillMidfield="13" ManagerId="7" CountryId="3" IsPlayer="False" />
+  <Club Id="52" Name="Barcelona" SkillDefense="70" SkillAttack="52" SkillMidfield="49" ManagerId="8" CountryId="5" IsPlayer="False" />
+  <Club Id="56" Name="Bayern" SkillDefense="8" SkillAttack="12" SkillMidfield="65" ManagerId="9" CountryId="6" IsPlayer="False" />
+  <Club Id="17" Name="Beerschot" SkillDefense="4" SkillAttack="25" SkillMidfield="59" ManagerId="10" CountryId="0" IsPlayer="False" />
+  <Club Id="32" Name="Brentford" SkillDefense="81" SkillAttack="56" SkillMidfield="46" ManagerId="11" CountryId="1" IsPlayer="False" />
+  <Club Id="30" Name="Brighton" SkillDefense="70" SkillAttack="42" SkillMidfield="64" ManagerId="12" CountryId="1" IsPlayer="False" />
+  <Club Id="35" Name="Burnley" SkillDefense="86" SkillAttack="90" SkillMidfield="47" ManagerId="13" CountryId="1" IsPlayer="False" />
+  <Club Id="8" Name="Cercle Brugge" SkillDefense="85" SkillAttack="36" SkillMidfield="12" ManagerId="14" CountryId="0" IsPlayer="False" />
+  <Club Id="6" Name="Charleroi" SkillDefense="39" SkillAttack="96" SkillMidfield="20" ManagerId="15" CountryId="0" IsPlayer="False" />
+  <Club Id="20" Name="Chelsea" SkillDefense="42" SkillAttack="47" SkillMidfield="43" ManagerId="16" CountryId="1" IsPlayer="False" />
+  <Club Id="1" Name="Club Brugge" SkillDefense="38" SkillAttack="37" SkillMidfield="7" ManagerId="17" CountryId="0" IsPlayer="False" />
+  <Club Id="28" Name="Crystal Palace" SkillDefense="62" SkillAttack="49" SkillMidfield="37" ManagerId="18" CountryId="1" IsPlayer="False" />
+  <Club Id="57" Name="Dortmund" SkillDefense="5" SkillAttack="39" SkillMidfield="10" ManagerId="19" CountryId="6" IsPlayer="False" />
+  <Club Id="14" Name="Eupen" SkillDefense="14" SkillAttack="9" SkillMidfield="38" ManagerId="20" CountryId="0" IsPlayer="False" />
+  <Club Id="34" Name="Everton" SkillDefense="62" SkillAttack="82" SkillMidfield="76" ManagerId="21" CountryId="1" IsPlayer="False" />
+  <Club Id="40" Name="Feyenoord" SkillDefense="27" SkillAttack="88" SkillMidfield="13" ManagerId="22" CountryId="3" IsPlayer="False" />
+  <Club Id="60" Name="Freiburg" SkillDefense="88" SkillAttack="93" SkillMidfield="16" ManagerId="23" CountryId="6" IsPlayer="False" />
+  <Club Id="61" Name="Hoffenheim" SkillDefense="45" SkillAttack="51" SkillMidfield="89" ManagerId="24" CountryId="6" IsPlayer="False" />
+  <Club Id="10" Name="KV Kortrijk" SkillDefense="4" SkillAttack="36" SkillMidfield="69" ManagerId="25" CountryId="0" IsPlayer="False" />
+  <Club Id="5" Name="KV Mechelen" SkillDefense="97" SkillAttack="27" SkillMidfield="39" ManagerId="26" CountryId="0" IsPlayer="False" />
+  <Club Id="13" Name="KV Oostende" SkillDefense="77" SkillAttack="82" SkillMidfield="65" ManagerId="27" CountryId="0" IsPlayer="False" />
+  <Club Id="33" Name="Leeds" SkillDefense="36" SkillAttack="30" SkillMidfield="66" ManagerId="28" CountryId="1" IsPlayer="False" />
+  <Club Id="29" Name="Leicester City" SkillDefense="80" SkillAttack="19" SkillMidfield="59" ManagerId="29" CountryId="1" IsPlayer="False" />
+  <Club Id="58" Name="Leverkusen" SkillDefense="42" SkillAttack="82" SkillMidfield="61" ManagerId="30" CountryId="6" IsPlayer="False" />
+  <Club Id="19" Name="Liverpool" SkillDefense="47" SkillAttack="66" SkillMidfield="20" ManagerId="31" CountryId="1" IsPlayer="False" />
+  <Club Id="49" Name="LOSC" SkillDefense="91" SkillAttack="35" SkillMidfield="3" ManagerId="32" CountryId="4" IsPlayer="False" />
+  <Club Id="18" Name="Manchester City" SkillDefense="33" SkillAttack="50" SkillMidfield="83" ManagerId="33" CountryId="1" IsPlayer="False" />
+  <Club Id="22" Name="Manchester United" SkillDefense="38" SkillAttack="33" SkillMidfield="27" ManagerId="34" CountryId="1" IsPlayer="False" />
+  <Club Id="45" Name="Marseille" SkillDefense="52" SkillAttack="70" SkillMidfield="45" ManagerId="35" CountryId="4" IsPlayer="False" />
+  <Club Id="31" Name="Newcastle United" SkillDefense="5" SkillAttack="82" SkillMidfield="48" ManagerId="36" CountryId="1" IsPlayer="False" />
+  <Club Id="46" Name="Nice" SkillDefense="75" SkillAttack="15" SkillMidfield="48" ManagerId="37" CountryId="4" IsPlayer="False" />
+  <Club Id="37" Name="Norwich City" SkillDefense="67" SkillAttack="78" SkillMidfield="91" ManagerId="38" CountryId="1" IsPlayer="False" />
+  <Club Id="11" Name="OH Leuven" SkillDefense="96" SkillAttack="16" SkillMidfield="55" ManagerId="39" CountryId="0" IsPlayer="False" />
+  <Club Id="44" Name="PSG" SkillDefense="45" SkillAttack="9" SkillMidfield="2" ManagerId="40" CountryId="4" IsPlayer="False" />
+  <Club Id="39" Name="PSV" SkillDefense="91" SkillAttack="3" SkillMidfield="30" ManagerId="41" CountryId="3" IsPlayer="False" />
+  <Club Id="59" Name="RB Leipzig" SkillDefense="96" SkillAttack="32" SkillMidfield="22" ManagerId="42" CountryId="6" IsPlayer="False" />
+  <Club Id="7" Name="RC Genk" SkillDefense="13" SkillAttack="9" SkillMidfield="70" ManagerId="43" CountryId="0" IsPlayer="False" />
+  <Club Id="54" Name="Real Betis" SkillDefense="37" SkillAttack="89" SkillMidfield="85" ManagerId="44" CountryId="5" IsPlayer="False" />
+  <Club Id="50" Name="Real Madrid" SkillDefense="45" SkillAttack="27" SkillMidfield="41" ManagerId="45" CountryId="5" IsPlayer="False" />
+  <Club Id="55" Name="Real Sociedad" SkillDefense="3" SkillAttack="58" SkillMidfield="85" ManagerId="46" CountryId="5" IsPlayer="False" />
+  <Club Id="47" Name="Rennes" SkillDefense="66" SkillAttack="35" SkillMidfield="18" ManagerId="47" CountryId="4" IsPlayer="False" />
+  <Club Id="16" Name="Seraing" SkillDefense="74" SkillAttack="55" SkillMidfield="38" ManagerId="48" CountryId="0" IsPlayer="False" />
+  <Club Id="51" Name="Sevilla" SkillDefense="86" SkillAttack="23" SkillMidfield="11" ManagerId="49" CountryId="5" IsPlayer="False" />
+  <Club Id="9" Name="Sint Truiden" SkillDefense="69" SkillAttack="34" SkillMidfield="77" ManagerId="50" CountryId="0" IsPlayer="False" />
+  <Club Id="27" Name="Southampton" SkillDefense="80" SkillAttack="66" SkillMidfield="58" ManagerId="51" CountryId="1" IsPlayer="False" />
+  <Club Id="12" Name="Standard" SkillDefense="65" SkillAttack="23" SkillMidfield="83" ManagerId="52" CountryId="0" IsPlayer="False" />
+  <Club Id="48" Name="Strasbourg" SkillDefense="95" SkillAttack="28" SkillMidfield="40" ManagerId="53" CountryId="4" IsPlayer="False" />
+  <Club Id="24" Name="Tottenham" SkillDefense="45" SkillAttack="18" SkillMidfield="51" ManagerId="54" CountryId="1" IsPlayer="False" />
+  <Club Id="42" Name="Twente" SkillDefense="65" SkillAttack="91" SkillMidfield="96" ManagerId="55" CountryId="3" IsPlayer="False" />
+  <Club Id="0" Name="Union" SkillDefense="4" SkillAttack="27" SkillMidfield="4" ManagerId="56" CountryId="0" IsPlayer="False" />
+  <Club Id="43" Name="Vitesse" SkillDefense="91" SkillAttack="28" SkillMidfield="73" ManagerId="57" CountryId="3" IsPlayer="False" />
+  <Club Id="36" Name="Watford" SkillDefense="49" SkillAttack="33" SkillMidfield="72" ManagerId="58" CountryId="1" IsPlayer="False" />
+  <Club Id="23" Name="West Ham United" SkillDefense="13" SkillAttack="21" SkillMidfield="64" ManagerId="59" CountryId="1" IsPlayer="False" />
+  <Club Id="25" Name="Wolves" SkillDefense="15" SkillAttack="83" SkillMidfield="32" ManagerId="60" CountryId="1" IsPlayer="False" />
+  <Club Id="15" Name="Zulte Waregem" SkillDefense="91" SkillAttack="11" SkillMidfield="95" ManagerId="61" CountryId="0" IsPlayer="False" />
+</IList>

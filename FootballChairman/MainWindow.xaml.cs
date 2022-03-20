@@ -40,6 +40,8 @@ namespace FootballChairman
         public MainWindow()
         {
             InitializeComponent();
+
+
             MainFrame.NavigationService.Navigate(FixturesPage);
             NavigationFrame.NavigationService.Navigate(NavigationButtonsPage);
 

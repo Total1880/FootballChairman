@@ -10,27 +10,33 @@
       DataContext="{Binding NavigationButtons, Source={StaticResource Locator}}">
 
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel>
             <Button
+                Content="Continue"
+                Width="100"
+                Command="{Binding ContinueCommand}"/>
+            <StackPanel Orientation="Horizontal">
+                <Button
                 Content="Next Games"
                 Width="100"
                 Command="{Binding OpenMatchOverviewPageCommand}"/>
-            <Button 
+                <Button 
                 Content="Cup Games"
                 Width="100"
                 Command="{Binding OpenCupOverviewPageCommand}"/>
-            <Button 
+                <Button 
                 Content="Fixtures"
                 Width="100"
                 Command="{Binding OpenFixturesPageCommand}"/>
-            <Button 
+                <Button 
                 Content="Club"
                 Width="100"
                 Command="{Binding OpenClubPageCommand}"/>
-            <Button 
+                <Button 
                 Content="History"
                 Width="100"
                 Command="{Binding OpenHistoryPageCommand}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

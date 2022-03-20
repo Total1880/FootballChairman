@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<IList>
+  <Competition Id="0" Name="Eerste Klasse" Skill="15" PromotionCompetitionId="-1" RelegationCompetitionId="1" NumberOfTeams="10" CountryId="0" CompetitionType="NationalCompetition" />
+  <Competition Id="1" Name="Tweede Klasse" Skill="12" PromotionCompetitionId="0" RelegationCompetitionId="-1" NumberOfTeams="8" CountryId="0" CompetitionType="NationalCompetition" />
+  <Competition Id="2" Name="Premier League" Skill="12" PromotionCompetitionId="-1" RelegationCompetitionId="3" NumberOfTeams="10" CountryId="1" CompetitionType="NationalCompetition" />
+  <Competition Id="3" Name="The Championship" Skill="12" PromotionCompetitionId="2" RelegationCompetitionId="-1" NumberOfTeams="10" CountryId="1" CompetitionType="NationalCompetition" />
+  <Competition Id="4" Name="Champions League" Skill="99" PromotionCompetitionId="-1" RelegationCompetitionId="-1" NumberOfTeams="0" CountryId="2" CompetitionType="InternationalCompetition" />
+  <Competition Id="5" Name="Eredivisie" Skill="15" PromotionCompetitionId="-1" RelegationCompetitionId="-1" NumberOfTeams="6" CountryId="3" CompetitionType="NationalCompetition" />
+  <Competition Id="6" Name="Ligue 1" Skill="15" PromotionCompetitionId="-1" RelegationCompetitionId="-1" NumberOfTeams="6" CountryId="4" CompetitionType="NationalCompetition" />
+  <Competition Id="7" Name="Primera Division" Skill="15" PromotionCompetitionId="-1" RelegationCompetitionId="-1" NumberOfTeams="6" CountryId="5" CompetitionType="NationalCompetition" />
+  <Competition Id="8" Name="1. Bundesliga" Skill="15" PromotionCompetitionId="-1" RelegationCompetitionId="-1" NumberOfTeams="6" CountryId="6" CompetitionType="NationalCompetition" />
+</IList>

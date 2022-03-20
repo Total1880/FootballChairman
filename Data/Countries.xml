@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<IList>
+  <Country Id="0" Name="Belgium" />
+  <Country Id="1" Name="England" />
+  <Country Id="2" Name="International" />
+  <Country Id="3" Name="Nederland" />
+  <Country Id="4" Name="Frankrijk" />
+  <Country Id="5" Name="Spanje" />
+  <Country Id="6" Name="Duitsland" />
+</IList>
