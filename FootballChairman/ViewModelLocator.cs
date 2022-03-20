@@ -24,6 +24,7 @@ namespace FootballChairman
             builder.RegisterType<MatchOverviewPageViewModel>().SingleInstance();
             builder.RegisterType<ClubPageViewModel>().SingleInstance();
             builder.RegisterType<HistoryPageViewModel>().SingleInstance();
+            builder.RegisterType<CupOverviewPageViewModel>().SingleInstance();
 
             _container = builder.Build();
         }
@@ -33,5 +34,6 @@ namespace FootballChairman
         public MatchOverviewPageViewModel MatchOverviewPage => _container.Resolve<MatchOverviewPageViewModel>();
         public ClubPageViewModel ClubPage => _container.Resolve<ClubPageViewModel>();
         public HistoryPageViewModel HistoryPage => _container.Resolve<HistoryPageViewModel>();
+        public CupOverviewPageViewModel CupOverviewPage => _container.Resolve<CupOverviewPageViewModel>();
     }
 }

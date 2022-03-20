@@ -16,6 +16,10 @@
                 Width="100"
                 Command="{Binding OpenMatchOverviewPageCommand}"/>
             <Button 
+                Content="Cup Games"
+                Width="100"
+                Command="{Binding OpenCupOverviewPageCommand}"/>
+            <Button 
                 Content="Fixtures"
                 Width="100"
                 Command="{Binding OpenFixturesPageCommand}"/>
