@@ -41,11 +41,6 @@ namespace FootballChairman.Services
 
         public IList<Fixture> LoadFixturesOfMatchday(int matchday)
         {
-            if (matchday < 1)
-            {
-                return new List<Fixture>();
-            }
-
             return LoadFixtures().Where(f => f.RoundNo == matchday).ToList();
         }
 
