@@ -7,5 +7,6 @@
         public static int PointPerEqual = 1;
         public static int PromotionSpots = 2;
         public static int RelegationSpots = 2;
+        public static string DefaultSaveGameName = "Default";
     }
 }

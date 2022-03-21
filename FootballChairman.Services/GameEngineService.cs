@@ -1,5 +1,6 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
+using OlavFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,29 @@ namespace FootballChairman.Services
         private readonly IFixtureService _fixtureService;
         private readonly IGameService _gameService;
         private readonly IClubPerCompetitionService _clubPerCompetitionService;
+        private readonly ISaveGameDataService _saveGameDataService;
 
         private IList<Competition> _competitions;
         private IList<CompetitionCup> _competitionCups;
         private SaveGameData _saveGameData;
 
-        public GameEngineService(ICompetitionService competitionService, ICompetitionCupService competitionCupService, IFixtureService fixtureService, IGameService gameService, IClubPerCompetitionService clubPerCompetitionService)
+        public GameEngineService(
+            ICompetitionService competitionService, 
+            ICompetitionCupService competitionCupService, 
+            IFixtureService fixtureService, IGameService gameService, 
+            IClubPerCompetitionService clubPerCompetitionService,
+            ISaveGameDataService saveGameDataService)
         {
             _competitionService = competitionService;
             _competitionCupService = competitionCupService;
             _fixtureService = fixtureService;
             _gameService = gameService;
             _clubPerCompetitionService = clubPerCompetitionService;
+            _saveGameDataService = saveGameDataService;
 
             _competitions = _competitionService.GetAllCompetitions();
             _competitionCups = _competitionCupService.GetAllCompetitions();
-            _saveGameData = new SaveGameData();
+            _saveGameData = _saveGameDataService.GetSaveGameData(Configuration.DefaultSaveGameName);
         }
         public void ProcessMatchDay()
         {
@@ -55,6 +63,7 @@ namespace FootballChairman.Services
                 }
             }
             _saveGameData.MatchDay++;
+            _saveGameDataService.CreateSaveGameData(_saveGameData);
         }
     }
 }
