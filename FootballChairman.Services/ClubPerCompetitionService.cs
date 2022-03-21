@@ -58,6 +58,7 @@ namespace FootballChairman.Services
                 item.Draw = 0;
                 item.Lost = 0;
                 item.IsNew = false;
+                item.FixtureEliminated = string.Empty;
             }
 
             _clubPerCompetitionRepository.Create(list);

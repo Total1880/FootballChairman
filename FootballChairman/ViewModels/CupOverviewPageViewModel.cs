@@ -1,7 +1,10 @@
-﻿using FootballChairman.Models;
+﻿using FootballChairman.Messages;
+using FootballChairman.Models;
 using FootballChairman.Models.Enums;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using OlavFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,11 +19,12 @@ namespace FootballChairman.ViewModels
         private ICountryService _countryService;
         private ICompetitionCupService _competitionCupService;
         private IFixtureService _fixtureService;
+        private ISaveGameDataService _saveGameDataService;
+        private IGameService _gameService;
 
-        private int _matchDay;
-        private ObservableCollection<Game> _lastGames;
+        private string _saveGameName;
+
         private ObservableCollection<Game> _showLastGames;
-        private ObservableCollection<Fixture> _nextFixtures;
         private ObservableCollection<CompetitionCup> _competitions;
         private ObservableCollection<Country> _countries;
         private ObservableCollection<Fixture> _showNextFixtures;
@@ -31,9 +35,7 @@ namespace FootballChairman.ViewModels
         public ObservableCollection<CompetitionCup> Competitions { get => _competitions; set { _competitions = value; RaisePropertyChanged(); } }
         public ObservableCollection<Country> Countries { get => _countries; set { _countries = value; RaisePropertyChanged(); } }
         public ObservableCollection<Fixture> ShowNextFixtures { get => _showNextFixtures; set { _showNextFixtures = value; RaisePropertyChanged(); } }
-        public ObservableCollection<Game> LastGames { get => _lastGames; set { _lastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Game> ShowLastGames { get => _showLastGames; set { _showLastGames = value; RaisePropertyChanged(); } }
-        public ObservableCollection<Fixture> NextFixtures { get => _nextFixtures; set { _nextFixtures = value; RaisePropertyChanged(); } }
 
         public string ScoreDevider { get => "-"; }
 
@@ -61,17 +63,31 @@ namespace FootballChairman.ViewModels
             }
         }
 
-        public CupOverviewPageViewModel(ICountryService countryService, ICompetitionCupService competitionCupService, IFixtureService fixtureService)
+        public CupOverviewPageViewModel(
+            ICountryService countryService,
+            ICompetitionCupService competitionCupService,
+            IFixtureService fixtureService,
+            ISaveGameDataService saveGameDataService, 
+            IGameService gameService)
         {
             _countryService = countryService;
             _competitionCupService = competitionCupService;
             _fixtureService = fixtureService;
+            _saveGameDataService = saveGameDataService;
+            _gameService = gameService;
 
-            _matchDay = 0;
+            _saveGameName = Configuration.DefaultSaveGameName;
 
             Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             SelectedCountry = Countries.FirstOrDefault();
             LoadCompetitions();
+
+            Messenger.Default.Register<RefreshCompetitionData>(this, LoadData);
+        }
+
+        private void LoadData(RefreshCompetitionData obj)
+        {
+            LoadFixtureLists();
         }
 
         private void LoadCompetitions()
@@ -83,11 +99,16 @@ namespace FootballChairman.ViewModels
 
         private void LoadFixtureLists()
         {
-            NextFixtures = new ObservableCollection<Fixture>(_fixtureService.LoadFixturesOfMatchday(_matchDay));
-            ShowNextFixtures = new ObservableCollection<Fixture>(NextFixtures.Where(f => f.CompetitionId == SelectedCompetitionCup.Id));
+            //NextFixtures = new ObservableCollection<Fixture>(_fixtureService.LoadFixturesOfMatchday(_saveGameDataService.GetSaveGameData(_saveGameName).MatchDay));
+            //ShowNextFixtures = new ObservableCollection<Fixture>(NextFixtures.Where(f => f.CompetitionId == SelectedCompetitionCup.Id));
 
-            if (LastGames != null)
-                ShowLastGames = new ObservableCollection<Game>(LastGames.Where(g => g.Fixture.CompetitionId == SelectedCompetitionCup.Id));
+            //ShowLastGames = new ObservableCollection<Game>(LastGames.Where(g => g.Fixture.CompetitionId == SelectedCompetitionCup.Id));
+
+            var nextFixtures = _fixtureService.LoadFixturesOfMatchday(_saveGameDataService.GetSaveGameData(_saveGameName).MatchDay).Where(f => f.CompetitionId == SelectedCompetitionCup.Id);
+            ShowNextFixtures = new ObservableCollection<Fixture>(nextFixtures);
+
+            var lastGames = _gameService.GetGames().Where(g => g.Fixture.CompetitionId == SelectedCompetitionCup.Id && g.Fixture.RoundNo == _saveGameDataService.GetSaveGameData(_saveGameName).MatchDay - 1);
+            ShowLastGames = new ObservableCollection<Game>(lastGames);
         }
     }
 }
