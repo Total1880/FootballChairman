@@ -93,10 +93,10 @@ namespace FootballChairman.Services
         }
         public Fixture UpdateFixture(Fixture fixture)
         {
-            if (fixture.HomeOpponentId > 0 && fixture.HomeOpponent.Length <=0 )
+            if (fixture.HomeOpponentId >= 0 && fixture.HomeOpponent.Length <=0 )
                 fixture.HomeOpponent = _clubService.GetClub(fixture.HomeOpponentId).Name;
 
-            if (fixture.AwayOpponentId > 0 && fixture.AwayOpponent.Length <= 0)
+            if (fixture.AwayOpponentId >= 0 && fixture.AwayOpponent.Length <= 0)
                 fixture.AwayOpponent = _clubService.GetClub(fixture.AwayOpponentId).Name;
 
             var fixtures = LoadFixtures();

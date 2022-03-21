@@ -92,7 +92,7 @@ namespace FootballChairman.ViewModels
 
         private void LoadCompetitions()
         {
-            Competitions = new ObservableCollection<CompetitionCup>(_competitionCupService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id && com.CompetitionType == CompetitionType.NationalCup));
+            Competitions = new ObservableCollection<CompetitionCup>(_competitionCupService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id && (com.CompetitionType == CompetitionType.NationalCup || com.CompetitionType == CompetitionType.InternationalCup)));
             if (Competitions.Count > 0)
                 SelectedCompetitionCup = Competitions[0];
         }

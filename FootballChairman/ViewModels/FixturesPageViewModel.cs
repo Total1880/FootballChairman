@@ -71,6 +71,7 @@ namespace FootballChairman.ViewModels
             _competitionCupService.CreateCompetition(new CompetitionCup { Id = 12, Name = "Coupe de France", Skill = 15, CountryId = 4, CompetitionType = CompetitionType.NationalCup });
             _competitionCupService.CreateCompetition(new CompetitionCup { Id = 13, Name = "Copa Del Rey", Skill = 15, CountryId = 5, CompetitionType = CompetitionType.NationalCup });
             _competitionCupService.CreateCompetition(new CompetitionCup { Id = 14, Name = "DFB Pokal", Skill = 15, CountryId = 6, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 15, Name = "Cup Winners Cup", Skill = 15, CountryId = 2, CompetitionType = CompetitionType.InternationalCup });
         }
 
         private void CreateClubs()
@@ -170,11 +171,7 @@ namespace FootballChairman.ViewModels
                         competitionCounter++;
                     }
                 }
-
-
-
             }
-
         }
 
         private void CreateFixtures()
@@ -186,7 +183,7 @@ namespace FootballChairman.ViewModels
             var competitions = _competitionService.GetAllCompetitions();
             var clubsPerCompetition = _clubPerCompetitionService.GetAll();
 
-            foreach (var competition in competitions.Where(com => com.CompetitionType != CompetitionType.NationalCup))
+            foreach (var competition in competitions)
             {
                 var listOfClubs = new List<Club>();
 

@@ -8,6 +8,6 @@ namespace FootballChairman.Models.Enums
 {
     public enum CompetitionType
     {
-        NationalCompetition, InternationalCompetition, NationalCup
+        NationalCompetition, InternationalCompetition, NationalCup, InternationalCup
     }
 }

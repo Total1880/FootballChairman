@@ -14,6 +14,8 @@ namespace FootballChairman.Models
             AwayOpponent = string.Empty;
             CupPreviousFixtureHomeTeam = string.Empty;
             CupPreviousFixtureAwayTeam = string.Empty;
+            HomeOpponentId = -1;
+            AwayOpponentId = -1;
         }
 
         public int RoundNo { get; set; }

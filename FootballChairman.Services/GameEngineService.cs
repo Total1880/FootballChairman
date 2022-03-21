@@ -131,6 +131,7 @@ namespace FootballChairman.Services
 
         private void CreateInternationalFixtures()
         {
+            //Create Champions league
             var clubs = new List<Club>();
             foreach (var competition in _competitionService.GetAllCompetitions().Where(comp => comp.CompetitionType == CompetitionType.NationalCompetition && comp.PromotionCompetitionId == -1))
             {
@@ -138,7 +139,17 @@ namespace FootballChairman.Services
                 clubs.Add(_clubService.GetClub(historyItem.ClubId));
             }
 
-            _clubPerCompetitionService.CreateInternationalClubPerCompetitionsForChampions(clubs, _competitionService.GetAllCompetitions().FirstOrDefault(c => c.CompetitionType == CompetitionType.InternationalCompetition).Id);
+            _clubPerCompetitionService.CreateInternationalClubPerCompetitions(clubs, _competitionService.GetAllCompetitions().FirstOrDefault(c => c.CompetitionType == CompetitionType.InternationalCompetition).Id);
+
+            //Create Cup Winners Cup
+            clubs = new List<Club>();
+            foreach (var competition in _competitionCupService.GetAllCompetitions().Where(comp => comp.CompetitionType == CompetitionType.NationalCup))
+            {
+                var historyItem = _historyItemService.GetHistoryItemsOfCompetition(competition.Id).FirstOrDefault(hi => hi.Year == _saveGameData.Year);
+                clubs.Add(_clubService.GetClub(historyItem.ClubId));
+            }
+
+            _clubPerCompetitionService.CreateInternationalClubPerCompetitions(clubs, _competitionCupService.GetAllCompetitions().FirstOrDefault(c => c.CompetitionType == CompetitionType.InternationalCup).Id);
         }
 
         private void ResetFixtures()
