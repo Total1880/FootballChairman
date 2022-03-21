@@ -5,6 +5,7 @@ using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using OlavFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace FootballChairman.ViewModels
         private IManagerService _managerService;
         private ICountryService _countryService;
         private IHistoryItemService _historyItemService;
-        private int _matchDay;
+        private ISaveGameDataService _saveGameDataService;
         private ObservableCollection<Game> _lastGames;
         private ObservableCollection<Game> _showLastGames;
         private ObservableCollection<Fixture> _nextFixtures;
@@ -40,7 +41,7 @@ namespace FootballChairman.ViewModels
         private Visibility _showEndSeasonButton;
         private Competition _selectedCompetition;
         private Country _selectedCountry;
-        private int _year = 1;
+        private string _saveGameName;
 
         public ObservableCollection<Game> LastGames { get => _lastGames; set { _lastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Game> ShowLastGames { get => _showLastGames; set { _showLastGames = value; RaisePropertyChanged(); } }
@@ -90,7 +91,9 @@ namespace FootballChairman.ViewModels
             ICompetitionService competitionService,
             ICompetitionCupService competitionCupService,
             IManagerService managerService,
-            ICountryService countryService, IHistoryItemService historyItemService)
+            ICountryService countryService, 
+            IHistoryItemService historyItemService,
+            ISaveGameDataService saveGameDataService)
         {
             _fixtureService = fixtureService;
             _gameService = gameService;
@@ -101,19 +104,15 @@ namespace FootballChairman.ViewModels
             _managerService = managerService;
             _countryService = countryService;
             _historyItemService = historyItemService;
+            _saveGameDataService = saveGameDataService;
 
+            _saveGameName = Configuration.DefaultSaveGameName;
             ShowEndSeasonButton = Visibility.Collapsed;
             ShowNextGameButton = Visibility.Visible;
-            _matchDay = 1;
             Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             SelectedCountry = Countries.FirstOrDefault();
             LoadCompetitions();
             LoadFixtureLists();
-
-            //load gameyear
-            var list = _historyItemService.GetHistoryItemsOfCompetition(Competitions[0].Id);
-            if (list.Any())
-                _year = list.Max(x => x.Year) + 1;
 
             Messenger.Default.Register<RefreshCompetitionData>(this, LoadData);
         }
@@ -126,7 +125,7 @@ namespace FootballChairman.ViewModels
 
         private void LoadFixtureLists()
         {
-            NextFixtures = new ObservableCollection<Fixture>(_fixtureService.LoadFixturesOfMatchday(_matchDay));
+            NextFixtures = new ObservableCollection<Fixture>(_fixtureService.LoadFixturesOfMatchday(_saveGameDataService.GetSaveGameData(_saveGameName).MatchDay));
             ShowNextFixtures = new ObservableCollection<Fixture>(NextFixtures.Where(f => f.CompetitionId == SelectedCompetition.Id));
 
             if (LastGames != null)
@@ -135,7 +134,6 @@ namespace FootballChairman.ViewModels
 
         private void NextGame()
         {
-            _matchDay++;
             PlayGames();
             LoadFixtureLists();
             RefreshRanking();
@@ -163,7 +161,7 @@ namespace FootballChairman.ViewModels
                 if (Ranking == null || Ranking.Count < 1)
                     continue;
 
-                _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = Ranking[0].ClubId, CompetitionId = competition.Id, Year = _year });
+                _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = Ranking[0].ClubId, CompetitionId = competition.Id, Year = _saveGameDataService.GetSaveGameData(_saveGameName).Year });
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(Ranking);
             }
             CreateInternationalFixtures();
@@ -174,12 +172,10 @@ namespace FootballChairman.ViewModels
             _clubPerCompetitionService.ResetData();
             ShowEndSeasonButton = Visibility.Collapsed;
             ShowNextGameButton = Visibility.Visible;
-            _matchDay = 1;
             LoadFixtureLists();
             RefreshRanking();
 
             MessengerInstance.Send(new RefreshYourClubDataMessage());
-            _year++;
         }
 
         private void ResetFixtures()
@@ -218,7 +214,7 @@ namespace FootballChairman.ViewModels
 
             foreach (var competition in Competitions)
             {
-                foreach (var fixture in _fixtureService.LoadFixturesOfMatchday(_matchDay - 1).Where(f => f.CompetitionId == competition.Id))
+                foreach (var fixture in _fixtureService.LoadFixturesOfMatchday(_saveGameDataService.GetSaveGameData(_saveGameName).MatchDay - 1).Where(f => f.CompetitionId == competition.Id))
                 {
                     var game = _gameService.PlayGame(fixture);
                     LastGames.Add(game);
@@ -245,7 +241,7 @@ namespace FootballChairman.ViewModels
             var clubs = new List<Club>();
             foreach (var competition in _competitionService.GetAllCompetitions().Where(comp => comp.CompetitionType == CompetitionType.NationalCompetition && comp.PromotionCompetitionId == -1))
             {
-                    var historyItem = _historyItemService.GetHistoryItemsOfCompetition(competition.Id).FirstOrDefault(hi => hi.Year == _year);
+                    var historyItem = _historyItemService.GetHistoryItemsOfCompetition(competition.Id).FirstOrDefault(hi => hi.Year == _saveGameDataService.GetSaveGameData(_saveGameName).Year);
                     clubs.Add(_clubService.GetClub(historyItem.ClubId));
             }
 

@@ -25,6 +25,7 @@ namespace FootballChairman.Services
             builder.RegisterType<HistoryItemService>().AsImplementedInterfaces();
             builder.RegisterType<CompetitionCupService>().AsImplementedInterfaces();
             builder.RegisterType<GameEngineService>().AsImplementedInterfaces();
+            builder.RegisterType<SaveGameDataService>().AsImplementedInterfaces();
         }
     }
 }

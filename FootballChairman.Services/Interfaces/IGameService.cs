@@ -10,5 +10,7 @@ namespace FootballChairman.Services.Interfaces
     public interface IGameService
     {
         Game PlayGame(Fixture fixture);
+        IList<Game> GetGames();
+
     }
 }

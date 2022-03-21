@@ -40,6 +40,7 @@ namespace FootballChairman.Services
             _competitionCups = _competitionCupService.GetAllCompetitions();
             _saveGameData = _saveGameDataService.GetSaveGameData(Configuration.DefaultSaveGameName);
         }
+
         public void ProcessMatchDay()
         {
             var fixtureList = _fixtureService.LoadFixturesOfMatchday(_saveGameData.MatchDay);
@@ -64,6 +65,22 @@ namespace FootballChairman.Services
             }
             _saveGameData.MatchDay++;
             _saveGameDataService.CreateSaveGameData(_saveGameData);
+        }
+
+        public void GoToEndOfSeason()
+        {
+            while (_saveGameData.MatchDay <= Configuration.WeeksInYear)
+            {
+                ProcessMatchDay();
+            }
+        }
+
+        private void ProcessEndOfSeason()
+        {
+            if (_saveGameData.MatchDay <= Configuration.WeeksInYear)
+                return;
+
+
         }
     }
 }
