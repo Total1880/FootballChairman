@@ -21,11 +21,13 @@ namespace FootballChairman.Models
         public int GoalsAgainst { get; set; }
         public int GoalDifference { get => GoalsFor - GoalsAgainst; }
         public bool IsNew { get; set; }
+        public string FixtureEliminated { get; set; }
 
         public ClubPerCompetition(int clubId, string clubName)
         {
             _clubId = clubId;
             _clubName = clubName;
+            FixtureEliminated = string.Empty;
         }
     }
 }

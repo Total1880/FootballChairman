@@ -4,6 +4,7 @@ using FootballChairman.Models.Enums;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -113,6 +114,14 @@ namespace FootballChairman.ViewModels
             var list = _historyItemService.GetHistoryItemsOfCompetition(Competitions[0].Id);
             if (list.Any())
                 _year = list.Max(x => x.Year) + 1;
+
+            Messenger.Default.Register<RefreshCompetitionData>(this, LoadData);
+        }
+
+        private void LoadData(RefreshCompetitionData obj)
+        {
+            LoadFixtureLists();
+            RefreshRanking();
         }
 
         private void LoadFixtureLists()

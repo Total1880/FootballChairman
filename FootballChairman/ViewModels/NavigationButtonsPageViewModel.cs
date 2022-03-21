@@ -1,4 +1,5 @@
-﻿using FootballChairman.Messages.PageOpeners;
+﻿using FootballChairman.Messages;
+using FootballChairman.Messages.PageOpeners;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -59,6 +60,7 @@ namespace FootballChairman.ViewModels
         private void Continue()
         {
             _gameEngineService.ProcessMatchDay();
+            MessengerInstance.Send(new RefreshCompetitionData());
         }
     }
 }

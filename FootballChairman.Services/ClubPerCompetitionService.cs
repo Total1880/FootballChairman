@@ -101,6 +101,45 @@ namespace FootballChairman.Services
 
             _clubPerCompetitionRepository.Create(list);
         }
+        public void UpdateCupData(Game game)
+        {
+            var list = GetAll();
+            var home = list.FirstOrDefault(c => c.ClubId == game.Fixture.HomeOpponentId && c.CompetitionId == game.Fixture.CompetitionId);
+            var away = list.FirstOrDefault(c => c.ClubId == game.Fixture.AwayOpponentId && c.CompetitionId == game.Fixture.CompetitionId);
+
+            home.GoalsFor += game.HomeScore;
+            home.GoalsAgainst += game.AwayScore;
+            away.GoalsAgainst += game.HomeScore;
+            away.GoalsFor += game.AwayScore;
+
+            if (game.HomeScore > game.AwayScore)
+            {
+                home.Points += Configuration.PointPerWin;
+                home.Win++;
+                away.Points += Configuration.PointPerLoss;
+                away.Lost++;
+                away.FixtureEliminated = game.Fixture.IdString;
+            }
+            else if (game.HomeScore < game.AwayScore)
+            {
+                away.Points += Configuration.PointPerWin;
+                away.Win++;
+
+                home.Points += Configuration.PointPerLoss;
+                home.Lost++;
+                home.FixtureEliminated = game.Fixture.IdString;
+            }
+            else
+            {
+                home.Points += Configuration.PointPerEqual;
+                home.Draw++;
+                away.Points += Configuration.PointPerEqual;
+                away.Draw++;
+                home.FixtureEliminated = game.Fixture.IdString;
+            }
+
+            _clubPerCompetitionRepository.Create(list);
+        }
 
         public void UpdatePromotionsAndRelegations(IList<ClubPerCompetition> ranking)
         {

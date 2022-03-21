@@ -13,6 +13,7 @@ namespace FootballChairman.Services.Interfaces
         void CreateInternationalClubPerCompetitionsForChampions(IList<Club> clubs, int competitionId);
         IList<ClubPerCompetition> GetAll();
         void UpdateData(Game game);
+        void UpdateCupData(Game game);
         void ResetData();
         void UpdatePromotionsAndRelegations(IList<ClubPerCompetition> ranking);
     }

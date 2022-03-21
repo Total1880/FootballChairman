@@ -11,13 +11,19 @@ namespace FootballChairman.Services
 {
     public class FixtureService : IFixtureService
     {
-        private IRepository<Fixture> _fixtureRepository;
-        private IScheduleMakerService _scheduleMakerService;
+        private readonly IRepository<Fixture> _fixtureRepository;
+        private readonly IScheduleMakerService _scheduleMakerService;
+        private readonly IHistoryItemService _historyItemService;
+        private readonly IClubPerCompetitionService _clubPerCompetitionService;
+        private readonly IClubService _clubService;
 
-        public FixtureService(IRepository<Fixture> fixtureRepository, IScheduleMakerService scheduleMakerService)
+        public FixtureService(IRepository<Fixture> fixtureRepository, IScheduleMakerService scheduleMakerService, IHistoryItemService historyItemService, IClubPerCompetitionService clubPerCompetitionService, IClubService clubService)
         {
             _fixtureRepository = fixtureRepository;
             _scheduleMakerService = scheduleMakerService;
+            _historyItemService = historyItemService;
+            _clubPerCompetitionService = clubPerCompetitionService;
+            _clubService = clubService;
         }
 
         public IList<Fixture> LoadFixtures()
@@ -51,6 +57,54 @@ namespace FootballChairman.Services
 
             fixtures.AddRange(newFixtures);
             return SaveFixtures(fixtures);
+        }
+
+        public void UpdateCupData(Game game, SaveGameData saveGameData)
+        {
+            var homeFixture = LoadFixturesOfMatchday(game.Fixture.RoundNo + 1).FirstOrDefault(f => f.CupPreviousFixtureHomeTeam == game.Fixture.IdString);
+            var awayFixture = LoadFixturesOfMatchday(game.Fixture.RoundNo + 1).FirstOrDefault(f => f.CupPreviousFixtureAwayTeam == game.Fixture.IdString);
+
+            if (homeFixture != null && awayFixture != null)
+                throw new Exception("multiple cupfixtures found ...");
+
+            var losingclub = _clubPerCompetitionService.GetAll().FirstOrDefault(cpc => cpc.FixtureEliminated == game.Fixture.IdString).ClubId;
+            var winningclub = losingclub == game.Fixture.AwayOpponentId ? game.Fixture.HomeOpponentId : game.Fixture.AwayOpponentId;
+
+            if (homeFixture == null && awayFixture == null)
+            {
+                _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = winningclub, CompetitionId = game.Fixture.CompetitionId, Year = saveGameData.Year });
+                return;
+            }
+
+            if (homeFixture != null)
+            {
+                homeFixture.HomeOpponentId = winningclub;
+                UpdateFixture(homeFixture);
+                return;
+            }
+            if (awayFixture != null)
+            {
+                awayFixture.AwayOpponentId = winningclub;
+                UpdateFixture(awayFixture);
+                return;
+            }
+
+            throw new Exception("no fixture updated...");
+        }
+        public Fixture UpdateFixture(Fixture fixture)
+        {
+            if (fixture.HomeOpponentId > 0 && fixture.HomeOpponent.Length <=0 )
+                fixture.HomeOpponent = _clubService.GetClub(fixture.HomeOpponentId).Name;
+
+            if (fixture.AwayOpponentId > 0 && fixture.AwayOpponent.Length <= 0)
+                fixture.AwayOpponent = _clubService.GetClub(fixture.AwayOpponentId).Name;
+
+            var fixtures = LoadFixtures();
+            fixtures.Remove(fixtures.FirstOrDefault(f => f.IdString == fixture.IdString));
+            fixtures.Add(fixture);
+            SaveFixtures(fixtures);
+
+            return fixture;
         }
     }
 }
