@@ -79,7 +79,7 @@ namespace FootballChairman.Repositories
                         readGameData.FixtureId = xmlReader.GetAttribute(nameof(Game.FixtureId));
 
                         gameList.Add(readGameData);
-                    } while (xmlReader.ReadToNextSibling(nameof(SaveGameData)));
+                    } while (xmlReader.ReadToNextSibling(nameof(Game)));
                 }
             }
 

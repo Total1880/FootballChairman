@@ -128,8 +128,7 @@ namespace FootballChairman.ViewModels
             NextFixtures = new ObservableCollection<Fixture>(_fixtureService.LoadFixturesOfMatchday(_saveGameDataService.GetSaveGameData(_saveGameName).MatchDay));
             ShowNextFixtures = new ObservableCollection<Fixture>(NextFixtures.Where(f => f.CompetitionId == SelectedCompetition.Id));
 
-            if (LastGames != null)
-                ShowLastGames = new ObservableCollection<Game>(LastGames.Where(g => g.Fixture.CompetitionId == SelectedCompetition.Id));
+                ShowLastGames = new ObservableCollection<Game>(_gameService.GetGames().Where(g => g.Fixture.CompetitionId == SelectedCompetition.Id && g.Fixture.RoundNo == _saveGameDataService.GetSaveGameData(_saveGameName).MatchDay - 1));
         }
 
         private void NextGame()
