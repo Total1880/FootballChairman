@@ -147,7 +147,6 @@ namespace FootballChairman.ViewModels
         {
             if (_clubPerCompetitionService.GetAll().Any())
             {
-                _clubPerCompetitionService.ResetData();
                 return;
             }
 

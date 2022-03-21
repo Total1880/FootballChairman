@@ -33,7 +33,7 @@ namespace FootballChairman.Services
             var data = _saveGameDataRepository.Get().FirstOrDefault(s => s.Name == name);
             if (data == null)
             {
-                return CreateSaveGameData(new SaveGameData { Name = name, MatchDay = 0, Year = 0 });
+                return CreateSaveGameData(new SaveGameData { Name = name, MatchDay = 0, Year = 1 });
             }
             return data;
         }

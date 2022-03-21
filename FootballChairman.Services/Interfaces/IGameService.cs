@@ -11,6 +11,6 @@ namespace FootballChairman.Services.Interfaces
     {
         Game PlayGame(Fixture fixture);
         IList<Game> GetGames();
-
+        void CleanGames();
     }
 }

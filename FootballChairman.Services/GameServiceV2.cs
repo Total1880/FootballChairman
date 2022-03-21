@@ -114,6 +114,10 @@ namespace FootballChairman.Services
             foreach (var game in games)
             {
                 game.Fixture = fixtures.FirstOrDefault(f => f.IdString == game.FixtureId);
+                if (game.Fixture == null)
+                {
+                    game.Fixture = new Fixture();
+                }
             }
 
             return games;
@@ -127,6 +131,13 @@ namespace FootballChairman.Services
             _gameRepository.Create(games);
 
             return game;
+        }
+
+        public void CleanGames()
+        {
+            var list = new List<Game>();
+            list.Add(new Game { Fixture = new Fixture { CompetitionId = -1 } });
+            _gameRepository.Create(list);
         }
     }
 }
