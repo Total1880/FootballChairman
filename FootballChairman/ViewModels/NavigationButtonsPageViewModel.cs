@@ -20,6 +20,7 @@ namespace FootballChairman.ViewModels
         private RelayCommand _openHistoryPageCommand;
         private RelayCommand _openCupOverviewPageCommand;
         private RelayCommand _continueCommand;
+        private RelayCommand _endSeasonCommand;
 
         public RelayCommand OpenFixturesPageCommand => _openFixturesPageCommand ??= new RelayCommand(OpenFixturesPage);
         public RelayCommand OpenMatchOverviewPageCommand => _openMatchOverviewPageCommand ??= new RelayCommand(OpenMatchOverviewPage);
@@ -27,6 +28,7 @@ namespace FootballChairman.ViewModels
         public RelayCommand OpenHistoryPageCommand => _openHistoryPageCommand ??= new RelayCommand(OpenHistoryPage);
         public RelayCommand OpenCupOverviewPageCommand => _openCupOverviewPageCommand ??= new RelayCommand(OpenCupOverviewPage);
         public RelayCommand ContinueCommand => _continueCommand ??= new RelayCommand(Continue);
+        public RelayCommand EndSeasonCommand => _endSeasonCommand ??= new RelayCommand(EndSeason);
 
         public NavigationButtonsViewModel(IGameEngineService gameEngineService)
         {
@@ -61,6 +63,11 @@ namespace FootballChairman.ViewModels
         {
             _gameEngineService.ProcessMatchDay();
             MessengerInstance.Send(new RefreshCompetitionData());
+        }
+
+        private void EndSeason()
+        {
+            _gameEngineService.GoToEndOfSeason();
         }
     }
 }

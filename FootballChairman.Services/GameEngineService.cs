@@ -25,6 +25,7 @@ namespace FootballChairman.Services
         private IList<Competition> _competitions;
         private IList<CompetitionCup> _competitionCups;
         private SaveGameData _saveGameData;
+        private bool _endSeason;
 
         public GameEngineService(
             ICompetitionService competitionService,
@@ -48,6 +49,7 @@ namespace FootballChairman.Services
             _competitions = _competitionService.GetAllCompetitions();
             _competitionCups = _competitionCupService.GetAllCompetitions();
             _saveGameData = _saveGameDataService.GetSaveGameData(Configuration.DefaultSaveGameName);
+            _endSeason = false;
         }
 
         public void ProcessMatchDay()
@@ -81,6 +83,7 @@ namespace FootballChairman.Services
 
             if (!fixturesLeft)
             {
+                _endSeason = true;
                 _saveGameData.MatchDay = Configuration.WeeksInYear + 1;
                 ProcessEndOfSeason();
             }
@@ -88,10 +91,12 @@ namespace FootballChairman.Services
 
         public void GoToEndOfSeason()
         {
-            while (_saveGameData.MatchDay <= Configuration.WeeksInYear)
+            while (!_endSeason)
             {
                 ProcessMatchDay();
             }
+
+            _endSeason = false;
         }
 
         private void ProcessEndOfSeason()

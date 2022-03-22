@@ -11,10 +11,16 @@
 
     <Grid>
         <StackPanel>
-            <Button
+            <StackPanel Orientation="Horizontal">
+                <Button
                 Content="Continue"
                 Width="100"
                 Command="{Binding ContinueCommand}"/>
+                <Button
+                Content="End Season"
+                Width="100"
+                Command="{Binding EndSeasonCommand}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button
                 Content="Next Games"
