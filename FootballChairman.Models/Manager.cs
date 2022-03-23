@@ -16,5 +16,7 @@ namespace FootballChairman.Models
         public int TrainingDefenseSkill { get; set; }
         public int TrainingMidfieldSkill { get; set; }
         public int ClubId { get; set; }
+
+        public string ClubName { get; set; }
     }
 }

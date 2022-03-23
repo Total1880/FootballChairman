@@ -14,6 +14,6 @@ namespace FootballChairman.Services.Interfaces
         Manager GetManager(int id);
         IList<Manager> GetAllManagers();
         IList<Manager> UpdateManagersEndSeason();
-
+        Manager UpdateManager(Manager manager);
     }
 }

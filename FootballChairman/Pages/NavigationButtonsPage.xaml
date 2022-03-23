@@ -42,6 +42,10 @@
                 Content="History"
                 Width="100"
                 Command="{Binding OpenHistoryPageCommand}"/>
+                <Button 
+                Content="Managers"
+                Width="100"
+                Command="{Binding OpenManagerPageCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

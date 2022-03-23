@@ -62,6 +62,15 @@ namespace FootballChairman.Services
 
         }
 
+        public Manager UpdateManager(Manager manager)
+        {
+           var list = GetAllManagers().Where(m => m.Id != manager.Id).ToList();
+            list.Add(manager);
+            _managerRepository.Create(list);
+
+            return manager;
+        }
+
         //returns new managers
         public IList<Manager> UpdateManagersEndSeason()
         {
