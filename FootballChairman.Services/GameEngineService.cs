@@ -61,7 +61,7 @@ namespace FootballChairman.Services
             {
                 foreach (var fixture in fixtureList.Where(f => f.CompetitionId == competition.Id))
                 {
-                    var game = _gameService.PlayGame(fixture);
+                    var game = _gameService.PlayGame(fixture, false);
                     _clubPerCompetitionService.UpdateData(game);
                     fixturesLeft = true;
                 }
@@ -71,7 +71,7 @@ namespace FootballChairman.Services
             {
                 foreach (var fixture in fixtureList.Where(f => f.CompetitionId == competitionCup.Id))
                 {
-                    var game = _gameService.PlayGame(fixture);
+                    var game = _gameService.PlayGame(fixture,true) ;
                     _clubPerCompetitionService.UpdateCupData(game);
                     _fixtureService.UpdateCupData(game, _saveGameData);
                     fixturesLeft = true;

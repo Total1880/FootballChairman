@@ -9,7 +9,7 @@ namespace FootballChairman.Services.Interfaces
 {
     public interface IGameService
     {
-        Game PlayGame(Fixture fixture);
+        Game PlayGame(Fixture fixture, bool suddendeath);
         IList<Game> GetGames();
         void CleanGames();
     }

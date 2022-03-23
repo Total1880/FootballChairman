@@ -22,7 +22,7 @@ namespace FootballChairman.Services
             _fixtureRepository = fixtureRepository;
         }
 
-        public Game PlayGame(Fixture fixture)
+        public Game PlayGame(Fixture fixture, bool suddendeath)
         {
             var game = new Game();
             game.Fixture = fixture;
@@ -96,6 +96,13 @@ namespace FootballChairman.Services
                 }
             }
 
+            if (game.HomeScore == game.AwayScore && suddendeath)
+            {
+                if (RandomInt(1, 3) == 1)
+                    game.HomeScore++;
+                else
+                    game.AwayScore++;
+            }
             return SaveGame(game);
         }
 
