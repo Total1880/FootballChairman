@@ -30,6 +30,7 @@ namespace FootballChairman
         private HistoryPage _historyPage;
         private CupOverviewPage _cupOverviewPage;
         private ManagerPage _managerPage;
+        private TransferPage _transferPage;
 
         public FixturesPage FixturesPage => _fixturesPage ??= new FixturesPage();
         public NavigationButtonsPage NavigationButtonsPage => _navigationButtonsPage ??= new NavigationButtonsPage();
@@ -38,6 +39,7 @@ namespace FootballChairman
         public HistoryPage HistoryPage => _historyPage ??= new HistoryPage();
         public CupOverviewPage CupOverviewPage => _cupOverviewPage ??= new CupOverviewPage();
         public ManagerPage ManagerPage => _managerPage ??= new ManagerPage();
+        public TransferPage TransferPage => _transferPage ??= new TransferPage();
 
         public MainWindow()
         {
@@ -53,6 +55,7 @@ namespace FootballChairman
             Messenger.Default.Register<OpenHistoryPageMessage>(this, OpenHistoryPage);
             Messenger.Default.Register<OpenCupOverviewPageMessage>(this, OpenCupOverviewPage);
             Messenger.Default.Register<OpenManagerPageMessage>(this, OpenManagerPage);
+            Messenger.Default.Register<OpenTransferPageMessage>(this, OpenTransferPage);
         }
 
         private void OpenFixturePage(OpenFixturesPageMessage obj)
@@ -83,6 +86,12 @@ namespace FootballChairman
         private void OpenManagerPage(OpenManagerPageMessage obj)
         {
             MainFrame.NavigationService.Navigate(ManagerPage);
+        }
+
+        private void OpenTransferPage(OpenTransferPageMessage obj)
+        {
+            MainFrame.NavigationService.Navigate(TransferPage);
+
         }
     }
 }

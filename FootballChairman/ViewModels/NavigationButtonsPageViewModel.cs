@@ -20,6 +20,8 @@ namespace FootballChairman.ViewModels
         private RelayCommand _openHistoryPageCommand;
         private RelayCommand _openCupOverviewPageCommand;
         private RelayCommand _openManagerPageCommand;
+        private RelayCommand _openTransferPageCommand;
+
         private RelayCommand _continueCommand;
         private RelayCommand _endSeasonCommand;
 
@@ -29,6 +31,7 @@ namespace FootballChairman.ViewModels
         public RelayCommand OpenHistoryPageCommand => _openHistoryPageCommand ??= new RelayCommand(OpenHistoryPage);
         public RelayCommand OpenCupOverviewPageCommand => _openCupOverviewPageCommand ??= new RelayCommand(OpenCupOverviewPage);
         public RelayCommand OpenManagerPageCommand => _openManagerPageCommand ??= new RelayCommand(OpenManagerPage);
+        public RelayCommand OpenTransferPageCommand => _openTransferPageCommand ??= new RelayCommand(OpenTransferPage);
 
         public RelayCommand ContinueCommand => _continueCommand ??= new RelayCommand(Continue);
         public RelayCommand EndSeasonCommand => _endSeasonCommand ??= new RelayCommand(EndSeason);
@@ -65,6 +68,11 @@ namespace FootballChairman.ViewModels
         private void OpenManagerPage()
         {
             MessengerInstance.Send(new OpenManagerPageMessage());
+        }
+
+        private void OpenTransferPage()
+        {
+            MessengerInstance.Send(new OpenTransferPageMessage());
         }
 
         private void Continue()

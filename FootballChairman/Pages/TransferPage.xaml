@@ -1,0 +1,92 @@
+﻿<Page x:Class="FootballChairman.Pages.TransferPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FootballChairman.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TransferPage"
+      DataContext="{Binding TransferPage, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Defense" Width="100"/>
+                <Label Content="Min"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchDefenseMin}"/>
+                <Label Content="Max"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchDefenseMax}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Midfield" Width="100"/>
+                <Label Content="Min"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchMidfieldMin}"/>
+                <Label Content="Max"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchMidfieldMax}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Attack" Width="100"/>
+                <Label Content="Min"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchAttackMin}"/>
+                <Label Content="Max"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchAttackMax}"/>
+            </StackPanel>
+            <CheckBox Content="Reachable"
+                      IsChecked="{Binding ReachablePlayers}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" 
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+            <Button Content="Search" 
+                    Command="{Binding SearchPlayersCommand}"
+                    Width="100"/>
+            <Button Content="Transfer Player"
+                    Command="{Binding TransferPlayersCommand}"
+                    Width="100"/>
+        </StackPanel>
+
+        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding LastName}">
+                        <GridViewColumnHeader Content="Last Name"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding FirstName}">
+                        <GridViewColumnHeader Content="First Name"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding ClubName}">
+                        <GridViewColumnHeader Content="Club"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Age}">
+                        <GridViewColumnHeader Content="Age"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Defense}">
+                        <GridViewColumnHeader Content="Defense"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Midfield}">
+                        <GridViewColumnHeader Content="Midfield"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Attack}">
+                        <GridViewColumnHeader Content="Attack"/>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

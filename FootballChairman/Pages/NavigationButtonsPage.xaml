@@ -46,6 +46,10 @@
                 Content="Managers"
                 Width="100"
                 Command="{Binding OpenManagerPageCommand}"/>
+                <Button 
+                Content="Transfers"
+                Width="100"
+                Command="{Binding OpenTransferPageCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

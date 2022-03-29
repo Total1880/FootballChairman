@@ -17,15 +17,18 @@ namespace FootballChairman.ViewModels
         private readonly IClubService _clubService;
         private readonly IManagerService _managerService;
         private readonly ICountryService _countryService;
+        private readonly IPlayerService _playerService;
         private Club _selectedClub;
         private Manager _selectedManager;
         private Country _selectedCountry;
 
         private ObservableCollection<Club> _clubs;
         private ObservableCollection<Country> _countries;
+        private ObservableCollection<Player> _players;
 
         public ObservableCollection<Club> Clubs { get => _clubs; set { _clubs = value; RaisePropertyChanged(); } }
         public ObservableCollection<Country> Countries { get => _countries; set { _countries = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Player> Players { get => _players; set { _players = value; RaisePropertyChanged(); } }
         public Country SelectedCountry
         {
             get => _selectedCountry;
@@ -46,6 +49,7 @@ namespace FootballChairman.ViewModels
                 if (_selectedClub != null)
                 {
                     SelectedManager = _managerService.GetManager(value.ManagerId);
+                    Players = new ObservableCollection<Player>(_playerService.GetPlayersFromClub(value.Id));
                 }
                 RaisePropertyChanged();
             }
@@ -62,11 +66,12 @@ namespace FootballChairman.ViewModels
         }
 
 
-        public ClubPageViewModel(IClubService clubService, IManagerService managerService, ICountryService countryService)
+        public ClubPageViewModel(IClubService clubService, IManagerService managerService, ICountryService countryService, IPlayerService playerService)
         {
             _clubService = clubService;
             _managerService = managerService;
             _countryService = countryService;
+            _playerService = playerService;
 
             Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             LoadData(new RefreshYourClubDataMessage());

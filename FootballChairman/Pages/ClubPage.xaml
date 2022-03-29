@@ -11,13 +11,14 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <ComboBox
                 Width="150"
@@ -49,7 +50,7 @@
                 Content="{Binding SelectedClub.SkillAttack}"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Manager: "/>
@@ -84,5 +85,29 @@
                 Content="{Binding SelectedManager.TrainingAttackSkill}"/>
             </StackPanel>
         </StackPanel>
+        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Players}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding LastName}">
+                        <GridViewColumnHeader Content="Last Name"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding FirstName}">
+                        <GridViewColumnHeader Content="First Name"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Age}">
+                        <GridViewColumnHeader Content="Age"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Defense}">
+                        <GridViewColumnHeader Content="Defense"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Midfield}">
+                        <GridViewColumnHeader Content="Midfield"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Attack}">
+                        <GridViewColumnHeader Content="Attack"/>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>
