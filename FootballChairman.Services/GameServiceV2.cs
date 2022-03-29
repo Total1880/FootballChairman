@@ -29,68 +29,49 @@ namespace FootballChairman.Services
 
             var homeClub = _clubService.GetClub(fixture.HomeOpponentId);
             var awayClub = _clubService.GetClub(fixture.AwayOpponentId);
-            var homeMidfieldStronger = homeClub.SkillMidfield >= awayClub.SkillMidfield;
-            var differenceMidfield = homeMidfieldStronger ? homeClub.SkillMidfield - awayClub.SkillMidfield : awayClub.SkillMidfield - homeClub.SkillMidfield;
+
+            var homeSkills = (homeClub.SkillAttack + homeClub.SkillMidfield + homeClub.SkillDefense) / 3;
+            var awaySkills = (awayClub.SkillAttack + awayClub.SkillMidfield + awayClub.SkillDefense) / 3;
+            var homeAttack = (homeClub.SkillAttack + homeClub.SkillMidfield / 2) / 1.5;
+            var homeDefense = (homeClub.SkillDefense + homeClub.SkillMidfield / 2) / 1.5;
+            var awayAttack = (awayClub.SkillAttack + awayClub.SkillMidfield / 2) / 1.5;
+            var awayDefense = (awayClub.SkillDefense + awayClub.SkillMidfield / 2) / 1.5;
+
+            var skillDifference = homeSkills - awaySkills;
+            var homeAttackDifference = homeAttack - awayDefense;
+            var awayAttackDifference = awayAttack - homeDefense;
+
+            var homeChange = 50 + skillDifference / 2;
+            var awayChange = 50 - skillDifference / 2;
+
+            var homeScoreChange = 33 + homeAttackDifference / 3;
+            var awayScoreChange = 33 + awayAttackDifference / 3;
+
+            if (homeScoreChange < 0)
+            {
+                throw new Exception();
+            }
+            if (awayScoreChange < 0)
+            {
+                throw new Exception();
+            }
 
             for (int i = 0; i < 90; i++)
             {
-                if (RandomInt(0, (int)Math.Round((decimal)differenceMidfield/2)) == 0)
+                if (RandomInt(0, 6) == 0)
                 {
-                    // chance stronger team
-                    if (homeMidfieldStronger)
+                    if (RandomInt(0, 100) < homeChange)
                     {
-                        //chance hometeam
-                        if (RandomInt(0, homeClub.SkillAttack) != 0)
+                        if (RandomInt(0, 100) < homeScoreChange)
                         {
-                            // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 3)) == 0)
-                            {
-                                // Defence fails, goal
-                                game.HomeScore++;
-                            }
+                            game.HomeScore++;
                         }
                     }
                     else
                     {
-                        //chance awayteam
-                        if (RandomInt(0, awayClub.SkillAttack) != 0)
+                        if (RandomInt(0, 100) < awayScoreChange)
                         {
-                            // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 3)) == 0)
-                            {
-                                // Defence fails, goal
-                                game.AwayScore++;
-                            }
-                        }
-                    }
-                }
-                else if (RandomInt(0, differenceMidfield) == 0)
-                {
-                    //change weaker team
-                    if (homeMidfieldStronger)
-                    {
-                        //chance awayteam
-                        if (RandomInt(0, awayClub.SkillAttack) != 0)
-                        {
-                            // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 3)) == 0)
-                            {
-                                // Defence fails, goal
-                                game.AwayScore++;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //chance hometeam
-                        if (RandomInt(0, homeClub.SkillAttack) != 0)
-                        {
-                            // Succesfull attack, other team may now defend
-                            if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 3)) == 0)
-                            {
-                                // Defence fails, goal
-                                game.HomeScore++;
-                            }
+                            game.AwayScore++;
                         }
                     }
                 }
@@ -103,8 +84,93 @@ namespace FootballChairman.Services
                 else
                     game.AwayScore++;
             }
+
             return SaveGame(game);
         }
+
+        //public Game PlayGame(Fixture fixture, bool suddendeath)
+        //{
+        //    var game = new Game();
+        //    game.Fixture = fixture;
+
+        //    var homeClub = _clubService.GetClub(fixture.HomeOpponentId);
+        //    var awayClub = _clubService.GetClub(fixture.AwayOpponentId);
+        //    var homeMidfieldStronger = homeClub.SkillMidfield >= awayClub.SkillMidfield;
+        //    var differenceMidfield = homeMidfieldStronger ? homeClub.SkillMidfield - awayClub.SkillMidfield : awayClub.SkillMidfield - homeClub.SkillMidfield;
+
+        //    for (int i = 0; i < 90; i++)
+        //    {
+        //        if (RandomInt(0, (int)Math.Round((decimal)differenceMidfield/2)) == 0)
+        //        {
+        //            // chance stronger team
+        //            if (homeMidfieldStronger)
+        //            {
+        //                //chance hometeam
+        //                if (RandomInt(0, homeClub.SkillAttack) != 0)
+        //                {
+        //                    // Succesfull attack, other team may now defend
+        //                    if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 3)) == 0)
+        //                    {
+        //                        // Defence fails, goal
+        //                        game.HomeScore++;
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                //chance awayteam
+        //                if (RandomInt(0, awayClub.SkillAttack) != 0)
+        //                {
+        //                    // Succesfull attack, other team may now defend
+        //                    if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 3)) == 0)
+        //                    {
+        //                        // Defence fails, goal
+        //                        game.AwayScore++;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (RandomInt(0, differenceMidfield) == 0)
+        //        {
+        //            //change weaker team
+        //            if (homeMidfieldStronger)
+        //            {
+        //                //chance awayteam
+        //                if (RandomInt(0, awayClub.SkillAttack) != 0)
+        //                {
+        //                    // Succesfull attack, other team may now defend
+        //                    if (RandomInt(0, (int)Math.Round((decimal)homeClub.SkillDefense / 3)) == 0)
+        //                    {
+        //                        // Defence fails, goal
+        //                        game.AwayScore++;
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                //chance hometeam
+        //                if (RandomInt(0, homeClub.SkillAttack) != 0)
+        //                {
+        //                    // Succesfull attack, other team may now defend
+        //                    if (RandomInt(0, (int)Math.Round((decimal)awayClub.SkillDefense / 3)) == 0)
+        //                    {
+        //                        // Defence fails, goal
+        //                        game.HomeScore++;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    if (game.HomeScore == game.AwayScore && suddendeath)
+        //    {
+        //        if (RandomInt(1, 3) == 1)
+        //            game.HomeScore++;
+        //        else
+        //            game.AwayScore++;
+        //    }
+        //    return SaveGame(game);
+        //}
 
         static int RandomInt(int min, int max)
         {
