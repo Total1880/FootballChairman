@@ -12,12 +12,14 @@ namespace FootballChairman.Services
     public class GameServiceV2 : IGameService
     {
         private readonly IClubService _clubService;
+        private readonly IPlayerService _playerService;
         private readonly IRepository<Game> _gameRepository;
         private readonly IRepository<Fixture> _fixtureRepository;
 
-        public GameServiceV2(IClubService clubService, IRepository<Game> gameRepository, IRepository<Fixture> fixtureRepository)
+        public GameServiceV2(IClubService clubService, IPlayerService playerService, IRepository<Game> gameRepository, IRepository<Fixture> fixtureRepository)
         {
             _clubService = clubService;
+            _playerService = playerService;
             _gameRepository = gameRepository;
             _fixtureRepository = fixtureRepository;
         }
@@ -30,12 +32,36 @@ namespace FootballChairman.Services
             var homeClub = _clubService.GetClub(fixture.HomeOpponentId);
             var awayClub = _clubService.GetClub(fixture.AwayOpponentId);
 
-            var homeSkills = (homeClub.SkillAttack + homeClub.SkillMidfield + homeClub.SkillDefense) / 3;
-            var awaySkills = (awayClub.SkillAttack + awayClub.SkillMidfield + awayClub.SkillDefense) / 3;
-            var homeAttack = (homeClub.SkillAttack + homeClub.SkillMidfield / 2) / 1.5;
-            var homeDefense = (homeClub.SkillDefense + homeClub.SkillMidfield / 2) / 1.5;
-            var awayAttack = (awayClub.SkillAttack + awayClub.SkillMidfield / 2) / 1.5;
-            var awayDefense = (awayClub.SkillDefense + awayClub.SkillMidfield / 2) / 1.5;
+            var homePlayers = _playerService.GetPlayersFromClub(homeClub.Id);
+            var awayPlayers = _playerService.GetPlayersFromClub(awayClub.Id);
+
+            var homeSkills = ((homeClub.SkillAttack + homeClub.SkillMidfield + homeClub.SkillDefense) / 3) * (11 - homePlayers.Count);
+            var awaySkills = ((awayClub.SkillAttack + awayClub.SkillMidfield + awayClub.SkillDefense) / 3) * (11- awayPlayers.Count);
+
+            var homeAttack = ((homeClub.SkillAttack + homeClub.SkillMidfield / 2) / 1.5) * (11 - homePlayers.Count);
+            var homeDefense = ((homeClub.SkillDefense + homeClub.SkillMidfield / 2) / 1.5) * (11 - homePlayers.Count);
+            var awayAttack = ((awayClub.SkillAttack + awayClub.SkillMidfield / 2) / 1.5) * (11 - awayPlayers.Count);
+            var awayDefense = ((awayClub.SkillDefense + awayClub.SkillMidfield / 2) / 1.5) * (11 - awayPlayers.Count);
+
+            foreach (var player in homePlayers)
+            {
+                homeSkills = homeSkills + ((player.Defense + player.Midfield + player.Attack) / 3);
+                homeAttack = homeAttack + ((player.Attack + player.Midfield / 2) / 1.5);
+                homeDefense = homeDefense + ((player.Defense + player.Midfield / 2) / 1.5);
+            }
+            foreach (var player in awayPlayers)
+            {
+                awaySkills = awaySkills + ((player.Defense + player.Midfield + player.Attack) / 3);
+                awayAttack = awayAttack + ((player.Attack + player.Midfield / 2) / 1.5);
+                awayDefense = awayDefense + ((player.Defense + player.Midfield / 2) / 1.5);
+            }
+
+            homeSkills /= 11;
+            awaySkills /= 11;
+            homeAttack /= 11;
+            homeDefense /= 11;
+            awayAttack /= 11;
+            awayDefense /= 11;
 
             var skillDifference = homeSkills - awaySkills;
             var homeAttackDifference = homeAttack - awayDefense;

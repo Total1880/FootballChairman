@@ -20,6 +20,7 @@ namespace FootballChairman.ViewModels
         private IManagerService _managerService;
         private ICountryService _countryService;
         private ICompetitionCupService _competitionCupService;
+        private IPlayerService _playerService;
         private ObservableCollection<Fixture> _fixtures = new ObservableCollection<Fixture>();
 
         public ObservableCollection<Fixture> Fixtures { get => _fixtures; }
@@ -31,7 +32,8 @@ namespace FootballChairman.ViewModels
             IClubPerCompetitionService clubPerCompetitionService,
             IManagerService managerService,
             ICountryService countryService,
-            ICompetitionCupService competitionCupService)
+            ICompetitionCupService competitionCupService,
+            IPlayerService playerService)
         {
             _fixtureService = fixtureService;
             _competitionService = competitionService;
@@ -40,11 +42,13 @@ namespace FootballChairman.ViewModels
             _managerService = managerService;
             _countryService = countryService;
             _competitionCupService = competitionCupService;
+            _playerService = playerService;
 
             CreateCountries();
             CreateCompetition();
             CreateClubs();
             CreateManagers();
+            CreatePlayers();
             CreateClubsPerCompetitions();
             CreateFixtures();
             _managerService = managerService;
@@ -219,6 +223,22 @@ namespace FootballChairman.ViewModels
                 club.ManagerId = _managerService.GenerateManager(club.Id).Id;
             }
             _clubService.CreateAllClubs(clubs);
+        }
+
+        private void CreatePlayers()
+        {
+            if (_playerService.GetPlayers().Any())
+                return;
+
+            var clubs = _clubService.GetAllClubs();
+
+            foreach (var club in clubs)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    _playerService.GenerateRandomPlayer(club.Id);
+                }
+            }
         }
         private void CreateCountries()
         {
