@@ -16,5 +16,11 @@ namespace FootballChairman.Models
         public int ManagerId { get; set; }
         public int CountryId { get; set; }
         public bool IsPlayer { get; set; }
+        public int Reputation { get; set; }
+
+        public Club()
+        {
+            Reputation = 5000;
+        }
     }
 }

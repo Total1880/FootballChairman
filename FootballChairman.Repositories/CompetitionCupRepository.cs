@@ -32,7 +32,7 @@ namespace FootballChairman.Repositories
                     writer.WriteStartElement(nameof(CompetitionCup));
                     writer.WriteAttributeString(nameof(CompetitionCup.Id), competition.Id.ToString());
                     writer.WriteAttributeString(nameof(CompetitionCup.Name), competition.Name.ToString());
-                    writer.WriteAttributeString(nameof(CompetitionCup.Skill), competition.Skill.ToString());
+                    writer.WriteAttributeString(nameof(CompetitionCup.Reputation), competition.Reputation.ToString());
                     writer.WriteAttributeString(nameof(CompetitionCup.CountryId), competition.CountryId.ToString());
                     writer.WriteAttributeString(nameof(CompetitionCup.CompetitionType), competition.CompetitionType.ToString());
                     writer.WriteAttributeString(nameof(CompetitionCup.Rounds), competition.Rounds.ToString());
@@ -80,7 +80,7 @@ namespace FootballChairman.Repositories
 
                         readCompetition.Id = int.Parse(xmlReader.GetAttribute(nameof(CompetitionCup.Id)));
                         readCompetition.Name = xmlReader.GetAttribute(nameof(CompetitionCup.Name));
-                        readCompetition.Skill = int.Parse(xmlReader.GetAttribute(nameof(CompetitionCup.Skill)));
+                        readCompetition.Reputation = int.Parse(xmlReader.GetAttribute(nameof(CompetitionCup.Reputation)));
                         readCompetition.CountryId = int.Parse(xmlReader.GetAttribute(nameof(CompetitionCup.CountryId)));
                         readCompetition.CompetitionType = (CompetitionType)Enum.Parse(typeof(CompetitionType), xmlReader.GetAttribute(nameof(CompetitionCup.CompetitionType)));
                         readCompetition.Rounds = int.Parse(xmlReader.GetAttribute(nameof(CompetitionCup.Rounds)));

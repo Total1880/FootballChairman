@@ -52,9 +52,32 @@ namespace FootballChairman.Services
             return CreateAllClubs(list).FirstOrDefault(c => c.Id == club.Id);
         }
 
-        public void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking)
+        public void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking, int competitionReputation)
         {
-            throw new NotImplementedException();
+            var clubs = GetAllClubs();
+            var counter = ranking.Count();
+            foreach (var club in ranking)
+            {
+                var lookUpClub = clubs.FirstOrDefault(c => c.Id == club.ClubId);
+                if (lookUpClub == null)
+                    continue;
+
+                if (lookUpClub.Reputation < competitionReputation - 100)
+                {
+                    lookUpClub.Reputation += counter;
+                }
+                if (lookUpClub.Reputation < competitionReputation - 1000)
+                {
+                    lookUpClub.Reputation += 100;
+                }
+                if (lookUpClub.Reputation > competitionReputation)
+                {
+                    lookUpClub.Reputation -= 100;
+                }
+
+                UpdateClub(lookUpClub);
+                counter--;
+            }
         }
 
         public void UpdateClubsEndOfSeasonTroughManager()

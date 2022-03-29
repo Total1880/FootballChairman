@@ -121,6 +121,7 @@ namespace FootballChairman.Services
                 if (ranking == null || ranking.Count() < 1)
                     continue;
 
+                _clubService.UpdateClubsEndOfSeason(ranking, competition.Reputation);
                 _historyItemService.CreateHistoryItem(new HistoryItem { ClubId = ranking[0].ClubId, CompetitionId = competition.Id, Year = _saveGameData.Year });
                 _clubPerCompetitionService.UpdatePromotionsAndRelegations(ranking);
             }

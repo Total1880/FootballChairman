@@ -13,7 +13,7 @@ namespace FootballChairman.Services.Interfaces
         Club GetClub(int id);
         IList<Club> GetAllClubs();
         IList<Club> CreateAllClubs(IList<Club> clubs);
-        void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking);
+        void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking, int competitionReputation);
         void UpdateClubsEndOfSeasonTroughManager();
         void UpdateClubsWithNewManagers(IList<Manager> newManagers);
         Club UpdateClub(Club club);

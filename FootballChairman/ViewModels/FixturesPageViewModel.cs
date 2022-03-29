@@ -55,23 +55,23 @@ namespace FootballChairman.ViewModels
             if (_competitionService.GetAllCompetitions().Any())
                 return;
 
-            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Skill = 12, PromotionCompetitionId = 0, RelegationCompetitionId = -1, NumberOfTeams = 8, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Premier League", Skill = 12, PromotionCompetitionId = -1, RelegationCompetitionId = 3, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 3, Name = "The Championship", Skill = 12, PromotionCompetitionId = 2, RelegationCompetitionId = -1, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 4, Name = "Champions League", Skill = 99, PromotionCompetitionId = -1, RelegationCompetitionId = -1, CountryId = 2, CompetitionType = CompetitionType.InternationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 5, Name = "Eredivisie", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 3, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 6, Name = "Ligue 1", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 4, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 7, Name = "Primera Division", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 5, CompetitionType = CompetitionType.NationalCompetition });
-            _competitionService.CreateCompetition(new Competition { Id = 8, Name = "1. Bundesliga", Skill = 15, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 6, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Reputation = 4000, PromotionCompetitionId = 0, RelegationCompetitionId = -1, NumberOfTeams = 8, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 2, Name = "Premier League", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = 3, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 3, Name = "The Championship", Reputation = 4000, PromotionCompetitionId = 2, RelegationCompetitionId = -1, NumberOfTeams = 10, CountryId = 1, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 4, Name = "Champions League", Reputation = 6000, PromotionCompetitionId = -1, RelegationCompetitionId = -1, CountryId = 2, CompetitionType = CompetitionType.InternationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 5, Name = "Eredivisie", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 3, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 6, Name = "Ligue 1", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 4, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 7, Name = "Primera Division", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 5, CompetitionType = CompetitionType.NationalCompetition });
+            _competitionService.CreateCompetition(new Competition { Id = 8, Name = "1. Bundesliga", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = -1, NumberOfTeams = 6, CountryId = 6, CompetitionType = CompetitionType.NationalCompetition });
 
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 9, Name = "Croky Cup", Skill = 15, CountryId = 0, CompetitionType = CompetitionType.NationalCup });
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 10, Name = "FA Cup", Skill = 15, CountryId = 1, CompetitionType = CompetitionType.NationalCup });
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 11, Name = "KNVB Cup", Skill = 15, CountryId = 3, CompetitionType = CompetitionType.NationalCup });
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 12, Name = "Coupe de France", Skill = 15, CountryId = 4, CompetitionType = CompetitionType.NationalCup });
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 13, Name = "Copa Del Rey", Skill = 15, CountryId = 5, CompetitionType = CompetitionType.NationalCup });
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 14, Name = "DFB Pokal", Skill = 15, CountryId = 6, CompetitionType = CompetitionType.NationalCup });
-            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 15, Name = "Cup Winners Cup", Skill = 15, CountryId = 2, CompetitionType = CompetitionType.InternationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 9, Name = "Croky Cup", Reputation = 4500, CountryId = 0, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 10, Name = "FA Cup", Reputation = 4500, CountryId = 1, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 11, Name = "KNVB Cup", Reputation = 4500, CountryId = 3, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 12, Name = "Coupe de France", Reputation = 4500, CountryId = 4, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 13, Name = "Copa Del Rey", Reputation = 4500, CountryId = 5, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 14, Name = "DFB Pokal", Reputation = 4500, CountryId = 6, CompetitionType = CompetitionType.NationalCup });
+            _competitionCupService.CreateCompetition(new CompetitionCup { Id = 15, Name = "Cup Winners Cup", Reputation = 5000, CountryId = 2, CompetitionType = CompetitionType.InternationalCup });
         }
 
         private void CreateClubs()
