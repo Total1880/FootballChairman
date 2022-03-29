@@ -70,7 +70,7 @@ namespace FootballChairman.Services
                 {
                     lookUpClub.Reputation += 100;
                 }
-                if (lookUpClub.Reputation > competitionReputation)
+                if (lookUpClub.Reputation > competitionReputation + 100)
                 {
                     lookUpClub.Reputation -= 100;
                 }

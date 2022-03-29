@@ -1,13 +1,16 @@
-﻿using FootballChairman.Models;
+﻿using FootballChairman.Messages;
+using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FootballChairman.ViewModels
 {
@@ -30,7 +33,13 @@ namespace FootballChairman.ViewModels
         {
             _managerService = managerService;
             _clubService = clubService;
+            Messenger.Default.Register<RefreshManagerDataMessage>(this, LoadData);
 
+            LoadData();
+        }
+
+        private void LoadData(RefreshManagerDataMessage obj)
+        {
             LoadData();
         }
 
@@ -53,6 +62,9 @@ namespace FootballChairman.ViewModels
             
             var playerManager = Managers.FirstOrDefault(m => m.ClubId == _playerClub.Id);
             var otherClub = _clubService.GetClub(SelectedManager.ClubId);
+
+            if (_playerClub.Reputation <= otherClub.Reputation)
+                return;
             
             SelectedManager.ClubId = _playerClub.Id;
             playerManager.ClubId = otherClub.Id;
@@ -66,6 +78,7 @@ namespace FootballChairman.ViewModels
             _managerService.UpdateManager(SelectedManager);
             _managerService.UpdateManager(playerManager);
 
+            MessageBox.Show(SelectedManager.FirstName + " " + SelectedManager.LastName + " transfered to " + _playerClub.Name);
             LoadData();
         }
     }

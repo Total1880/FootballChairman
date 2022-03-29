@@ -93,6 +93,7 @@ namespace FootballChairman.Services
             }
 
             _managerRepository.Create(allManagers);
+            
             return newManagers;
         }
     }

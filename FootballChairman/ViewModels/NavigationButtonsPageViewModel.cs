@@ -71,6 +71,8 @@ namespace FootballChairman.ViewModels
         {
             _gameEngineService.ProcessMatchDay();
             MessengerInstance.Send(new RefreshCompetitionData());
+            MessengerInstance.Send(new RefreshManagerDataMessage());
+            MessengerInstance.Send(new RefreshYourClubDataMessage());
         }
 
         private void EndSeason()
