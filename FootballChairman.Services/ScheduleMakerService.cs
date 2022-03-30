@@ -125,6 +125,9 @@ namespace FootballChairman.Services
 
         public IList<Fixture> GenerateCup(IList<Club> teams, CompetitionCup competitionCup)
         {
+            if (teams == null || teams.Count < 2)
+                return new List<Fixture>();
+
             int totalNumberOfTeams = teams.Count;
             var fixtures = new List<Fixture>();
             var cupround = 0;
@@ -134,15 +137,18 @@ namespace FootballChairman.Services
             {
                 teams.Add(new Club { Id = -1, Name = "bye"});
             }
-            competitionCup.Rounds = (int)Math.Ceiling(Math.Sqrt(totalNumberOfTeams));
+
 
             var extrateams = 0;
             var nextRoundTeams = totalNumberOfTeams;
-            while (Math.Ceiling(Math.Sqrt(nextRoundTeams)) != Math.Sqrt(nextRoundTeams))
+
+            while (IsInBinarySequence(nextRoundTeams) == -1)
             {
                 extrateams++;
                 nextRoundTeams--;
             }
+
+            competitionCup.Rounds = IsInBinarySequence(nextRoundTeams);
 
             //Create extra round
             if (extrateams > 0)
@@ -216,6 +222,20 @@ namespace FootballChairman.Services
             }
 
             return fixtures;
+        }
+
+        private int IsInBinarySequence(int number)
+        {
+            var numbertocheck = 1;
+            var counter = 0;
+            do
+            {
+                counter++;
+                if (number == numbertocheck) return counter;
+                numbertocheck *= 2;
+            } while (numbertocheck <= number);
+
+            return -1;
         }
     }
 }
