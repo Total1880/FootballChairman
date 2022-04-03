@@ -13,13 +13,15 @@ namespace FootballChairman.Services
     {
         private Random random = new Random();
         private readonly IRepository<Player> _playerRepository;
+        private readonly IPersonNameService _personNameService;
 
-        public PlayerService(IRepository<Player> playerRepository)
+        public PlayerService(IRepository<Player> playerRepository, IPersonNameService personNameService)
         {
             _playerRepository = playerRepository;
+            _personNameService = personNameService;
         }
 
-        public Player GenerateRandomPlayer(int clubId)
+        public Player GenerateRandomPlayer(int clubId, int countryId)
         {
             var allPlayers = _playerRepository.Get();
             var newId = 0;
@@ -37,8 +39,9 @@ namespace FootballChairman.Services
             newPlayer.Defense = random.Next(0, 100);
             newPlayer.Midfield = random.Next(0, 100);
             newPlayer.Attack = random.Next(0, 100);
-            newPlayer.FirstName = "First" + newId;
-            newPlayer.LastName = "Last" + newId;
+            newPlayer.FirstName = _personNameService.GetRandomFirstName(countryId);
+            newPlayer.LastName = _personNameService.GetRandomLastName(countryId);
+            newPlayer.CountryId = countryId;
 
             return CreatePlayer(newPlayer);
         }

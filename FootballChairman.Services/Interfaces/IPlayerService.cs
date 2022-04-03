@@ -9,7 +9,7 @@ namespace FootballChairman.Services.Interfaces
 {
     public interface IPlayerService
     {
-        Player GenerateRandomPlayer(int clubId);
+        Player GenerateRandomPlayer(int clubId, int countryId);
         Player CreatePlayer(Player player);
         IList<Player> GetPlayers();
         IList<Player> GetPlayersFromClub(int clubId);

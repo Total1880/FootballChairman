@@ -248,7 +248,7 @@ namespace FootballChairman.ViewModels
 
             foreach (var club in clubs)
             {
-                club.ManagerId = _managerService.GenerateManager(club.Id).Id;
+                club.ManagerId = _managerService.GenerateManager(club.Id, club.CountryId).Id;
             }
             _clubService.CreateAllClubs(clubs);
         }
@@ -264,7 +264,7 @@ namespace FootballChairman.ViewModels
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    _playerService.GenerateRandomPlayer(club.Id);
+                    _playerService.GenerateRandomPlayer(club.Id, club.CountryId);
                 }
             }
         }

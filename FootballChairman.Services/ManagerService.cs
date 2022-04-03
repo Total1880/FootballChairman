@@ -12,11 +12,13 @@ namespace FootballChairman.Services
     public class ManagerService : IManagerService
     {
         private readonly IRepository<Manager> _managerRepository;
+        private readonly IPersonNameService _personNameService;
         private Random random = new Random();
 
-        public ManagerService(IRepository<Manager> managerRepository)
+        public ManagerService(IRepository<Manager> managerRepository, IPersonNameService personNameService)
         {
             _managerRepository = managerRepository;
+            _personNameService = personNameService;
         }
         public Manager CreateManager(Manager manager)
         {
@@ -29,7 +31,7 @@ namespace FootballChairman.Services
             return manager;
         }
 
-        public Manager GenerateManager(int clubId)
+        public Manager GenerateManager(int clubId, int countryId)
         {
             var allManagers = GetAllManagers();
             int newid;
@@ -40,13 +42,14 @@ namespace FootballChairman.Services
 
             var newManager = new Manager();
             newManager.Id = newid;
-            newManager.FirstName = "first" + newid;
-            newManager.LastName = "last" + newid;
+            newManager.FirstName = _personNameService.GetRandomFirstName(countryId);
+            newManager.LastName = _personNameService.GetRandomLastName(countryId);
             newManager.TrainingDefenseSkill = random.Next(1, 11);
             newManager.TrainingAttackSkill = random.Next(1, 11);
             newManager.TrainingMidfieldSkill = random.Next(1, 11);
             newManager.Age = random.Next(40, 65);
             newManager.ClubId = clubId;
+            newManager.CountryId = countryId;
             CreateManager(newManager);
             return newManager;
         }
@@ -84,7 +87,7 @@ namespace FootballChairman.Services
                 {
                     if (random.Next(0, 5) == 0)
                     {
-                        var newManager = GenerateManager(manager.ClubId);
+                        var newManager = GenerateManager(manager.ClubId, manager.CountryId);
                         allManagers.Remove(manager);
                         allManagers.Add(newManager);
                         newManagers.Add(newManager);

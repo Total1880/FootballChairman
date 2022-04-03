@@ -10,7 +10,7 @@ namespace FootballChairman.Services.Interfaces
     public interface IManagerService
     {
         Manager CreateManager(Manager manager);
-        Manager GenerateManager(int clubId);
+        Manager GenerateManager(int clubId, int countryId);
         Manager GetManager(int id);
         IList<Manager> GetAllManagers();
         IList<Manager> UpdateManagersEndSeason();

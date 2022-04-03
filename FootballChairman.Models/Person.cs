@@ -14,5 +14,6 @@ namespace FootballChairman.Models
         public int Age { get; set; }
         public int ClubId { get; set; }
         public string ClubName { get; set; }
+        public int CountryId { get; set; }
     }
 }
