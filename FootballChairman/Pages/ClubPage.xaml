@@ -71,6 +71,12 @@
                 <Label 
                 Content="{Binding SelectedManager.Age}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label 
+                Content="Type: "/>
+                <Label 
+                Content="{Binding SelectedManager.ManagerType}"/>
+            </StackPanel>
             <Label Content="Stats"/>
             <StackPanel Orientation="Horizontal">
                 <Label 
