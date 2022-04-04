@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballChairman.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace FootballChairman.Models
         public int TrainingDefenseSkill { get; set; }
         public int TrainingMidfieldSkill { get; set; }
         public int TrainingGoalkeepingSkill { get; set; }
+        public ManagerType ManagerType { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FootballChairman.Models;
+using FootballChairman.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Manager.ClubId), manager.ClubId.ToString());
                     writer.WriteAttributeString(nameof(Manager.Age), manager.Age.ToString());
                     writer.WriteAttributeString(nameof(Manager.CountryId), manager.CountryId.ToString());
+                    writer.WriteAttributeString(nameof(Manager.ManagerType), manager.ManagerType.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -91,6 +93,7 @@ namespace FootballChairman.Repositories
                         readManager.ClubId = int.Parse(xmlReader.GetAttribute(nameof(Manager.ClubId)));
                         readManager.Age = int.Parse(xmlReader.GetAttribute(nameof(Manager.Age)));
                         readManager.CountryId = int.Parse(xmlReader.GetAttribute(nameof(Manager.CountryId)));
+                        readManager.ManagerType = (ManagerType)Enum.Parse(typeof(ManagerType), xmlReader.GetAttribute(nameof(Manager.ManagerType)));
 
                         managerList.Add(readManager);
                     } while (xmlReader.ReadToNextSibling(nameof(Manager)));

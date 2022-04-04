@@ -1,4 +1,5 @@
 ﻿using FootballChairman.Models;
+using FootballChairman.Models.Enums;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
 using System;
@@ -33,6 +34,9 @@ namespace FootballChairman.Services
 
         public Manager GenerateManager(int clubId, int countryId)
         {
+            Type type = typeof(ManagerType);
+            Array values = type.GetEnumValues();
+
             var allManagers = GetAllManagers();
             int newid;
             if (allManagers.Count > 0)
@@ -51,6 +55,8 @@ namespace FootballChairman.Services
             newManager.Age = random.Next(40, 65);
             newManager.ClubId = clubId;
             newManager.CountryId = countryId;
+            newManager.ManagerType = (ManagerType)values.GetValue(random.Next(values.Length));
+
             CreateManager(newManager);
             return newManager;
         }
@@ -64,6 +70,11 @@ namespace FootballChairman.Services
         {
             return _managerRepository.Get().FirstOrDefault(m => m.Id == id);
 
+        }
+
+        public Manager GetManagerFromClub(int clubId)
+        {
+            return _managerRepository.Get().FirstOrDefault(m => m.ClubId == clubId);
         }
 
         public Manager UpdateManager(Manager manager)
