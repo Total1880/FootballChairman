@@ -66,5 +66,31 @@ namespace FootballChairman.Services
         {
             return _playerRepository.Get().Where(p => p.ClubId == clubId).ToList();
         }
+
+        public IList<Player> UpdatePlayersEndOfSeason()
+        {
+            var allPlayers = _playerRepository.Get();
+            var playersToRetire = new List<Player>();
+
+            foreach (var player in allPlayers)
+            {
+                player.Defense += random.Next(0, 5);
+                player.Midfield += random.Next(0, 5);
+                player.Attack += random.Next(0, 5);
+                player.Age++;
+
+                if (player.Age > 30 && random.Next(0,5) == 0)
+                    playersToRetire.Add(player);
+            }
+
+            foreach (var player in playersToRetire)
+            {
+                allPlayers.Remove(player);
+                GenerateRandomPlayer(player.ClubId, player.CountryId);
+            }
+            _playerRepository.Create(allPlayers);
+
+            return allPlayers;
+        }
     }
 }

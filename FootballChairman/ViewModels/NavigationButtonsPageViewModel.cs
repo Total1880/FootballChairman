@@ -86,6 +86,9 @@ namespace FootballChairman.ViewModels
         private void EndSeason()
         {
             _gameEngineService.GoToEndOfSeason();
+            MessengerInstance.Send(new RefreshCompetitionData());
+            MessengerInstance.Send(new RefreshManagerDataMessage());
+            MessengerInstance.Send(new RefreshYourClubDataMessage());
         }
     }
 }

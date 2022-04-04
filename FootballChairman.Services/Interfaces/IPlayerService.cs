@@ -13,5 +13,6 @@ namespace FootballChairman.Services.Interfaces
         Player CreatePlayer(Player player);
         IList<Player> GetPlayers();
         IList<Player> GetPlayersFromClub(int clubId);
+        IList<Player> UpdatePlayersEndOfSeason();
     }
 }

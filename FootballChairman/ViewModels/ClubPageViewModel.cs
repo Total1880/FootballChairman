@@ -76,6 +76,8 @@ namespace FootballChairman.ViewModels
             Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             LoadData(new RefreshYourClubDataMessage());
             Messenger.Default.Register<RefreshYourClubDataMessage>(this, LoadData);
+            if (Clubs.Any(c => c.IsPlayer))
+                SelectedClub = Clubs.FirstOrDefault(c => c.IsPlayer);
         }
 
         private void LoadData(RefreshYourClubDataMessage obj)

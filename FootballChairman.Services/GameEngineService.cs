@@ -21,6 +21,7 @@ namespace FootballChairman.Services
         private readonly IClubService _clubService;
         private readonly IManagerService _managerService;
         private readonly IHistoryItemService _historyItemService;
+        private readonly IPlayerService _playerService;
 
         private IList<Competition> _competitions;
         private IList<CompetitionCup> _competitionCups;
@@ -34,7 +35,9 @@ namespace FootballChairman.Services
             IClubPerCompetitionService clubPerCompetitionService,
             ISaveGameDataService saveGameDataService,
             IClubService clubService,
-            IManagerService managerService, IHistoryItemService historyItemService)
+            IManagerService managerService, 
+            IHistoryItemService historyItemService,
+            IPlayerService playerService)
         {
             _competitionService = competitionService;
             _competitionCupService = competitionCupService;
@@ -45,6 +48,7 @@ namespace FootballChairman.Services
             _clubService = clubService;
             _managerService = managerService;
             _historyItemService = historyItemService;
+            _playerService = playerService;
 
             _competitions = _competitionService.GetAllCompetitions();
             _competitionCups = _competitionCupService.GetAllCompetitions();
@@ -106,6 +110,8 @@ namespace FootballChairman.Services
 
             _clubService.UpdateClubsEndOfSeasonTroughManager();
             _clubService.UpdateClubsWithNewManagers(_managerService.UpdateManagersEndSeason());
+
+            _playerService.UpdatePlayersEndOfSeason();
 
             var competitions = _competitionService.GetAllCompetitions().Where(com => com.CompetitionType != CompetitionType.NationalCup);
 
