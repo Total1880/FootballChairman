@@ -35,6 +35,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Manager.TrainingDefenseSkill), manager.TrainingDefenseSkill.ToString());
                     writer.WriteAttributeString(nameof(Manager.TrainingMidfieldSkill), manager.TrainingMidfieldSkill.ToString());
                     writer.WriteAttributeString(nameof(Manager.TrainingAttackSkill), manager.TrainingAttackSkill.ToString());
+                    writer.WriteAttributeString(nameof(Manager.TrainingGoalkeepingSkill), manager.TrainingGoalkeepingSkill.ToString());
                     writer.WriteAttributeString(nameof(Manager.ClubId), manager.ClubId.ToString());
                     writer.WriteAttributeString(nameof(Manager.Age), manager.Age.ToString());
                     writer.WriteAttributeString(nameof(Manager.CountryId), manager.CountryId.ToString());
@@ -86,6 +87,7 @@ namespace FootballChairman.Repositories
                         readManager.TrainingDefenseSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingDefenseSkill)));
                         readManager.TrainingMidfieldSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingMidfieldSkill)));
                         readManager.TrainingAttackSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingAttackSkill)));
+                        readManager.TrainingGoalkeepingSkill = int.Parse(xmlReader.GetAttribute(nameof(Manager.TrainingGoalkeepingSkill)));
                         readManager.ClubId = int.Parse(xmlReader.GetAttribute(nameof(Manager.ClubId)));
                         readManager.Age = int.Parse(xmlReader.GetAttribute(nameof(Manager.Age)));
                         readManager.CountryId = int.Parse(xmlReader.GetAttribute(nameof(Manager.CountryId)));

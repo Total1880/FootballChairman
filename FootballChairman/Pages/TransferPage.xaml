@@ -20,6 +20,15 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal">
+                <Label Content="Goalkeeping" Width="100"/>
+                <Label Content="Min"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchGoalkeepingMin}"/>
+                <Label Content="Max"/>
+                <TextBox Width="100"
+                         Text="{Binding SearchGoalkeepingMax}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Label Content="Defense" Width="100"/>
                 <Label Content="Min"/>
                 <TextBox Width="100"
@@ -75,6 +84,9 @@
                     </GridViewColumn>
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding Age}">
                         <GridViewColumnHeader Content="Age"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Goalkeeping}">
+                        <GridViewColumnHeader Content="Goalkeeping"/>
                     </GridViewColumn>
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding Defense}">
                         <GridViewColumnHeader Content="Defense"/>

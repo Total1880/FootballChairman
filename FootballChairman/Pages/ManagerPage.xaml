@@ -33,6 +33,9 @@
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding ClubName}">
                         <GridViewColumnHeader Content="Club"/>
                     </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding TrainingGoalkeepingSkill}">
+                        <GridViewColumnHeader Content="Goalkeeping"/>
+                    </GridViewColumn>
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding TrainingDefenseSkill}">
                         <GridViewColumnHeader Content="Defense"/>
                     </GridViewColumn>

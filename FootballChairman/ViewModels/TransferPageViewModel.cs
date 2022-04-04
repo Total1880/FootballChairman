@@ -16,6 +16,8 @@ namespace FootballChairman.ViewModels
     {
         private readonly IPlayerService _playerService;
         private readonly IClubService _clubService;
+        private int _searchGoalkeepingMin;
+        private int _searchGoalkeepingMax;
         private int _searchDefenseMin;
         private int _searchDefenseMax;
         private int _searchMidfieldMin;
@@ -41,6 +43,8 @@ namespace FootballChairman.ViewModels
         public RelayCommand SearchPlayersCommand => _searchPlayersCommand ??= new RelayCommand(SearchPlayers);
         public RelayCommand TransferPlayersCommand => _transferPlayersCommand ??= new RelayCommand(TransferPlayers);
 
+        public int SearchGoalkeepingMin { get => _searchGoalkeepingMin; set { _searchGoalkeepingMin = value; } }
+        public int SearchGoalkeepingMax { get => _searchGoalkeepingMax; set { _searchGoalkeepingMax = value; } }
         public int SearchDefenseMin { get => _searchDefenseMin; set { _searchDefenseMin = value;} }
         public int SearchDefenseMax { get => _searchDefenseMax; set { _searchDefenseMax = value;} }
         public int SearchMidfieldMin { get => _searchMidfieldMin; set { _searchMidfieldMin = value;} }
@@ -56,6 +60,11 @@ namespace FootballChairman.ViewModels
 
             _clubs = _clubService.GetAllClubs();
             _playerClub = _clubs.FirstOrDefault(c => c.IsPlayer);
+
+            SearchGoalkeepingMax = 100;
+            SearchDefenseMax = 100;
+            SearchMidfieldMax = 100;
+            SearchAttackMax = 100;
         }
 
         private void SearchPlayers()
@@ -64,7 +73,8 @@ namespace FootballChairman.ViewModels
                 .GetPlayers()
                 .Where(p => p.Defense >= SearchDefenseMin && p.Defense <= SearchDefenseMax &&
                 p.Midfield >= SearchMidfieldMin && p.Midfield <= SearchMidfieldMax &&
-                p.Attack >= SearchAttackMin && p.Attack <= SearchAttackMax);
+                p.Attack >= SearchAttackMin && p.Attack <= SearchAttackMax &&
+                p.Goalkeeping >= SearchAttackMin && p.Goalkeeping <= SearchGoalkeepingMax);
 
             var searchPlayers = new List<Player>(listPlayers);
 

@@ -11,5 +11,6 @@ namespace FootballChairman.Models
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Midfield { get; set; }
+        public int Goalkeeping { get; set; }
     }
 }
