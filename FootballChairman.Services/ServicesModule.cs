@@ -28,6 +28,7 @@ namespace FootballChairman.Services
             builder.RegisterType<SaveGameDataService>().AsImplementedInterfaces();
             builder.RegisterType<PlayerService>().AsImplementedInterfaces();
             builder.RegisterType<PersonNameService>().AsImplementedInterfaces();
+            builder.RegisterType<TacticService>().AsImplementedInterfaces();
         }
     }
 }
