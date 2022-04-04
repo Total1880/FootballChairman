@@ -22,9 +22,11 @@ namespace FootballChairman.Services
         private readonly IManagerService _managerService;
         private readonly IHistoryItemService _historyItemService;
         private readonly IPlayerService _playerService;
+        private readonly ITacticService _tacticService;
 
         private IList<Competition> _competitions;
         private IList<CompetitionCup> _competitionCups;
+        private IList<Tactic> _tactics;
         private SaveGameData _saveGameData;
         private bool _endSeason;
 
@@ -37,7 +39,8 @@ namespace FootballChairman.Services
             IClubService clubService,
             IManagerService managerService, 
             IHistoryItemService historyItemService,
-            IPlayerService playerService)
+            IPlayerService playerService,
+            ITacticService tacticService)
         {
             _competitionService = competitionService;
             _competitionCupService = competitionCupService;
@@ -49,11 +52,14 @@ namespace FootballChairman.Services
             _managerService = managerService;
             _historyItemService = historyItemService;
             _playerService = playerService;
+            _tacticService = tacticService;
 
             _competitions = _competitionService.GetAllCompetitions();
             _competitionCups = _competitionCupService.GetAllCompetitions();
             _saveGameData = _saveGameDataService.GetSaveGameData(Configuration.DefaultSaveGameName);
             _endSeason = false;
+            _tactics = new List<Tactic>();
+            GenerateTactics();
         }
 
         public void ProcessMatchDay()
@@ -65,7 +71,7 @@ namespace FootballChairman.Services
             {
                 foreach (var fixture in fixtureList.Where(f => f.CompetitionId == competition.Id))
                 {
-                    var game = _gameService.PlayGame(fixture, false);
+                    var game = _gameService.PlayGame(fixture, false, _tactics.FirstOrDefault(t => t.ClubId == fixture.HomeOpponentId), _tactics.FirstOrDefault(t => t.ClubId == fixture.AwayOpponentId));
                     _clubPerCompetitionService.UpdateData(game);
                     fixturesLeft = true;
                 }
@@ -75,7 +81,7 @@ namespace FootballChairman.Services
             {
                 foreach (var fixture in fixtureList.Where(f => f.CompetitionId == competitionCup.Id))
                 {
-                    var game = _gameService.PlayGame(fixture,true) ;
+                    var game = _gameService.PlayGame(fixture,true, _tactics.FirstOrDefault(t => t.ClubId == fixture.HomeOpponentId), _tactics.FirstOrDefault(t => t.ClubId == fixture.AwayOpponentId)) ;
                     _clubPerCompetitionService.UpdateCupData(game);
                     _fixtureService.UpdateCupData(game, _saveGameData);
                     fixturesLeft = true;
@@ -192,6 +198,19 @@ namespace FootballChairman.Services
                     listOfClubs.Add(clubs.FirstOrDefault(c => c.Id == club.ClubId));
                 }
                 _fixtureService.GenerateCupFixtures(listOfClubs, competition);
+            }
+        }
+
+        private void GenerateTactics()
+        {
+            var clubs = _clubService.GetAllClubs();
+            
+            foreach (var club in clubs)
+            {
+                if (!_tactics.Any(t => t.ClubId == club.Id))
+                {
+                    _tactics.Add(_tacticService.GetStandardTactic(club.Id));
+                }
             }
         }
     }

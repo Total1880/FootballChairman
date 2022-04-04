@@ -11,36 +11,21 @@ namespace FootballChairman.Services
 {
     public class GameServiceV2 : IGameService
     {
-        private readonly IClubService _clubService;
-        private readonly IPlayerService _playerService;
         private readonly IRepository<Game> _gameRepository;
         private readonly IRepository<Fixture> _fixtureRepository;
-        private readonly ITacticService _tacticService;
 
         public GameServiceV2(
-            IClubService clubService, 
-            IPlayerService playerService, 
             IRepository<Game> gameRepository, 
-            IRepository<Fixture> fixtureRepository,
-            ITacticService tacticService)
+            IRepository<Fixture> fixtureRepository)
         {
-            _clubService = clubService;
-            _playerService = playerService;
             _gameRepository = gameRepository;
             _fixtureRepository = fixtureRepository;
-            _tacticService = tacticService;
         }
 
-        public Game PlayGame(Fixture fixture, bool suddendeath)
+        public Game PlayGame(Fixture fixture, bool suddendeath, Tactic homeTactic, Tactic awayTactic)
         {
             var game = new Game();
             game.Fixture = fixture;
-
-            var homeClub = _clubService.GetClub(fixture.HomeOpponentId);
-            var awayClub = _clubService.GetClub(fixture.AwayOpponentId);
-
-            var homeTactic = _tacticService.GetStandardTactic(homeClub.Id);
-            var awayTactic = _tacticService.GetStandardTactic(awayClub.Id);
 
             double homeSkills = 0;
             double awaySkills = 0;
