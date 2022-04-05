@@ -141,6 +141,7 @@ namespace FootballChairman.Services
             CreateInternationalFixtures();
             ResetFixtures();
             _clubPerCompetitionService.ResetData();
+            GenerateTactics();
 
             _saveGameData.MatchDay = 0;
             _saveGameData.Year++;
@@ -204,6 +205,7 @@ namespace FootballChairman.Services
         private void GenerateTactics()
         {
             var clubs = _clubService.GetAllClubs();
+            _tactics = new List<Tactic>();
             
             foreach (var club in clubs)
             {
