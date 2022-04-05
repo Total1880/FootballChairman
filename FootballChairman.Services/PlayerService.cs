@@ -15,12 +15,14 @@ namespace FootballChairman.Services
         private readonly IRepository<Player> _playerRepository;
         private readonly IPersonNameService _personNameService;
         private readonly ICountryService _countryService;
+        private readonly IClubService _clubService;
 
-        public PlayerService(IRepository<Player> playerRepository, IPersonNameService personNameService, ICountryService countryService)
+        public PlayerService(IRepository<Player> playerRepository, IPersonNameService personNameService, ICountryService countryService, IClubService clubService)
         {
             _playerRepository = playerRepository;
             _personNameService = personNameService;
             _countryService = countryService;
+            _clubService = clubService;
         }
 
         public Player GenerateRandomPlayer(int clubId, int countryId)
@@ -146,6 +148,20 @@ namespace FootballChairman.Services
             _playerRepository.Create(allPlayers);
 
             return allPlayers;
+        }
+
+        public void CheckIfClubHasEnoughPlayers(int clubId)
+        {
+            var players = _playerRepository.Get().Where(p => p.ClubId == clubId).ToList();
+            var counter = players.Count;
+            if (counter < 11)
+            {
+                var countryId = _clubService.GetClub(clubId).CountryId;
+                for (int i = counter; i < 11; i++)
+                {
+                    GenerateYouthPlayer(clubId, countryId);
+                }
+            }
         }
     }
 }

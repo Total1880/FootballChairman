@@ -52,6 +52,9 @@ namespace FootballChairman.ViewModels
             CreateClubsPerCompetitions();
             CreateFixtures();
             _managerService = managerService;
+
+            //temp
+            _playerService.CheckIfClubHasEnoughPlayers(69);
         }
 
         private void CreateCompetition()

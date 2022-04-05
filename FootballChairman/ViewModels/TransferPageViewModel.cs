@@ -99,7 +99,9 @@ namespace FootballChairman.ViewModels
             if (SelectedPlayer == null)
                 return;
 
-            var clubReputation = _clubs.FirstOrDefault(c => c.Id == SelectedPlayer.ClubId).Reputation;
+            var clubId = SelectedPlayer.ClubId;
+
+            var clubReputation = _clubs.FirstOrDefault(c => c.Id == clubId).Reputation;
 
             if (clubReputation > _playerClub.Reputation)
                 return;
@@ -107,6 +109,7 @@ namespace FootballChairman.ViewModels
             SelectedPlayer.ClubId = _playerClub.Id;
 
             _playerService.CreatePlayer(SelectedPlayer);
+            _playerService.CheckIfClubHasEnoughPlayers(clubId);
 
             MessageBox.Show(SelectedPlayer.FirstName + " " + SelectedPlayer.LastName + " has signed for " + _playerClub.Name);
 
