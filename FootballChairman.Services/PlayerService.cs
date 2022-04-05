@@ -40,6 +40,7 @@ namespace FootballChairman.Services
             newPlayer.Midfield = random.Next(0, 100);
             newPlayer.Attack = random.Next(0, 100);
             newPlayer.Goalkeeping = random.Next(0, 100);
+            newPlayer.Potential = random.Next(0, 300);
             newPlayer.FirstName = _personNameService.GetRandomFirstName(countryId);
             newPlayer.LastName = _personNameService.GetRandomLastName(countryId);
             newPlayer.CountryId = countryId;
@@ -75,14 +76,21 @@ namespace FootballChairman.Services
 
             foreach (var player in allPlayers)
             {
+                player.Age++;
+
+                if (player.Age > 30 && random.Next(0, 5) == 0)
+                {
+                    playersToRetire.Add(player);
+                    continue;
+                }
+
+                if (player.Potential <= player.Defense + player.Midfield + player.Attack)
+                    continue;
+
                 player.Defense += random.Next(0, 5);
                 player.Midfield += random.Next(0, 5);
                 player.Attack += random.Next(0, 5);
                 player.Goalkeeping += random.Next(0, 5);
-                player.Age++;
-
-                if (player.Age > 30 && random.Next(0,5) == 0)
-                    playersToRetire.Add(player);
             }
 
             foreach (var player in playersToRetire)

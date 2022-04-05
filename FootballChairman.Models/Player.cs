@@ -56,5 +56,7 @@ namespace FootballChairman.Models
                     _goalkeeping = value;
             }
         }
+
+        public int Potential { get; set; }
     }
 }
