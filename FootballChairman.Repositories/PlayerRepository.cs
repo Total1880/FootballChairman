@@ -39,6 +39,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Player.Age), player.Age.ToString());
                     writer.WriteAttributeString(nameof(Player.Goalkeeping), player.Goalkeeping.ToString());
                     writer.WriteAttributeString(nameof(Player.Potential), player.Potential.ToString());
+                    writer.WriteAttributeString(nameof(Player.CountryId), player.CountryId.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -91,6 +92,7 @@ namespace FootballChairman.Repositories
                         readPlayer.Age = int.Parse(xmlReader.GetAttribute(nameof(Player.Age)));
                         readPlayer.Goalkeeping = int.Parse(xmlReader.GetAttribute(nameof(Player.Goalkeeping)));
                         readPlayer.Potential = int.Parse(xmlReader.GetAttribute(nameof(Player.Potential)));
+                        readPlayer.CountryId = int.Parse(xmlReader.GetAttribute(nameof(Player.CountryId)));
 
                         playerList.Add(readPlayer);
                     } while (xmlReader.ReadToNextSibling(nameof(Player)));

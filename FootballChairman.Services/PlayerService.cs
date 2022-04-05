@@ -14,11 +14,13 @@ namespace FootballChairman.Services
         private Random random = new Random();
         private readonly IRepository<Player> _playerRepository;
         private readonly IPersonNameService _personNameService;
+        private readonly ICountryService _countryService;
 
-        public PlayerService(IRepository<Player> playerRepository, IPersonNameService personNameService)
+        public PlayerService(IRepository<Player> playerRepository, IPersonNameService personNameService, ICountryService countryService)
         {
             _playerRepository = playerRepository;
             _personNameService = personNameService;
+            _countryService = countryService;
         }
 
         public Player GenerateRandomPlayer(int clubId, int countryId)
@@ -35,7 +37,7 @@ namespace FootballChairman.Services
 
             newPlayer.Id = newId;
             newPlayer.ClubId = clubId;
-            newPlayer.Age = random.Next(18,35);
+            newPlayer.Age = random.Next(18, 35);
             newPlayer.Defense = random.Next(0, 100);
             newPlayer.Midfield = random.Next(0, 100);
             newPlayer.Attack = random.Next(0, 100);
@@ -43,6 +45,49 @@ namespace FootballChairman.Services
             newPlayer.Potential = random.Next(0, 300);
             newPlayer.FirstName = _personNameService.GetRandomFirstName(countryId);
             newPlayer.LastName = _personNameService.GetRandomLastName(countryId);
+            newPlayer.CountryId = countryId;
+
+            return CreatePlayer(newPlayer);
+        }
+
+        public Player GenerateYouthPlayer(int clubId, int countryId)
+        {
+            var allPlayers = _playerRepository.Get();
+            var newId = 0;
+            var countryIdLastName = countryId;
+
+            //randomize potential foreigner
+            if (random.Next(0, 10) == 0)
+            {
+                var countries = _countryService.GetAllCountries();
+
+                countryIdLastName = countries[random.Next(0, countries.Count)].Id;
+            }
+            else if (random.Next(0, 20) == 0)
+            {
+                var countries = _countryService.GetAllCountries();
+
+                countryId = countries[random.Next(0, countries.Count)].Id;
+                countryIdLastName = countryId;
+            }
+
+            if (allPlayers.Count > 0)
+            {
+                newId = allPlayers.Max(p => p.Id) + 1;
+            }
+
+            Player newPlayer = new Player();
+
+            newPlayer.Id = newId;
+            newPlayer.ClubId = clubId;
+            newPlayer.Age = 18;
+            newPlayer.Defense = random.Next(0, 50);
+            newPlayer.Midfield = random.Next(0, 50);
+            newPlayer.Attack = random.Next(0, 50);
+            newPlayer.Goalkeeping = random.Next(0, 50);
+            newPlayer.Potential = random.Next(0, 300);
+            newPlayer.FirstName = _personNameService.GetRandomFirstName(countryId);
+            newPlayer.LastName = _personNameService.GetRandomLastName(countryIdLastName);
             newPlayer.CountryId = countryId;
 
             return CreatePlayer(newPlayer);
@@ -96,7 +141,7 @@ namespace FootballChairman.Services
             foreach (var player in playersToRetire)
             {
                 allPlayers.Remove(player);
-                allPlayers.Add(GenerateRandomPlayer(player.ClubId, player.CountryId));
+                allPlayers.Add(GenerateYouthPlayer(player.ClubId, player.CountryId));
             }
             _playerRepository.Create(allPlayers);
 
