@@ -2,11 +2,6 @@
 using FootballChairman.Models.Enums;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
@@ -171,15 +166,21 @@ namespace FootballChairman.Services
 
             tactic.DefendersId = new List<int>();
             foreach (var d in tactic.Defenders)
+            {
                 tactic.DefendersId.Add(d.Id);
+            }
 
             tactic.MidfieldersId = new List<int>();
             foreach (var m in tactic.Midfielders)
+            {
                 tactic.MidfieldersId.Add(m.Id);
+            }
 
             tactic.AttackersId = new List<int>();
             foreach (var a in tactic.Attackers)
+            {
                 tactic.AttackersId.Add(a.Id);
+            }
 
             allTactics.Add(tactic);
             _tacticRepository.Create(allTactics);
@@ -196,15 +197,21 @@ namespace FootballChairman.Services
 
             tactic.Defenders = new List<Player>();
             foreach (var d in tactic.DefendersId)
+            {
                 tactic.Defenders.Add(players.FirstOrDefault(p => p.Id == d));
+            }
 
             tactic.Midfielders = new List<Player>();
             foreach (var m in tactic.MidfieldersId)
+            {
                 tactic.Midfielders.Add(players.FirstOrDefault(p => p.Id == m));
+            }
 
             tactic.Attackers = new List<Player>();
             foreach (var a in tactic.AttackersId)
+            {
                 tactic.Attackers.Add(players.FirstOrDefault(p => p.Id == a));
+            }
 
             return tactic;
         }

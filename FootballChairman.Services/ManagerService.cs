@@ -2,11 +2,6 @@
 using FootballChairman.Models.Enums;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
@@ -14,7 +9,7 @@ namespace FootballChairman.Services
     {
         private readonly IRepository<Manager> _managerRepository;
         private readonly IPersonNameService _personNameService;
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         public ManagerService(IRepository<Manager> managerRepository, IPersonNameService personNameService)
         {
@@ -40,9 +35,13 @@ namespace FootballChairman.Services
             var allManagers = GetAllManagers();
             int newid;
             if (allManagers.Count > 0)
+            {
                 newid = allManagers.Max(m => m.Id) + 1;
+            }
             else
+            {
                 newid = 0;
+            }
 
             var newManager = new Manager();
             newManager.Id = newid;
@@ -79,7 +78,7 @@ namespace FootballChairman.Services
 
         public Manager UpdateManager(Manager manager)
         {
-           var list = GetAllManagers().Where(m => m.Id != manager.Id).ToList();
+            var list = GetAllManagers().Where(m => m.Id != manager.Id).ToList();
             list.Add(manager);
             _managerRepository.Create(list);
 
@@ -108,7 +107,7 @@ namespace FootballChairman.Services
             }
 
             _managerRepository.Create(allManagers);
-            
+
             return newManagers;
         }
     }

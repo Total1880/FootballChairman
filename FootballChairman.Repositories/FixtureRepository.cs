@@ -1,6 +1,4 @@
 ﻿using FootballChairman.Models;
-using System.Collections.Generic;
-using System.IO;
 using System.Xml;
 
 namespace FootballChairman.Repositories

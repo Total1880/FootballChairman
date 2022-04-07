@@ -1,11 +1,6 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
@@ -68,7 +63,9 @@ namespace FootballChairman.Services
             var awayFixture = LoadFixturesOfMatchday(game.Fixture.RoundNo + 1).FirstOrDefault(f => f.CupPreviousFixtureAwayTeam == game.Fixture.IdString);
 
             if (homeFixture != null && awayFixture != null)
+            {
                 throw new Exception("multiple cupfixtures found ...");
+            }
 
             var losingclub = _clubPerCompetitionService.GetAll().FirstOrDefault(cpc => cpc.FixtureEliminated == game.Fixture.IdString).ClubId;
             var winningclub = losingclub == game.Fixture.AwayOpponentId ? game.Fixture.HomeOpponentId : game.Fixture.AwayOpponentId;
@@ -96,11 +93,15 @@ namespace FootballChairman.Services
         }
         public Fixture UpdateFixture(Fixture fixture)
         {
-            if (fixture.HomeOpponentId >= 0 && fixture.HomeOpponent.Length <=0 )
+            if (fixture.HomeOpponentId >= 0 && fixture.HomeOpponent.Length <= 0)
+            {
                 fixture.HomeOpponent = _clubService.GetClub(fixture.HomeOpponentId).Name;
+            }
 
             if (fixture.AwayOpponentId >= 0 && fixture.AwayOpponent.Length <= 0)
+            {
                 fixture.AwayOpponent = _clubService.GetClub(fixture.AwayOpponentId).Name;
+            }
 
             var fixtures = LoadFixtures();
             fixtures.Remove(fixtures.FirstOrDefault(f => f.IdString == fixture.IdString));
@@ -109,7 +110,7 @@ namespace FootballChairman.Services
 
             return fixture;
         }
-        private Random rng = new Random();
+        private readonly Random rng = new Random();
 
         private void Shuffle<T>(IList<T> list)
         {

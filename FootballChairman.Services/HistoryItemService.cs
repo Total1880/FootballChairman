@@ -1,17 +1,12 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
     public class HistoryItemService : IHistoryItemService
     {
-        IRepository<HistoryItem> _historyItemRepository;
+        private readonly IRepository<HistoryItem> _historyItemRepository;
 
         public HistoryItemService(IRepository<HistoryItem> historyItemRepository)
         {
@@ -22,12 +17,19 @@ namespace FootballChairman.Services
             var list = _historyItemRepository.Get();
 
             if (list.Any(hi => hi.Year == historyItem.Year && hi.CompetitionId == historyItem.CompetitionId))
+            {
                 throw new Exception("item already exist!");
+            }
 
             if (list.Any())
+            {
                 historyItem.Id = list.Max(hi => hi.Id) + 1;
+            }
             else
+            {
                 historyItem.Id = 0;
+            }
+
             list.Add(historyItem);
             _historyItemRepository.Create(list);
 

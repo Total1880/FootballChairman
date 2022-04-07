@@ -1,10 +1,5 @@
 ﻿using FootballChairman.Repositories.Interfaces;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
@@ -28,7 +23,7 @@ namespace FootballChairman.Services
             return lastNames[RandomInt(0, lastNames.Count)];
         }
 
-        static int RandomInt(int min, int max)
+        private static int RandomInt(int min, int max)
         {
             Random random = new Random();
             int val = random.Next(min, max);

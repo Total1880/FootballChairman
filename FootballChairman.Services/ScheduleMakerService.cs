@@ -1,10 +1,5 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
@@ -126,7 +121,9 @@ namespace FootballChairman.Services
         public IList<Fixture> GenerateCup(IList<Club> teams, CompetitionCup competitionCup)
         {
             if (teams == null || teams.Count < 2)
+            {
                 return new List<Fixture>();
+            }
 
             int totalNumberOfTeams = teams.Count;
             var fixtures = new List<Fixture>();
@@ -135,7 +132,7 @@ namespace FootballChairman.Services
 
             if (totalNumberOfTeams % 2 != 0)
             {
-                teams.Add(new Club { Id = -1, Name = "bye"});
+                teams.Add(new Club { Id = -1, Name = "bye" });
             }
 
 
@@ -184,7 +181,7 @@ namespace FootballChairman.Services
                 if (extrateams > i)
                 {
                     fixture.CupPreviousFixtureHomeTeam = fixtures[i].IdString;
-                    fixture.CupPreviousFixtureAwayTeam = fixtures[i+1].IdString;
+                    fixture.CupPreviousFixtureAwayTeam = fixtures[i + 1].IdString;
                 }
                 else
                 {
@@ -231,7 +228,11 @@ namespace FootballChairman.Services
             do
             {
                 counter++;
-                if (number == numbertocheck) return counter;
+                if (number == numbertocheck)
+                {
+                    return counter;
+                }
+
                 numbertocheck *= 2;
             } while (numbertocheck <= number);
 

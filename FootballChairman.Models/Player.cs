@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FootballChairman.Models
+﻿namespace FootballChairman.Models
 {
     public class Player : Person
     {
@@ -18,9 +12,13 @@ namespace FootballChairman.Models
             set
             {
                 if (value > 99)
+                {
                     _attack = 99;
+                }
                 else
+                {
                     _attack = value;
+                }
             }
         }
         public int Defense
@@ -29,9 +27,13 @@ namespace FootballChairman.Models
             set
             {
                 if (value > 99)
+                {
                     _defense = 99;
+                }
                 else
+                {
                     _defense = value;
+                }
             }
         }
         public int Midfield
@@ -40,9 +42,13 @@ namespace FootballChairman.Models
             set
             {
                 if (value > 99)
+                {
                     _midfield = 99;
+                }
                 else
+                {
                     _midfield = value;
+                }
             }
         }
         public int Goalkeeping
@@ -51,9 +57,13 @@ namespace FootballChairman.Models
             set
             {
                 if (value > 99)
+                {
                     _goalkeeping = 99;
+                }
                 else
+                {
                     _goalkeeping = value;
+                }
             }
         }
 

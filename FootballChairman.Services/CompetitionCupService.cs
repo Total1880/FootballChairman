@@ -1,17 +1,12 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
     public class CompetitionCupService : ICompetitionCupService
     {
-        IRepository<CompetitionCup> _competitionCupRepository;
+        private readonly IRepository<CompetitionCup> _competitionCupRepository;
         public CompetitionCupService(IRepository<CompetitionCup> competitionCupRepository)
         {
             _competitionCupRepository = competitionCupRepository;

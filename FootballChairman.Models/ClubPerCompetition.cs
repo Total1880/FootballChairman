@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FootballChairman.Models
+﻿namespace FootballChairman.Models
 {
     public class ClubPerCompetition
     {
         private readonly int _clubId;
         public readonly string _clubName;
-        public int ClubId { get => _clubId;}
+        public int ClubId { get => _clubId; }
         public string ClubName { get => _clubName; }
         public int CompetitionId { get; set; }
         public int Points { get; set; }

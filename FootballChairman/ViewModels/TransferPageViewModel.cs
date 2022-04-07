@@ -2,12 +2,9 @@
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace FootballChairman.ViewModels
@@ -26,9 +23,9 @@ namespace FootballChairman.ViewModels
         private int _searchAttackMax;
         private bool _reachablePlayers;
 
-        private IList<Club> _clubs;
+        private readonly IList<Club> _clubs;
         private Player _selectedPlayer;
-        private Club _playerClub;
+        private readonly Club _playerClub;
 
         public Player SelectedPlayer { get => _selectedPlayer; set { _selectedPlayer = value; } }
 
@@ -45,13 +42,13 @@ namespace FootballChairman.ViewModels
 
         public int SearchGoalkeepingMin { get => _searchGoalkeepingMin; set { _searchGoalkeepingMin = value; } }
         public int SearchGoalkeepingMax { get => _searchGoalkeepingMax; set { _searchGoalkeepingMax = value; } }
-        public int SearchDefenseMin { get => _searchDefenseMin; set { _searchDefenseMin = value;} }
-        public int SearchDefenseMax { get => _searchDefenseMax; set { _searchDefenseMax = value;} }
-        public int SearchMidfieldMin { get => _searchMidfieldMin; set { _searchMidfieldMin = value;} }
-        public int SearchMidfieldMax { get => _searchMidfieldMax; set { _searchMidfieldMax = value;} }
-        public int SearchAttackMin { get => _searchAttackMin; set { _searchAttackMin = value;} }
-        public int SearchAttackMax { get => _searchAttackMax; set { _searchAttackMax = value;} }
-        public bool ReachablePlayers { get => _reachablePlayers; set { _reachablePlayers = value;} }
+        public int SearchDefenseMin { get => _searchDefenseMin; set { _searchDefenseMin = value; } }
+        public int SearchDefenseMax { get => _searchDefenseMax; set { _searchDefenseMax = value; } }
+        public int SearchMidfieldMin { get => _searchMidfieldMin; set { _searchMidfieldMin = value; } }
+        public int SearchMidfieldMax { get => _searchMidfieldMax; set { _searchMidfieldMax = value; } }
+        public int SearchAttackMin { get => _searchAttackMin; set { _searchAttackMin = value; } }
+        public int SearchAttackMax { get => _searchAttackMax; set { _searchAttackMax = value; } }
+        public bool ReachablePlayers { get => _reachablePlayers; set { _reachablePlayers = value; } }
 
         public TransferPageViewModel(IPlayerService playerService, IClubService clubService)
         {
@@ -97,14 +94,18 @@ namespace FootballChairman.ViewModels
         private void TransferPlayers()
         {
             if (SelectedPlayer == null)
+            {
                 return;
+            }
 
             var clubId = SelectedPlayer.ClubId;
 
             var clubReputation = _clubs.FirstOrDefault(c => c.Id == clubId).Reputation;
 
             if (clubReputation > _playerClub.Reputation)
+            {
                 return;
+            }
 
             SelectedPlayer.ClubId = _playerClub.Id;
 

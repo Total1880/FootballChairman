@@ -1,11 +1,6 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
@@ -15,7 +10,7 @@ namespace FootballChairman.Services
         private readonly IRepository<Fixture> _fixtureRepository;
 
         public GameServiceV2(
-            IRepository<Game> gameRepository, 
+            IRepository<Game> gameRepository,
             IRepository<Fixture> fixtureRepository)
         {
             _gameRepository = gameRepository;
@@ -119,14 +114,19 @@ namespace FootballChairman.Services
             if (game.HomeScore == game.AwayScore && suddendeath)
             {
                 if (RandomInt(1, 3) == 1)
+                {
                     game.HomeScore++;
+                }
                 else
+                {
                     game.AwayScore++;
+                }
             }
 
             return SaveGame(game);
         }
-        static int RandomInt(int min, int max)
+
+        private static int RandomInt(int min, int max)
         {
             Random random = new Random();
             int val = random.Next(min, max);

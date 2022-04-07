@@ -3,17 +3,12 @@ using FootballChairman.Messages.PageOpeners;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.ViewModels
 {
     public class NavigationButtonsViewModel : ViewModelBase
     {
-        IGameEngineService _gameEngineService;
+        private readonly IGameEngineService _gameEngineService;
         private RelayCommand _openFixturesPageCommand;
         private RelayCommand _openMatchOverviewPageCommand;
         private RelayCommand _openClubPageCommand;

@@ -2,18 +2,13 @@
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
 using OlavFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
     public class ClubPerCompetitionService : IClubPerCompetitionService
     {
-        IRepository<ClubPerCompetition> _clubPerCompetitionRepository;
-        ICompetitionService _competitionService;
+        private readonly IRepository<ClubPerCompetition> _clubPerCompetitionRepository;
+        private readonly ICompetitionService _competitionService;
 
         public ClubPerCompetitionService(IRepository<ClubPerCompetition> clubPerCompetitionRepository, ICompetitionService competitionService)
         {
@@ -36,7 +31,7 @@ namespace FootballChairman.Services
 
             foreach (var club in clubs)
             {
-                CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = competitionId});
+                CreateClubPerCompetition(new ClubPerCompetition(club.Id, club.Name) { CompetitionId = competitionId });
             }
         }
 

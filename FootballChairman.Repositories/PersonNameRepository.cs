@@ -1,9 +1,4 @@
 ﻿using FootballChairman.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Repositories
 {
@@ -133,7 +128,7 @@ namespace FootballChairman.Repositories
                     lastNames.Add("Van Dijk");
                     lastNames.Add("Bakker");
                     lastNames.Add("Janssen");
-                    lastNames.Add("Visser");;
+                    lastNames.Add("Visser"); ;
                     lastNames.Add("Smit");
                     lastNames.Add("Meijer");
                     break;

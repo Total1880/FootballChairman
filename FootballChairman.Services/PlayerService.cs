@@ -1,17 +1,12 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
     public class PlayerService : IPlayerService
     {
-        private Random random = new Random();
+        private readonly Random random = new Random();
         private readonly IRepository<Player> _playerRepository;
         private readonly IPersonNameService _personNameService;
         private readonly ICountryService _countryService;
@@ -20,8 +15,8 @@ namespace FootballChairman.Services
 
         public PlayerService(
             IRepository<Player> playerRepository,
-            IPersonNameService personNameService, 
-            ICountryService countryService, 
+            IPersonNameService personNameService,
+            ICountryService countryService,
             IClubService clubService,
             IManagerService managerService)
         {
@@ -141,7 +136,9 @@ namespace FootballChairman.Services
                 }
 
                 if (player.Potential <= player.Defense + player.Midfield + player.Attack)
+                {
                     continue;
+                }
 
                 player.Defense += random.Next(0, manager.TrainingDefenseSkill / 10);
                 player.Midfield += random.Next(0, manager.TrainingMidfieldSkill / 10);

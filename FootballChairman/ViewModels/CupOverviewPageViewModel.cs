@@ -5,24 +5,20 @@ using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using OlavFramework;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.ViewModels
 {
     public class CupOverviewPageViewModel : ViewModelBase
     {
-        private ICountryService _countryService;
-        private ICompetitionCupService _competitionCupService;
-        private IFixtureService _fixtureService;
-        private ISaveGameDataService _saveGameDataService;
-        private IGameService _gameService;
+        private readonly ICountryService _countryService;
+        private readonly ICompetitionCupService _competitionCupService;
+        private readonly IFixtureService _fixtureService;
+        private readonly ISaveGameDataService _saveGameDataService;
+        private readonly IGameService _gameService;
 
-        private string _saveGameName;
+        private readonly string _saveGameName;
 
         private ObservableCollection<Game> _showLastGames;
         private ObservableCollection<CompetitionCup> _competitions;
@@ -67,7 +63,7 @@ namespace FootballChairman.ViewModels
             ICountryService countryService,
             ICompetitionCupService competitionCupService,
             IFixtureService fixtureService,
-            ISaveGameDataService saveGameDataService, 
+            ISaveGameDataService saveGameDataService,
             IGameService gameService)
         {
             _countryService = countryService;
@@ -94,7 +90,9 @@ namespace FootballChairman.ViewModels
         {
             Competitions = new ObservableCollection<CompetitionCup>(_competitionCupService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id && (com.CompetitionType == CompetitionType.NationalCup || com.CompetitionType == CompetitionType.InternationalCup)));
             if (Competitions.Count > 0)
+            {
                 SelectedCompetitionCup = Competitions[0];
+            }
         }
 
         private void LoadFixtureLists()

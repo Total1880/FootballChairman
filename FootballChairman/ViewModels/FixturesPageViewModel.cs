@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FootballChairman.Models;
+﻿using FootballChairman.Models;
 using FootballChairman.Models.Enums;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FootballChairman.ViewModels
 {
     public class FixturesPageViewModel : ViewModelBase
     {
-        private IFixtureService _fixtureService;
-        private ICompetitionService _competitionService;
-        private IClubService _clubService;
-        private IClubPerCompetitionService _clubPerCompetitionService;
-        private IManagerService _managerService;
-        private ICountryService _countryService;
-        private ICompetitionCupService _competitionCupService;
-        private IPlayerService _playerService;
+        private readonly IFixtureService _fixtureService;
+        private readonly ICompetitionService _competitionService;
+        private readonly IClubService _clubService;
+        private readonly IClubPerCompetitionService _clubPerCompetitionService;
+        private readonly IManagerService _managerService;
+        private readonly ICountryService _countryService;
+        private readonly ICompetitionCupService _competitionCupService;
+        private readonly IPlayerService _playerService;
         private ObservableCollection<Fixture> _fixtures = new ObservableCollection<Fixture>();
 
         public ObservableCollection<Fixture> Fixtures { get => _fixtures; }
@@ -60,7 +58,9 @@ namespace FootballChairman.ViewModels
         private void CreateCompetition()
         {
             if (_competitionService.GetAllCompetitions().Any())
+            {
                 return;
+            }
 
             _competitionService.CreateCompetition(new Competition { Id = 0, Name = "Eerste Klasse", Reputation = 5000, PromotionCompetitionId = -1, RelegationCompetitionId = 1, NumberOfTeams = 10, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
             _competitionService.CreateCompetition(new Competition { Id = 1, Name = "Tweede Klasse", Reputation = 4000, PromotionCompetitionId = 0, RelegationCompetitionId = 9, NumberOfTeams = 8, CountryId = 0, CompetitionType = CompetitionType.NationalCompetition });
@@ -87,7 +87,10 @@ namespace FootballChairman.ViewModels
         private void CreateClubs()
         {
             if (_clubService.GetAllClubs().Any())
+            {
                 return;
+            }
+
             var random = new Random();
 
             _clubService.CreateClub(new Club { CountryId = 0, SkillDefense = random.Next(1, 99), SkillAttack = random.Next(1, 99), SkillMidfield = random.Next(1, 99), SkillGoalkeeping = random.Next(1, 99), Id = 0, Name = "Union" });
@@ -212,7 +215,9 @@ namespace FootballChairman.ViewModels
         private void CreateFixtures()
         {
             if (_fixtureService.LoadFixtures().Any())
+            {
                 return;
+            }
 
             var clubs = _clubService.GetAllClubs();
             var competitions = _competitionService.GetAllCompetitions();
@@ -245,7 +250,9 @@ namespace FootballChairman.ViewModels
         private void CreateManagers()
         {
             if (_managerService.GetAllManagers().Any())
+            {
                 return;
+            }
 
             var clubs = _clubService.GetAllClubs();
 
@@ -259,7 +266,9 @@ namespace FootballChairman.ViewModels
         private void CreatePlayers()
         {
             if (_playerService.GetPlayers().Any())
+            {
                 return;
+            }
 
             var clubs = _clubService.GetAllClubs();
 
@@ -274,7 +283,9 @@ namespace FootballChairman.ViewModels
         private void CreateCountries()
         {
             if (_countryService.GetAllCountries().Any())
+            {
                 return;
+            }
 
             _countryService.CreateCountry(new Country { Id = 0, Name = "Belgium" });
             _countryService.CreateCountry(new Country { Id = 1, Name = "England" });

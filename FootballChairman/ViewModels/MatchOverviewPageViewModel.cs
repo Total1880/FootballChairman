@@ -3,27 +3,21 @@ using FootballChairman.Models;
 using FootballChairman.Models.Enums;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OlavFramework;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace FootballChairman.ViewModels
 {
     public class MatchOverviewPageViewModel : ViewModelBase
     {
-        private IFixtureService _fixtureService;
-        private IGameService _gameService;
-        private IClubPerCompetitionService _clubPerCompetitionService;
-        private ICompetitionService _competitionService;
-        private ICountryService _countryService;
-        private ISaveGameDataService _saveGameDataService;
+        private readonly IFixtureService _fixtureService;
+        private readonly IGameService _gameService;
+        private readonly IClubPerCompetitionService _clubPerCompetitionService;
+        private readonly ICompetitionService _competitionService;
+        private readonly ICountryService _countryService;
+        private readonly ISaveGameDataService _saveGameDataService;
         private ObservableCollection<Game> _showLastGames;
         private ObservableCollection<Fixture> _showNextFixtures;
         private ObservableCollection<ClubPerCompetition> _ranking;
@@ -31,7 +25,7 @@ namespace FootballChairman.ViewModels
         private ObservableCollection<Country> _countries;
         private Competition _selectedCompetition;
         private Country _selectedCountry;
-        private string _saveGameName;
+        private readonly string _saveGameName;
 
         public ObservableCollection<Game> ShowLastGames { get => _showLastGames; set { _showLastGames = value; RaisePropertyChanged(); } }
         public ObservableCollection<Fixture> ShowNextFixtures { get => _showNextFixtures; set { _showNextFixtures = value; RaisePropertyChanged(); } }

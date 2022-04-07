@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FootballChairman.Models
+﻿namespace FootballChairman.Models
 {
     public class Tactic
     {
@@ -16,6 +10,6 @@ namespace FootballChairman.Models
         public IList<Player> Attackers { get; set; }
         public IList<int> AttackersId { get; set; }
         public Player Goalkeeper { get; set; }
-        public int GoalkeeperId { get; set;}
+        public int GoalkeeperId { get; set; }
     }
 }

@@ -3,12 +3,8 @@ using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.ViewModels
 {
@@ -93,25 +89,38 @@ namespace FootballChairman.ViewModels
             LoadData(new RefreshYourClubDataMessage());
             Messenger.Default.Register<RefreshYourClubDataMessage>(this, LoadData);
             if (Clubs.Any(c => c.IsPlayer))
+            {
                 SelectedClub = Clubs.FirstOrDefault(c => c.IsPlayer);
+            }
         }
 
         private void LoadData(RefreshYourClubDataMessage obj)
         {
             int placeholderId = 0;
             if (SelectedClub != null)
+            {
                 placeholderId = SelectedClub.Id;
+            }
+
             if (SelectedCountry == null)
+            {
                 SelectedCountry = Countries.FirstOrDefault();
+            }
 
             Clubs = new ObservableCollection<Club>(_clubService.GetAllClubs().Where(c => c.CountryId == SelectedCountry.Id));
 
             if (SelectedClub != null)
+            {
                 SelectedClub = Clubs.FirstOrDefault(c => c.Id == placeholderId);
+            }
             else if (Clubs.Any(c => c.IsPlayer))
+            {
                 SelectedClub = Clubs.FirstOrDefault(c => c.IsPlayer);
+            }
             else
+            {
                 SelectedClub = Clubs.FirstOrDefault();
+            }
         }
 
         private void LoadTacticLabels()
@@ -122,8 +131,9 @@ namespace FootballChairman.ViewModels
             Attackers = string.Empty;
 
             if (SelectedClub == null)
+            {
                 return;
-
+            }
 
             var tactic = _tacticService.GetTactic(SelectedClub.Id);
 

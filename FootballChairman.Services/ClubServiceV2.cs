@@ -1,18 +1,13 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.Services
 {
     public class ClubServiceV2 : IClubService
     {
-        IRepository<Club> _clubRepository;
-        IManagerService _managerService;
+        private readonly IRepository<Club> _clubRepository;
+        private readonly IManagerService _managerService;
 
         public ClubServiceV2(IRepository<Club> clubRepository, IManagerService managerService)
         {
@@ -60,7 +55,9 @@ namespace FootballChairman.Services
             {
                 var lookUpClub = clubs.FirstOrDefault(c => c.Id == club.ClubId);
                 if (lookUpClub == null)
+                {
                     continue;
+                }
 
                 if (lookUpClub.Reputation < competitionReputation - 100)
                 {
@@ -91,43 +88,6 @@ namespace FootballChairman.Services
                 UpdateClub(lookUpClub);
                 counter--;
             }
-        }
-
-        public void UpdateClubsEndOfSeasonTroughManager()
-        {
-            var clubs = GetAllClubs();
-            var random = new Random();
-
-            foreach (var club in clubs)
-            {
-                var manager = _managerService.GetManager(club.ManagerId);
-
-                if (club.SkillDefense < manager.TrainingDefenseSkill * 10)
-                    club.SkillDefense += random.Next(0, 10);
-                else
-                    club.SkillDefense -= random.Next(0, 10);
-
-                if (club.SkillMidfield < manager.TrainingMidfieldSkill * 10)
-                    club.SkillMidfield += random.Next(0, 10);
-                else
-                    club.SkillMidfield -= random.Next(0, 10);
-
-                if (club.SkillAttack < manager.TrainingAttackSkill * 10)
-                    club.SkillAttack += random.Next(0, 10);
-                else
-                    club.SkillAttack -= random.Next(0, 10);
-
-                if (club.SkillDefense < 1)
-                    club.SkillDefense = 1;
-
-                if (club.SkillMidfield < 1)
-                    club.SkillMidfield = 1;
-
-                if (club.SkillAttack < 1)
-                    club.SkillAttack = 1;
-            }
-
-            _clubRepository.Create(clubs);
         }
 
         public void UpdateClubsWithNewManagers(IList<Manager> newManagers)

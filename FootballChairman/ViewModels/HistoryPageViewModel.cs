@@ -1,12 +1,8 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballChairman.ViewModels
 {
@@ -46,7 +42,10 @@ namespace FootballChairman.ViewModels
             {
                 _selectedCompetition = value;
                 if (value != null)
+                {
                     LoadDataHistoryItems();
+                }
+
                 RaisePropertyChanged();
             }
         }
@@ -67,9 +66,11 @@ namespace FootballChairman.ViewModels
         private void LoadData()
         {
             if (SelectedCountry == null)
+            {
                 SelectedCountry = Countries.FirstOrDefault();
+            }
 
-            var competitions = _competitionCupService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id) ;
+            var competitions = _competitionCupService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id);
 
             Competitions = new ObservableCollection<CompetitionBase>(_competitionService.GetAllCompetitions().Where(com => com.CountryId == SelectedCountry.Id));
             foreach (var competition in competitions)
