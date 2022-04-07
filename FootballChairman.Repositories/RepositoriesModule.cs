@@ -23,6 +23,7 @@ namespace FootballChairman.Repositories
             builder.RegisterType<GameRepository>().AsImplementedInterfaces();
             builder.RegisterType<PlayerRepository>().AsImplementedInterfaces();
             builder.RegisterType<PersonNameRepository>().AsImplementedInterfaces();
+            builder.RegisterType<TacticRepository>().AsImplementedInterfaces();
         }
     }
 }

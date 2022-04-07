@@ -1,5 +1,6 @@
 ﻿using FootballChairman.Models;
 using FootballChairman.Models.Enums;
+using FootballChairman.Repositories;
 using FootballChairman.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace FootballChairman.Services
     {
         private readonly IPlayerService _playerService;
         private readonly IManagerService _managerService;
+        private readonly IRepository<Tactic> _tacticRepository;
 
-        public TacticService(IPlayerService playerService, IManagerService managerService)
+        public TacticService(IPlayerService playerService, IManagerService managerService, IRepository<Tactic> tacticRepository)
         {
             _playerService = playerService;
             _managerService = managerService;
+            _tacticRepository = tacticRepository;
         }
 
         public Tactic GetStandardTactic(int clubId)
@@ -28,13 +31,13 @@ namespace FootballChairman.Services
             switch (manager.ManagerType)
             {
                 case ManagerType.Defensive:
-                    return GetDefensiveTactic(clubId, players);
+                    return CreateTactic(GetDefensiveTactic(clubId, players));
                 case ManagerType.BalancedDefensive:
-                    return GetBalancedDefensiveTactic(clubId, players);
+                    return CreateTactic(GetBalancedDefensiveTactic(clubId, players));
                 case ManagerType.BalancedAttacking:
-                    return GetBalacedAttackingTactic(clubId, players);
+                    return CreateTactic(GetBalacedAttackingTactic(clubId, players));
                 case ManagerType.Attacking:
-                    return GetAttackingTactic(clubId, players);
+                    return CreateTactic(GetAttackingTactic(clubId, players));
                 default:
                     throw new NotImplementedException("This managertype is not implemented: " + manager.ManagerType.ToString());
             }
@@ -155,6 +158,51 @@ namespace FootballChairman.Services
             players.RemoveRange(0, 4);
 
             return tactic;
+        }
+
+        public Tactic CreateTactic(Tactic tactic)
+        {
+            var allTactics = _tacticRepository.Get().Where(t => t.ClubId != tactic.ClubId).ToList();
+            tactic.GoalkeeperId = tactic.Goalkeeper.Id;
+
+            tactic.DefendersId = new List<int>();
+            foreach (var d in tactic.Defenders)
+                tactic.DefendersId.Add(d.Id);
+
+            tactic.MidfieldersId = new List<int>();
+            foreach (var m in tactic.Midfielders)
+                tactic.MidfieldersId.Add(m.Id);
+
+            tactic.AttackersId = new List<int>();
+            foreach (var a in tactic.Attackers)
+                tactic.AttackersId.Add(a.Id);
+
+            allTactics.Add(tactic);
+            _tacticRepository.Create(allTactics);
+            return tactic;
+        }
+
+        public Tactic GetTactic(int clubId)
+        {
+            var players = _playerService.GetPlayersFromClub(clubId);
+
+            var tactic = _tacticRepository.Get().FirstOrDefault(t => t.ClubId == clubId);
+
+            tactic.Goalkeeper = players.FirstOrDefault(p => p.Id == tactic.GoalkeeperId);
+
+            tactic.Defenders = new List<Player>();
+            foreach (var d in tactic.DefendersId)
+                tactic.Defenders.Add(players.FirstOrDefault(p => p.Id == d));
+
+            tactic.Midfielders = new List<Player>();
+            foreach (var m in tactic.MidfieldersId)
+                tactic.Midfielders.Add(players.FirstOrDefault(p => p.Id == m));
+
+            tactic.Attackers = new List<Player>();
+            foreach (var a in tactic.AttackersId)
+                tactic.Attackers.Add(players.FirstOrDefault(p => p.Id == a));
+
+            return _tacticRepository.Get().FirstOrDefault(t => t.ClubId == clubId);
         }
     }
 }
