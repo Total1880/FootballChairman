@@ -14,9 +14,19 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0"
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <CheckBox Content="Reachable"
+                      IsChecked="{Binding ReachableManagers}"/>
+            <Button 
+                Content="Search Manager"
+                Command="{Binding SearchManagerCommand}"
+                Width="100"/>
+            <Button 
                 Content="Get Manager"
-                Command="{Binding TransferManagerCommand}"/>
+                Command="{Binding TransferManagerCommand}"
+                Width="100"/>
+        </StackPanel>
+
 
         <ListView Grid.Row="1" ItemsSource="{Binding Managers}" SelectedItem="{Binding SelectedManager}">
             <ListView.View>

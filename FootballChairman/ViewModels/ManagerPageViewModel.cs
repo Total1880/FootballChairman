@@ -17,13 +17,19 @@ namespace FootballChairman.ViewModels
         private Manager _selectedManager;
         private Club _playerClub;
         private RelayCommand _transferManagerCommand;
+        private RelayCommand _searchManagerCommand;
+        private bool _reachableManagers;
+
 
         private ObservableCollection<Manager> _managers;
 
         public Manager SelectedManager { get => _selectedManager; set { _selectedManager = value; } }
         public RelayCommand TransferManagerCommand => _transferManagerCommand ??= new RelayCommand(TransferManager);
+        public RelayCommand SearchManagerCommand => _searchManagerCommand ??= new RelayCommand(LoadData);
 
         public ObservableCollection<Manager> Managers { get => _managers; set { _managers = value; RaisePropertyChanged(); } }
+        public bool ReachableManagers { get => _reachableManagers; set { _reachableManagers = value; } }
+
 
         public ManagerPageViewModel(IManagerService managerService, IClubService clubService)
         {
@@ -45,6 +51,11 @@ namespace FootballChairman.ViewModels
             var clubs = _clubService.GetAllClubs();
             _playerClub = clubs.FirstOrDefault(c => c.IsPlayer);
 
+            if (ReachableManagers)
+            {
+                var lessRepClubs = clubs.Where(c => c.Reputation < _playerClub.Reputation).ToList();
+                Managers = new ObservableCollection<Manager>(Managers.Where(m => lessRepClubs.Any(c => c.Id == m.ClubId)));
+            }
             foreach (var manager in Managers)
             {
                 manager.ClubName = clubs.FirstOrDefault(c => c.Id == manager.ClubId).Name;
@@ -61,7 +72,7 @@ namespace FootballChairman.ViewModels
             var playerManager = Managers.FirstOrDefault(m => m.ClubId == _playerClub.Id);
             var otherClub = _clubService.GetClub(SelectedManager.ClubId);
 
-            if (_playerClub.Reputation <= otherClub.Reputation)
+            if (_playerClub.Reputation < otherClub.Reputation)
             {
                 return;
             }
