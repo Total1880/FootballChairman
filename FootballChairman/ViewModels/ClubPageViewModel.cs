@@ -18,9 +18,14 @@ namespace FootballChairman.ViewModels
         private readonly IManagerService _managerService;
         private readonly ICountryService _countryService;
         private readonly IPlayerService _playerService;
+        private readonly ITacticService _tacticService;
         private Club _selectedClub;
         private Manager _selectedManager;
         private Country _selectedCountry;
+        private string _goalkeeper;
+        private string _defenders;
+        private string _midfielders;
+        private string _attackers;
 
         private ObservableCollection<Club> _clubs;
         private ObservableCollection<Country> _countries;
@@ -50,6 +55,7 @@ namespace FootballChairman.ViewModels
                 {
                     SelectedManager = _managerService.GetManager(value.ManagerId);
                     Players = new ObservableCollection<Player>(_playerService.GetPlayersFromClub(value.Id));
+                    LoadTacticLabels();
                 }
                 RaisePropertyChanged();
             }
@@ -64,14 +70,24 @@ namespace FootballChairman.ViewModels
                 RaisePropertyChanged();
             }
         }
+        public string Goalkeeper { get => _goalkeeper; set { _goalkeeper = value; RaisePropertyChanged(); } }
+        public string Defenders { get => _defenders; set { _defenders = value; RaisePropertyChanged(); } }
+        public string Midfielders { get => _midfielders; set { _midfielders = value; RaisePropertyChanged(); } }
+        public string Attackers { get => _attackers; set { _attackers = value; RaisePropertyChanged(); } }
 
 
-        public ClubPageViewModel(IClubService clubService, IManagerService managerService, ICountryService countryService, IPlayerService playerService)
+        public ClubPageViewModel(
+            IClubService clubService,
+            IManagerService managerService,
+            ICountryService countryService,
+            IPlayerService playerService,
+            ITacticService tacticService)
         {
             _clubService = clubService;
             _managerService = managerService;
             _countryService = countryService;
             _playerService = playerService;
+            _tacticService = tacticService;
 
             Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             LoadData(new RefreshYourClubDataMessage());
@@ -84,7 +100,7 @@ namespace FootballChairman.ViewModels
         {
             int placeholderId = 0;
             if (SelectedClub != null)
-             placeholderId = SelectedClub.Id;
+                placeholderId = SelectedClub.Id;
             if (SelectedCountry == null)
                 SelectedCountry = Countries.FirstOrDefault();
 
@@ -96,6 +112,25 @@ namespace FootballChairman.ViewModels
                 SelectedClub = Clubs.FirstOrDefault(c => c.IsPlayer);
             else
                 SelectedClub = Clubs.FirstOrDefault();
+        }
+
+        private void LoadTacticLabels()
+        {
+            Goalkeeper = string.Empty;
+            Defenders = string.Empty;
+            Midfielders = string.Empty;
+            Attackers = string.Empty;
+
+            if (SelectedClub == null)
+                return;
+
+
+            var tactic = _tacticService.GetTactic(SelectedClub.Id);
+
+            Goalkeeper = tactic.Goalkeeper.LastNameFirstLetterFirstName;
+            Defenders = string.Join(" | ", tactic.Defenders.Select(p => p.LastNameFirstLetterFirstName));
+            Midfielders = string.Join(" | ", tactic.Midfielders.Select(p => p.LastNameFirstLetterFirstName));
+            Attackers = string.Join(" | ", tactic.Attackers.Select(p => p.LastNameFirstLetterFirstName));
         }
     }
 }

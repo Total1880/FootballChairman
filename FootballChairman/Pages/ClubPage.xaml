@@ -15,6 +15,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -31,6 +32,8 @@
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding SelectedClub}"/>
             </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Goalkeeping: "/>
@@ -56,7 +59,37 @@
                 Content="{Binding SelectedClub.SkillAttack}"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Label
+                    Content="GK: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding Goalkeeper}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label
+                    Content="D: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding Defenders}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label
+                    Content="M: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding Midfielders}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label
+                    Content="A: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding Attackers}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
             <StackPanel Orientation="Horizontal">
                 <Label 
                 Content="Manager: "/>
@@ -103,7 +136,7 @@
                 Content="{Binding SelectedManager.TrainingAttackSkill}"/>
             </StackPanel>
         </StackPanel>
-        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Players}">
+        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Players}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding LastName}">

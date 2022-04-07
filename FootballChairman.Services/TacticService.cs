@@ -202,7 +202,7 @@ namespace FootballChairman.Services
             foreach (var a in tactic.AttackersId)
                 tactic.Attackers.Add(players.FirstOrDefault(p => p.Id == a));
 
-            return _tacticRepository.Get().FirstOrDefault(t => t.ClubId == clubId);
+            return tactic;
         }
     }
 }

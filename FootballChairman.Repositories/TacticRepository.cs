@@ -56,6 +56,7 @@ namespace FootballChairman.Repositories
                         //writer.WriteEndElement();
                     }
                     writer.WriteEndElement();
+                    writer.WriteEndElement();
                 }
 
                 writer.WriteEndElement();
@@ -128,6 +129,7 @@ namespace FootballChairman.Repositories
                             xmlReader.ReadStartElement(nameof(Tactic.AttackersId));
                             readTactic.AttackersId.Add(int.Parse(xmlReader.ReadContentAsString()));
                         } while (xmlReader.ReadToNextSibling(nameof(Tactic.AttackersId)));
+                        xmlReader.ReadEndElement();
 
                         tacticList.Add(readTactic);
                     } while (xmlReader.ReadToNextSibling(nameof(Tactic)));
