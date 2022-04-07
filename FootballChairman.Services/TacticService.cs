@@ -49,6 +49,7 @@ namespace FootballChairman.Services
             var tactic = new Tactic { ClubId = clubId };
 
             //Get Goalkeeper
+            players = players.OrderByDescending(p => p.Goalkeeping).ToList();
             tactic.Goalkeeper = players.FirstOrDefault();
             players.Remove(tactic.Goalkeeper);
 
@@ -66,7 +67,7 @@ namespace FootballChairman.Services
 
             //Get 2 Attackers
             tactic.Attackers = new List<Player>();
-            players = players.OrderBy(p => p.Attack).ToList();
+            players = players.OrderByDescending(p => p.Attack).ToList();
             tactic.Attackers = players.GetRange(0, 2);
             players.RemoveRange(0, 2);
 
@@ -78,6 +79,7 @@ namespace FootballChairman.Services
             var tactic = new Tactic { ClubId = clubId };
 
             //Get Goalkeeper
+            players = players.OrderByDescending(p => p.Goalkeeping).ToList();
             tactic.Goalkeeper = players.FirstOrDefault();
             players.Remove(tactic.Goalkeeper);
 
@@ -95,7 +97,7 @@ namespace FootballChairman.Services
 
             //Get 2 Attackers
             tactic.Attackers = new List<Player>();
-            players = players.OrderBy(p => p.Attack).ToList();
+            players = players.OrderByDescending(p => p.Attack).ToList();
             tactic.Attackers = players.GetRange(0, 2);
             players.RemoveRange(0, 2);
 
@@ -107,6 +109,7 @@ namespace FootballChairman.Services
             var tactic = new Tactic { ClubId = clubId };
 
             //Get Goalkeeper
+            players = players.OrderByDescending(p => p.Goalkeeping).ToList();
             tactic.Goalkeeper = players.FirstOrDefault();
             players.Remove(tactic.Goalkeeper);
 
@@ -118,7 +121,7 @@ namespace FootballChairman.Services
 
             //Get 2 Attackers
             tactic.Attackers = new List<Player>();
-            players = players.OrderBy(p => p.Attack).ToList();
+            players = players.OrderByDescending(p => p.Attack).ToList();
             tactic.Attackers = players.GetRange(0, 2);
             players.RemoveRange(0, 2);
 
@@ -137,7 +140,7 @@ namespace FootballChairman.Services
 
             //Get 2 Attackers
             tactic.Attackers = new List<Player>();
-            players = players.OrderBy(p => p.Attack).ToList();
+            players = players.OrderByDescending(p => p.Attack).ToList();
             tactic.Attackers = players.GetRange(0, 2);
             players.RemoveRange(0, 2);
 
@@ -148,6 +151,7 @@ namespace FootballChairman.Services
             players.RemoveRange(0, 4);
 
             //Get Goalkeeper
+            players = players.OrderByDescending(p => p.Goalkeeping).ToList();
             tactic.Goalkeeper = players.FirstOrDefault();
             players.Remove(tactic.Goalkeeper);
 

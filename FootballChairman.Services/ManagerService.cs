@@ -48,10 +48,10 @@ namespace FootballChairman.Services
             newManager.Id = newid;
             newManager.FirstName = _personNameService.GetRandomFirstName(countryId);
             newManager.LastName = _personNameService.GetRandomLastName(countryId);
-            newManager.TrainingDefenseSkill = random.Next(1, 11);
-            newManager.TrainingAttackSkill = random.Next(1, 11);
-            newManager.TrainingMidfieldSkill = random.Next(1, 11);
-            newManager.TrainingGoalkeepingSkill = random.Next(1, 11);
+            newManager.TrainingDefenseSkill = random.Next(1, 100);
+            newManager.TrainingAttackSkill = random.Next(1, 100);
+            newManager.TrainingMidfieldSkill = random.Next(1, 100);
+            newManager.TrainingGoalkeepingSkill = random.Next(1, 100);
             newManager.Age = random.Next(40, 65);
             newManager.ClubId = clubId;
             newManager.CountryId = countryId;

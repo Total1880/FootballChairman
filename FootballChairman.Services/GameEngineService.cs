@@ -114,7 +114,7 @@ namespace FootballChairman.Services
             if (_saveGameData.MatchDay <= Configuration.WeeksInYear)
                 return;
 
-            _clubService.UpdateClubsEndOfSeasonTroughManager();
+            //_clubService.UpdateClubsEndOfSeasonTroughManager();
             _clubService.UpdateClubsWithNewManagers(_managerService.UpdateManagersEndSeason());
 
             _playerService.UpdatePlayersEndOfSeason();

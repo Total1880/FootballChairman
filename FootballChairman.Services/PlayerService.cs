@@ -16,13 +16,20 @@ namespace FootballChairman.Services
         private readonly IPersonNameService _personNameService;
         private readonly ICountryService _countryService;
         private readonly IClubService _clubService;
+        private readonly IManagerService _managerService;
 
-        public PlayerService(IRepository<Player> playerRepository, IPersonNameService personNameService, ICountryService countryService, IClubService clubService)
+        public PlayerService(
+            IRepository<Player> playerRepository,
+            IPersonNameService personNameService, 
+            ICountryService countryService, 
+            IClubService clubService,
+            IManagerService managerService)
         {
             _playerRepository = playerRepository;
             _personNameService = personNameService;
             _countryService = countryService;
             _clubService = clubService;
+            _managerService = managerService;
         }
 
         public Player GenerateRandomPlayer(int clubId, int countryId)
@@ -119,11 +126,13 @@ namespace FootballChairman.Services
         public IList<Player> UpdatePlayersEndOfSeason()
         {
             var allPlayers = _playerRepository.Get();
+            var allManagers = _managerService.GetAllManagers();
             var playersToRetire = new List<Player>();
 
             foreach (var player in allPlayers)
             {
                 player.Age++;
+                var manager = allManagers.FirstOrDefault(m => m.ClubId == player.ClubId);
 
                 if (player.Age > 30 && random.Next(0, 5) == 0)
                 {
@@ -134,10 +143,10 @@ namespace FootballChairman.Services
                 if (player.Potential <= player.Defense + player.Midfield + player.Attack)
                     continue;
 
-                player.Defense += random.Next(0, 5);
-                player.Midfield += random.Next(0, 5);
-                player.Attack += random.Next(0, 5);
-                player.Goalkeeping += random.Next(0, 5);
+                player.Defense += random.Next(0, manager.TrainingDefenseSkill / 10);
+                player.Midfield += random.Next(0, manager.TrainingMidfieldSkill / 10);
+                player.Attack += random.Next(0, manager.TrainingAttackSkill / 10);
+                player.Goalkeeping += random.Next(0, manager.TrainingGoalkeepingSkill / 10);
             }
 
             foreach (var player in playersToRetire)
