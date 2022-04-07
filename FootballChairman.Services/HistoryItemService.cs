@@ -18,7 +18,7 @@ namespace FootballChairman.Services
 
             if (list.Any(hi => hi.Year == historyItem.Year && hi.CompetitionId == historyItem.CompetitionId))
             {
-                throw new Exception("item already exist!");
+                //throw new Exception("item already exist!");
             }
 
             if (list.Any())

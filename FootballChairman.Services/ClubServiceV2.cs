@@ -7,12 +7,12 @@ namespace FootballChairman.Services
     public class ClubServiceV2 : IClubService
     {
         private readonly IRepository<Club> _clubRepository;
-        private readonly IManagerService _managerService;
+        private readonly IRepository<Player> _playerRepository;
 
-        public ClubServiceV2(IRepository<Club> clubRepository, IManagerService managerService)
+        public ClubServiceV2(IRepository<Club> clubRepository, IRepository<Player> playerRepository)
         {
             _clubRepository = clubRepository;
-            _managerService = managerService;
+            _playerRepository = playerRepository;
         }
 
         public IList<Club> CreateAllClubs(IList<Club> clubs)

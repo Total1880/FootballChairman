@@ -11,6 +11,7 @@ namespace FootballChairman.Services.Interfaces
         void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking, int competitionReputation);
         void UpdateClubsWithNewManagers(IList<Manager> newManagers);
         Club UpdateClub(Club club);
+       
 
     }
 }

@@ -149,7 +149,7 @@ namespace FootballChairman.Services
             foreach (var player in playersToRetire)
             {
                 allPlayers.Remove(player);
-                allPlayers.Add(GenerateYouthPlayer(player.ClubId, player.CountryId));
+                //allPlayers.Add(GenerateYouthPlayer(player.ClubId, player.CountryId));
             }
             _playerRepository.Create(allPlayers);
 

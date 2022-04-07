@@ -139,6 +139,10 @@ namespace FootballChairman.Services
             CreateInternationalFixtures();
             ResetFixtures();
             _clubPerCompetitionService.ResetData();
+
+            //GenerateTactics();
+            _managerService.DoTransfers();
+            CheckIfClubHasEnoughPlayers();
             GenerateTactics();
 
             _saveGameData.MatchDay = 0;
@@ -210,6 +214,25 @@ namespace FootballChairman.Services
                 if (!_tactics.Any(t => t.ClubId == club.Id))
                 {
                     _tactics.Add(_tacticService.GetStandardTactic(club.Id));
+                }
+            }
+        }
+
+        private void CheckIfClubHasEnoughPlayers()
+        {
+            var clubs = _clubService.GetAllClubs();
+            var players = _playerService.GetPlayers();
+
+            foreach (var club in clubs)
+            {
+                var playerOfClubCount = players.Where(p => p.ClubId == club.Id).Count();
+
+                if (playerOfClubCount < 11)
+                {
+                    for (int i = playerOfClubCount; i < 11; i++)
+                    {
+                        _playerService.GenerateYouthPlayer(club.Id, club.CountryId);
+                    }
                 }
             }
         }

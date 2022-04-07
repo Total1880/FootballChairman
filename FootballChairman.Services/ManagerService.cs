@@ -8,13 +8,19 @@ namespace FootballChairman.Services
     public class ManagerService : IManagerService
     {
         private readonly IRepository<Manager> _managerRepository;
+        private readonly IRepository<Club> _clubRepository;
+        private readonly IRepository<Player> _playerRepository;
+        private readonly IRepository<Tactic> _tacticRepository;
         private readonly IPersonNameService _personNameService;
         private readonly Random random = new Random();
 
-        public ManagerService(IRepository<Manager> managerRepository, IPersonNameService personNameService)
+        public ManagerService(IRepository<Manager> managerRepository, IPersonNameService personNameService, IRepository<Club> clubRepository, IRepository<Player> playerRepository, IRepository<Tactic> tacticRepository)
         {
             _managerRepository = managerRepository;
             _personNameService = personNameService;
+            _clubRepository = clubRepository;
+            _playerRepository = playerRepository;
+            _tacticRepository = tacticRepository;
         }
         public Manager CreateManager(Manager manager)
         {
@@ -85,7 +91,6 @@ namespace FootballChairman.Services
             return manager;
         }
 
-        //returns new managers
         public IList<Manager> UpdateManagersEndSeason()
         {
             var newManagers = new List<Manager>();
@@ -109,6 +114,166 @@ namespace FootballChairman.Services
             _managerRepository.Create(allManagers);
 
             return newManagers;
+        }
+
+        public void DoTransfers()
+        {
+            var clubs = _clubRepository.Get().OrderByDescending(c => c.Reputation).ToList();
+            var managers = GetAllManagers();
+            var tactics = _tacticRepository.Get();
+
+            List<Player> players = _playerRepository.Get().ToList();
+
+            FillTacticsWithPlayers(tactics, players);
+
+            foreach (var club in clubs)
+            {
+                var lowerRepClubs = clubs.Where(c => c.Reputation < club.Reputation);
+
+                if (lowerRepClubs.Count() < 1)
+                    continue;
+
+                var transferablePlayers = new List<Player>();
+
+                foreach (var lowerRepClub in lowerRepClubs)
+                {
+                    transferablePlayers.AddRange(players.Where(p => p.ClubId == lowerRepClub.Id).ToList());
+                }
+
+                var tactic = tactics.FirstOrDefault(t => t.ClubId == club.Id);
+                var playersToTransfer = new List<Player>();
+
+                switch (managers.FirstOrDefault(m => m.ClubId == club.Id).ManagerType)
+                {
+                    case ManagerType.Defensive:
+                        playersToTransfer.Add(TransferGoalkeepingPlayer(transferablePlayers, tactic.Goalkeeper));
+                        playersToTransfer.Add(TransferDefendingPlayer(transferablePlayers, tactic.Defenders));
+                        playersToTransfer.Add(TransferMidfieldlayer(transferablePlayers, tactic.Midfielders));
+                        playersToTransfer.Add(TransferAttackingPlayer(transferablePlayers, tactic.Attackers));
+                        break;
+
+                    case ManagerType.BalancedDefensive:
+                        playersToTransfer.Add(TransferGoalkeepingPlayer(transferablePlayers, tactic.Goalkeeper));
+                        playersToTransfer.Add(TransferMidfieldlayer(transferablePlayers, tactic.Midfielders));
+                        playersToTransfer.Add(TransferDefendingPlayer(transferablePlayers, tactic.Defenders));
+                        playersToTransfer.Add(TransferAttackingPlayer(transferablePlayers, tactic.Attackers));
+                        break;
+
+                    case ManagerType.BalancedAttacking:
+                        playersToTransfer.Add(TransferGoalkeepingPlayer(transferablePlayers, tactic.Goalkeeper));
+                        playersToTransfer.Add(TransferMidfieldlayer(transferablePlayers, tactic.Midfielders));
+                        playersToTransfer.Add(TransferAttackingPlayer(transferablePlayers, tactic.Attackers));
+                        playersToTransfer.Add(TransferDefendingPlayer(transferablePlayers, tactic.Defenders));
+                        break;
+
+                    case ManagerType.Attacking:
+                        playersToTransfer.Add(TransferAttackingPlayer(transferablePlayers, tactic.Attackers));
+                        playersToTransfer.Add(TransferMidfieldlayer(transferablePlayers, tactic.Midfielders));
+                        playersToTransfer.Add(TransferGoalkeepingPlayer(transferablePlayers, tactic.Goalkeeper));
+                        playersToTransfer.Add(TransferDefendingPlayer(transferablePlayers, tactic.Defenders));
+                        break;
+
+                    default:
+                        throw new NotImplementedException("This managertype is not implemented: " + managers.FirstOrDefault(m => m.ClubId == club.Id).ManagerType.ToString());
+                }
+                foreach (var player in playersToTransfer)
+                {
+                    if (player == null)
+                    {
+                        continue;
+                    }
+
+                    players.FirstOrDefault(p => p.Id == player.Id).ClubId= club.Id;
+                }
+            }
+
+            _playerRepository.Create(players);
+        }
+
+        private Player TransferGoalkeepingPlayer(IList<Player> transferablePlayers, Player goalkeeper)
+        {
+            var potentialTransfer = transferablePlayers.OrderBy(p => p.Age).OrderByDescending(p => p.Goalkeeping).FirstOrDefault();
+            if (potentialTransfer != null && potentialTransfer.Goalkeeping > goalkeeper.Goalkeeping)
+            {
+                return potentialTransfer;
+            }
+
+            return null;
+        }
+        private Player TransferDefendingPlayer(IList<Player> transferablePlayers, IList<Player> clubDefenders)
+        {
+            var potentialTransfer = transferablePlayers.OrderBy(p => p.Age).OrderByDescending(p => p.Defense).FirstOrDefault();
+            if (potentialTransfer != null && potentialTransfer.Defense > clubDefenders.Min(p => p.Defense))
+            {
+                return potentialTransfer;
+            }
+
+            return null;
+        }
+        private Player TransferMidfieldlayer(IList<Player> transferablePlayers, IList<Player> clubMidfielders)
+        {
+            var potentialTransfer = transferablePlayers.OrderBy(p => p.Age).OrderByDescending(p => p.Midfield).FirstOrDefault();
+            if (potentialTransfer != null && potentialTransfer.Midfield > clubMidfielders.Min(p => p.Midfield))
+            {
+                return potentialTransfer;
+            }
+
+            return null;
+        }
+        private Player TransferAttackingPlayer(IList<Player> transferablePlayers, IList<Player> clubAttackers)
+        {
+            var potentialTransfer = transferablePlayers.OrderBy(p => p.Age).OrderByDescending(p => p.Attack).FirstOrDefault();
+            if (potentialTransfer != null && potentialTransfer.Attack > clubAttackers.Min(p => p.Attack))
+            {
+                return potentialTransfer;
+            }
+
+            return null;
+        }
+        private void FillTacticsWithPlayers(IList<Tactic> tactics, IList<Player> players)
+        {
+            foreach (var tactic in tactics)
+            {
+                var keeperToAdd = (players.FirstOrDefault(p => p.Id == tactic.GoalkeeperId));
+                if (keeperToAdd == null)
+                {
+                    keeperToAdd = new Player { Goalkeeping = -1, Defense = -1, Midfield = -1, Attack = -1 };
+                }
+                tactic.Goalkeeper = players.FirstOrDefault(keeperToAdd);
+
+                tactic.Defenders = new List<Player>();
+                foreach (var d in tactic.DefendersId)
+                {
+                    var playerToAdd = players.FirstOrDefault(p => p.Id == d);
+                    if (playerToAdd == null)
+                    {
+                        playerToAdd = new Player { Goalkeeping = -1, Defense = -1, Midfield = -1, Attack = -1 };
+                    }
+                    tactic.Defenders.Add(playerToAdd);
+                }
+
+                tactic.Midfielders = new List<Player>();
+                foreach (var m in tactic.MidfieldersId)
+                {
+                    var playerToAdd = players.FirstOrDefault(p => p.Id == m);
+                    if (playerToAdd == null)
+                    {
+                        playerToAdd = new Player { Goalkeeping = -1, Defense = -1, Midfield = -1, Attack = -1 };
+                    }
+                    tactic.Midfielders.Add(playerToAdd);
+                }
+
+                tactic.Attackers = new List<Player>();
+                foreach (var a in tactic.AttackersId)
+                {
+                    var playerToAdd = players.FirstOrDefault(p => p.Id == a);
+                    if (playerToAdd == null)
+                    {
+                        playerToAdd = new Player { Goalkeeping = -1, Defense = -1, Midfield = -1, Attack = -1 };
+                    }
+                    tactic.Attackers.Add(playerToAdd);
+                }
+            }
         }
     }
 }
