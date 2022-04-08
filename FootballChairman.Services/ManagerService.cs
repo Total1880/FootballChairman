@@ -116,11 +116,12 @@ namespace FootballChairman.Services
             return newManagers;
         }
 
-        public void DoTransfers()
+        public IList<Transfer> DoTransfers(int year)
         {
             var clubs = _clubRepository.Get().OrderByDescending(c => c.Reputation).ToList();
             var managers = GetAllManagers();
             var tactics = _tacticRepository.Get();
+            var transfers = new List<Transfer>();
 
             List<Player> players = _playerRepository.Get().ToList();
 
@@ -182,12 +183,18 @@ namespace FootballChairman.Services
                     {
                         continue;
                     }
-
+                    var transfer = new Transfer();
+                    transfer.Year = year;
+                    transfer.Player.Id = player.Id;
+                    transfer.PreviousClub.Id = player.ClubId;
+                    transfer.NextClub.Id = club.Id;
+                    transfers.Add(transfer);
                     players.FirstOrDefault(p => p.Id == player.Id).ClubId= club.Id;
                 }
             }
 
             _playerRepository.Create(players);
+            return transfers;
         }
 
         private Player TransferGoalkeepingPlayer(IList<Player> transferablePlayers, Player goalkeeper)

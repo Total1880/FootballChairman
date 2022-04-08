@@ -15,6 +15,7 @@ namespace FootballChairman.ViewModels
         private readonly ICountryService _countryService;
         private readonly IPlayerService _playerService;
         private readonly ITacticService _tacticService;
+        private readonly ITransferService _transferService;
         private Club _selectedClub;
         private Manager _selectedManager;
         private Country _selectedCountry;
@@ -26,10 +27,12 @@ namespace FootballChairman.ViewModels
         private ObservableCollection<Club> _clubs;
         private ObservableCollection<Country> _countries;
         private ObservableCollection<Player> _players;
+        private ObservableCollection<Transfer> _transfers;
 
         public ObservableCollection<Club> Clubs { get => _clubs; set { _clubs = value; RaisePropertyChanged(); } }
         public ObservableCollection<Country> Countries { get => _countries; set { _countries = value; RaisePropertyChanged(); } }
         public ObservableCollection<Player> Players { get => _players; set { _players = value; RaisePropertyChanged(); } }
+        public ObservableCollection<Transfer> Transfers { get => _transfers; set { _transfers = value; RaisePropertyChanged(); } }
         public Country SelectedCountry
         {
             get => _selectedCountry;
@@ -52,6 +55,7 @@ namespace FootballChairman.ViewModels
                     SelectedManager = _managerService.GetManager(value.ManagerId);
                     Players = new ObservableCollection<Player>(_playerService.GetPlayersFromClub(value.Id));
                     LoadTacticLabels();
+                    LoadTransfers();
                 }
                 RaisePropertyChanged();
             }
@@ -77,13 +81,15 @@ namespace FootballChairman.ViewModels
             IManagerService managerService,
             ICountryService countryService,
             IPlayerService playerService,
-            ITacticService tacticService)
+            ITacticService tacticService,
+            ITransferService transferService)
         {
             _clubService = clubService;
             _managerService = managerService;
             _countryService = countryService;
             _playerService = playerService;
             _tacticService = tacticService;
+            _transferService = transferService;
 
             Countries = new ObservableCollection<Country>(_countryService.GetAllCountries());
             LoadData(new RefreshYourClubDataMessage());
@@ -141,6 +147,11 @@ namespace FootballChairman.ViewModels
             Defenders = string.Join(" | ", tactic.Defenders.Select(p => p.LastNameFirstLetterFirstName));
             Midfielders = string.Join(" | ", tactic.Midfielders.Select(p => p.LastNameFirstLetterFirstName));
             Attackers = string.Join(" | ", tactic.Attackers.Select(p => p.LastNameFirstLetterFirstName));
+        }
+
+        private void LoadTransfers()
+        {
+            Transfers = new ObservableCollection<Transfer>(_transferService.GetTransferListOfClub(SelectedClub.Id));
         }
     }
 }

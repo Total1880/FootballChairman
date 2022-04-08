@@ -18,6 +18,7 @@ namespace FootballChairman.Services
         private readonly IHistoryItemService _historyItemService;
         private readonly IPlayerService _playerService;
         private readonly ITacticService _tacticService;
+        private readonly ITransferService _transferService;
 
         private readonly IList<Competition> _competitions;
         private readonly IList<CompetitionCup> _competitionCups;
@@ -35,7 +36,8 @@ namespace FootballChairman.Services
             IManagerService managerService,
             IHistoryItemService historyItemService,
             IPlayerService playerService,
-            ITacticService tacticService)
+            ITacticService tacticService,
+            ITransferService transferService)
         {
             _competitionService = competitionService;
             _competitionCupService = competitionCupService;
@@ -48,6 +50,7 @@ namespace FootballChairman.Services
             _historyItemService = historyItemService;
             _playerService = playerService;
             _tacticService = tacticService;
+            _transferService = transferService; 
 
             _competitions = _competitionService.GetAllCompetitions();
             _competitionCups = _competitionCupService.GetAllCompetitions();
@@ -141,7 +144,7 @@ namespace FootballChairman.Services
             _clubPerCompetitionService.ResetData();
 
             //GenerateTactics();
-            _managerService.DoTransfers();
+            _transferService.AddTransfers(_managerService.DoTransfers(_saveGameData.Year));
             CheckIfClubHasEnoughPlayers();
             GenerateTactics();
 
