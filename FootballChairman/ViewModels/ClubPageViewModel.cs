@@ -151,7 +151,7 @@ namespace FootballChairman.ViewModels
 
         private void LoadTransfers()
         {
-            Transfers = new ObservableCollection<Transfer>(_transferService.GetTransferListOfClub(SelectedClub.Id));
+            Transfers = new ObservableCollection<Transfer>(_transferService.GetTransferListOfClub(SelectedClub.Id).OrderByDescending(t => t.Year));
         }
     }
 }

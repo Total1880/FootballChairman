@@ -69,7 +69,7 @@ namespace FootballChairman.ViewModels
                 return;
             }
 
-            var playerManager = Managers.FirstOrDefault(m => m.ClubId == _playerClub.Id);
+            var playerManager = _managerService.GetManagerFromClub(_playerClub.Id);
             var otherClub = _clubService.GetClub(SelectedManager.ClubId);
 
             if (_playerClub.Reputation < otherClub.Reputation)
