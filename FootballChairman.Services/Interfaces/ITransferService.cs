@@ -11,5 +11,6 @@ namespace FootballChairman.Services.Interfaces
     {
         IList<Transfer> AddTransfers(IList<Transfer> transfers);
         IList<Transfer> GetTransferListOfClub(int clubId);
+        IList<Transfer> GetTransferListOfPlayer(int playerId);
     }
 }

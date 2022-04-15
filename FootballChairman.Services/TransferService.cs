@@ -34,17 +34,17 @@ namespace FootballChairman.Services
         public IList<Transfer> GetTransferListOfClub(int clubId)
         {
             var transfers = _transferRepository.Get().Where(t => t.PreviousClub.Id == clubId || t.NextClub.Id == clubId).ToList();
-            var players = _playerRepository.Get();
-            var clubs = _clubRepository.Get();
-
-            foreach (var transfer in transfers)
-            {
-                transfer.Player = players.FirstOrDefault(p => p.Id == transfer.Player.Id);
-                transfer.PreviousClub = clubs.FirstOrDefault(c => c.Id == transfer.PreviousClub.Id);
-                transfer.NextClub = clubs.FirstOrDefault(c => c.Id == transfer.NextClub.Id);
-            }
+            UpdateTransferData(transfers);
             DeleteTransfers(transfers.Where(t => t.Player == null).ToList());
             return transfers.Where(t => t.Player != null).ToList();
+        }
+
+        public IList<Transfer> GetTransferListOfPlayer(int playerId)
+        {
+            var transfers = _transferRepository.Get().Where(t => t.Player.Id == playerId).ToList();
+            UpdateTransferData(transfers);
+
+            return transfers;
         }
 
         private void DeleteTransfers(IList<Transfer> transfers)
@@ -56,7 +56,19 @@ namespace FootballChairman.Services
                 allTransfers.Remove(allTransfers.FirstOrDefault(t => t.Year == transfer.Year && t.Player == null));
             }
             _transferRepository.Create(allTransfers);
+        }
 
+        private void UpdateTransferData(IList<Transfer> transfers)
+        {
+            var players = _playerRepository.Get();
+            var clubs = _clubRepository.Get();
+
+            foreach (var transfer in transfers)
+            {
+                transfer.Player = players.FirstOrDefault(p => p.Id == transfer.Player.Id);
+                transfer.PreviousClub = clubs.FirstOrDefault(c => c.Id == transfer.PreviousClub.Id);
+                transfer.NextClub = clubs.FirstOrDefault(c => c.Id == transfer.NextClub.Id);
+            }
         }
     }
 }

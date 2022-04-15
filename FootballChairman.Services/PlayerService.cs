@@ -169,5 +169,10 @@ namespace FootballChairman.Services
                 }
             }
         }
+
+        public Player GetPlayer(int playerId)
+        {
+            return _playerRepository.Get().FirstOrDefault(p => p.Id == playerId);
+        }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using FootballChairman.Messages;
+using FootballChairman.Messages.PageOpeners;
 using FootballChairman.Models;
 using FootballChairman.Services.Interfaces;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -19,10 +22,16 @@ namespace FootballChairman.ViewModels
         private Club _selectedClub;
         private Manager _selectedManager;
         private Country _selectedCountry;
+        private Player _selectedPlayer;
+        private Transfer _selectedTransfer;
         private string _goalkeeper;
         private string _defenders;
         private string _midfielders;
         private string _attackers;
+
+        private RelayCommand _openPlayerPageCommand;
+
+        public RelayCommand OpenPlayerPageCommand => _openPlayerPageCommand ??= new RelayCommand(OpenPlayerPage);
 
         private ObservableCollection<Club> _clubs;
         private ObservableCollection<Country> _countries;
@@ -70,6 +79,31 @@ namespace FootballChairman.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public Player SelectedPlayer
+        {
+            get => _selectedPlayer;
+            set
+            {
+                _selectedPlayer = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Transfer SelectedTransfer
+        {
+            get => _selectedTransfer;
+            set
+            {
+                _selectedTransfer = value;
+                if (_selectedTransfer != null)
+                {
+                    SelectedPlayer = _selectedTransfer.Player;
+                }
+                RaisePropertyChanged();
+            }
+        }
+
         public string Goalkeeper { get => _goalkeeper; set { _goalkeeper = value; RaisePropertyChanged(); } }
         public string Defenders { get => _defenders; set { _defenders = value; RaisePropertyChanged(); } }
         public string Midfielders { get => _midfielders; set { _midfielders = value; RaisePropertyChanged(); } }
@@ -98,6 +132,17 @@ namespace FootballChairman.ViewModels
             {
                 SelectedClub = Clubs.FirstOrDefault(c => c.IsPlayer);
             }
+        }
+
+        private void OpenPlayerPage()
+        {
+            if (SelectedPlayer == null)
+            {
+                return;
+            }
+
+            MessengerInstance.Send(new OpenPlayerPageMessage());
+            MessengerInstance.Send(new ViewThisPlayerMessage(SelectedPlayer.Id));
         }
 
         private void LoadData(RefreshYourClubDataMessage obj)

@@ -22,6 +22,7 @@ namespace FootballChairman
             builder.RegisterType<CupOverviewPageViewModel>().SingleInstance();
             builder.RegisterType<ManagerPageViewModel>().SingleInstance();
             builder.RegisterType<TransferPageViewModel>().SingleInstance();
+            builder.RegisterType<PlayerPageViewModel>().SingleInstance();
 
             _container = builder.Build();
         }
@@ -34,5 +35,6 @@ namespace FootballChairman
         public CupOverviewPageViewModel CupOverviewPage => _container.Resolve<CupOverviewPageViewModel>();
         public ManagerPageViewModel ManagerPage => _container.Resolve<ManagerPageViewModel>();
         public TransferPageViewModel TransferPage => _container.Resolve<TransferPageViewModel>();
+        public PlayerPageViewModel PlayerPage => _container.Resolve<PlayerPageViewModel>();
     }
 }

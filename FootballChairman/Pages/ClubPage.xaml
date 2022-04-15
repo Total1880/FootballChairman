@@ -13,7 +13,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -33,6 +33,11 @@
                 DisplayMemberPath="Name"
                 SelectedItem="{Binding SelectedClub}"/>
             </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Button
+                Content="View Player"
+                Command="{Binding OpenPlayerPageCommand}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
@@ -90,10 +95,10 @@
                     Content="{Binding Attackers}"/>
             </StackPanel>
         </StackPanel>
-        <ListView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Transfers}">
+        <ListView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Transfers}" SelectedItem="{Binding SelectedTransfer}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding GetTranferInString}">
+                    <GridViewColumn DisplayMemberBinding="{Binding GetTranferInString}">
                         <GridViewColumnHeader Content="Transfer"/>
                     </GridViewColumn>
                 </GridView>
@@ -146,7 +151,7 @@
                 Content="{Binding SelectedManager.TrainingAttackSkill}"/>
             </StackPanel>
         </StackPanel>
-        <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Players}">
+        <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding LastName}">

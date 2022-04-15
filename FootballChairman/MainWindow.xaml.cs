@@ -1,6 +1,7 @@
 ﻿using FootballChairman.Messages.PageOpeners;
 using FootballChairman.Pages;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Windows;
 
 namespace FootballChairman
@@ -18,6 +19,7 @@ namespace FootballChairman
         private CupOverviewPage _cupOverviewPage;
         private ManagerPage _managerPage;
         private TransferPage _transferPage;
+        private PlayerPage _playerPage;
 
         public FixturesPage FixturesPage => _fixturesPage ??= new FixturesPage();
         public NavigationButtonsPage NavigationButtonsPage => _navigationButtonsPage ??= new NavigationButtonsPage();
@@ -27,6 +29,7 @@ namespace FootballChairman
         public CupOverviewPage CupOverviewPage => _cupOverviewPage ??= new CupOverviewPage();
         public ManagerPage ManagerPage => _managerPage ??= new ManagerPage();
         public TransferPage TransferPage => _transferPage ??= new TransferPage();
+        public PlayerPage PlayerPage => _playerPage ??= new PlayerPage();
 
         public MainWindow()
         {
@@ -43,6 +46,7 @@ namespace FootballChairman
             Messenger.Default.Register<OpenCupOverviewPageMessage>(this, OpenCupOverviewPage);
             Messenger.Default.Register<OpenManagerPageMessage>(this, OpenManagerPage);
             Messenger.Default.Register<OpenTransferPageMessage>(this, OpenTransferPage);
+            Messenger.Default.Register<OpenPlayerPageMessage>(this, OpenPlayerPage);
         }
 
         private void OpenFixturePage(OpenFixturesPageMessage obj)
@@ -78,7 +82,11 @@ namespace FootballChairman
         private void OpenTransferPage(OpenTransferPageMessage obj)
         {
             MainFrame.NavigationService.Navigate(TransferPage);
+        }
 
+        private void OpenPlayerPage(OpenPlayerPageMessage obj)
+        {
+            MainFrame.NavigationService.Navigate(PlayerPage);
         }
     }
 }

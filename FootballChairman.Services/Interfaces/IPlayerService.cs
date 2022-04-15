@@ -11,5 +11,6 @@ namespace FootballChairman.Services.Interfaces
         IList<Player> GetPlayersFromClub(int clubId);
         IList<Player> UpdatePlayersEndOfSeason();
         void CheckIfClubHasEnoughPlayers(int clubId);
+        Player GetPlayer(int playerId);
     }
 }
