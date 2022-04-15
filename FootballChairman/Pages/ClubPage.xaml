@@ -42,6 +42,12 @@
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <Label 
+                Content="Budget: "/>
+                <Label 
+                Content="{Binding SelectedClub.Budget}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label 
                 Content="Goalkeeping: "/>
                 <Label 
                 Content="{Binding SelectedClub.SkillGoalkeeping}"/>

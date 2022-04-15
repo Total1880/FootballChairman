@@ -12,6 +12,7 @@
         public int CountryId { get; set; }
         public bool IsPlayer { get; set; }
         public int Reputation { get; set; }
+        public float Budget { get; set; }
 
         public Club()
         {

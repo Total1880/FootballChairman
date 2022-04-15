@@ -18,7 +18,6 @@ namespace FootballChairman.ViewModels
         private readonly ITransferService _transferService;
         private readonly IClubService _clubService;
         private ObservableCollection<Transfer> _transfers;
-        private IList<Club> _clubs;
         private Player _shownPlayer;
 
         public ObservableCollection<Transfer> Transfers { get => _transfers; set { _transfers = value; RaisePropertyChanged(); } }

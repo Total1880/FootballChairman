@@ -84,6 +84,7 @@ namespace FootballChairman.Services
                     lookUpClub.Reputation -= 500;
                 }
 
+                lookUpClub.Budget += lookUpClub.Reputation;
 
                 UpdateClub(lookUpClub);
                 counter--;
