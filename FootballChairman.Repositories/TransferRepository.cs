@@ -70,7 +70,17 @@ namespace FootballChairman.Repositories
                     {
                         var readTransferData = new Transfer();
 
-                        readTransferData.Year = int.Parse(xmlReader.GetAttribute(nameof(Transfer.Year)));
+                        //Check if transfers  already exist
+                        int year;
+                        if (int.TryParse(xmlReader.GetAttribute(nameof(Transfer.Year)), out year))
+                        {
+                            readTransferData.Year = year;
+                        }
+                        else
+                        {
+                            return transferList;
+                        }
+
                         readTransferData.Player.Id = int.Parse(xmlReader.GetAttribute(nameof(Transfer.Player)));
                         readTransferData.PreviousClub.Id = int.Parse(xmlReader.GetAttribute(nameof(Transfer.PreviousClub)));
                         readTransferData.NextClub.Id = int.Parse(xmlReader.GetAttribute(nameof(Transfer.NextClub)));

@@ -23,6 +23,11 @@ namespace FootballChairman.Services
             return data;
         }
 
+        public bool DoesSaveGameExist(string name)
+        {
+            return _saveGameDataRepository.Get().FirstOrDefault(s => s.Name == name) != null;
+        }
+
         public SaveGameData GetSaveGameData(string name)
         {
             var data = _saveGameDataRepository.Get().FirstOrDefault(s => s.Name == name);
@@ -32,5 +37,7 @@ namespace FootballChairman.Services
             }
             return data;
         }
+
+        
     }
 }

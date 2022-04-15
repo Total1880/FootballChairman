@@ -6,5 +6,6 @@ namespace FootballChairman.Services.Interfaces
     {
         SaveGameData GetSaveGameData(string name);
         SaveGameData CreateSaveGameData(SaveGameData data);
+        bool DoesSaveGameExist(string name);
     }
 }
