@@ -9,5 +9,6 @@ namespace FootballChairman.Models
         public int TrainingMidfieldSkill { get; set; }
         public int TrainingGoalkeepingSkill { get; set; }
         public ManagerType ManagerType { get; set; }
+        public FacilityUpgradeType FacilityUpgradeType { get; set; }
     }
 }

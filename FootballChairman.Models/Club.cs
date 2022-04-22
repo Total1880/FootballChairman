@@ -9,6 +9,8 @@
         public bool IsPlayer { get; set; }
         public int Reputation { get; set; }
         public float Budget { get; set; }
+        public int YouthFacilities { get; set; }
+        public int TrainingFacilities { get; set; }
 
         public Club()
         {

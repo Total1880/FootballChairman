@@ -35,8 +35,10 @@ namespace FootballChairman.Services
 
         public Manager GenerateManager(int clubId, int countryId)
         {
-            Type type = typeof(ManagerType);
-            Array values = type.GetEnumValues();
+            Type managerType = typeof(ManagerType);
+            Type facilityUpgradeType = typeof(FacilityUpgradeType);
+            Array managerTypeValues = managerType.GetEnumValues();
+            Array facilityUpgradeTypeValues = facilityUpgradeType.GetEnumValues();
 
             var allManagers = GetAllManagers();
             int newid;
@@ -60,7 +62,8 @@ namespace FootballChairman.Services
             newManager.Age = random.Next(40, 65);
             newManager.ClubId = clubId;
             newManager.CountryId = countryId;
-            newManager.ManagerType = (ManagerType)values.GetValue(random.Next(values.Length));
+            newManager.ManagerType = (ManagerType)managerTypeValues.GetValue(random.Next(managerTypeValues.Length));
+            newManager.FacilityUpgradeType = (FacilityUpgradeType)facilityUpgradeTypeValues.GetValue(random.Next(facilityUpgradeTypeValues.Length));
 
             CreateManager(newManager);
             return newManager;

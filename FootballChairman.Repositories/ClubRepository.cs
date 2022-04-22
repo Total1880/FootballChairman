@@ -31,6 +31,8 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Club.IsPlayer), club.IsPlayer.ToString());
                     writer.WriteAttributeString(nameof(Club.Reputation), club.Reputation.ToString());
                     writer.WriteAttributeString(nameof(Club.Budget), club.Budget.ToString());
+                    writer.WriteAttributeString(nameof(Club.YouthFacilities), club.YouthFacilities.ToString());
+                    writer.WriteAttributeString(nameof(Club.TrainingFacilities), club.Budget.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -80,6 +82,8 @@ namespace FootballChairman.Repositories
                         readClub.IsPlayer = bool.Parse(xmlReader.GetAttribute(nameof(Club.IsPlayer)));
                         readClub.Reputation = int.Parse(xmlReader.GetAttribute(nameof(Club.Reputation)));
                         readClub.Budget = float.Parse(xmlReader.GetAttribute(nameof(Club.Budget)));
+                        readClub.YouthFacilities = int.Parse(xmlReader.GetAttribute(nameof(Club.YouthFacilities)));
+                        readClub.TrainingFacilities = int.Parse(xmlReader.GetAttribute(nameof(Club.TrainingFacilities)));
 
                         clubList.Add(readClub);
                     } while (xmlReader.ReadToNextSibling(nameof(Club)));

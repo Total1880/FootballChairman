@@ -9,5 +9,6 @@
         public static int RelegationSpots = 1;
         public static string DefaultSaveGameName = "Default";
         public static int WeeksInYear = 52;
+        public static int PriceUpgrade = 1000;
     }
 }

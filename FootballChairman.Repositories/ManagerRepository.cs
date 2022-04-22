@@ -36,6 +36,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Manager.Age), manager.Age.ToString());
                     writer.WriteAttributeString(nameof(Manager.CountryId), manager.CountryId.ToString());
                     writer.WriteAttributeString(nameof(Manager.ManagerType), manager.ManagerType.ToString());
+                    writer.WriteAttributeString(nameof(Manager.FacilityUpgradeType), manager.FacilityUpgradeType.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -89,6 +90,7 @@ namespace FootballChairman.Repositories
                         readManager.Age = int.Parse(xmlReader.GetAttribute(nameof(Manager.Age)));
                         readManager.CountryId = int.Parse(xmlReader.GetAttribute(nameof(Manager.CountryId)));
                         readManager.ManagerType = (ManagerType)Enum.Parse(typeof(ManagerType), xmlReader.GetAttribute(nameof(Manager.ManagerType)));
+                        readManager.FacilityUpgradeType = (FacilityUpgradeType)Enum.Parse(typeof(FacilityUpgradeType), xmlReader.GetAttribute(nameof(Manager.FacilityUpgradeType)));
 
                         managerList.Add(readManager);
                     } while (xmlReader.ReadToNextSibling(nameof(Manager)));
