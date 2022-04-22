@@ -55,6 +55,7 @@ namespace FootballChairman.Services
             var managers = _managerRepository.Get();
             var clubs = GetAllClubs();
             var counter = ranking.Count();
+            var players = _playerRepository.Get();
             foreach (var club in ranking)
             {
                 var lookUpClub = clubs.FirstOrDefault(c => c.Id == club.ClubId);
@@ -62,6 +63,11 @@ namespace FootballChairman.Services
                 {
                     continue;
                 }
+
+                //Update budget
+                var clubPlayers = players.Where(p => p.ClubId == club.ClubId);
+                var wages = clubPlayers.Sum(p => p.Wage) + managers.FirstOrDefault(m => m.ClubId == club.ClubId).Wage;
+                lookUpClub.Budget -= wages;
 
                 //Update reputation
                 if (lookUpClub.Reputation < competitionReputation - 100)

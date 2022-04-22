@@ -51,6 +51,27 @@ namespace FootballChairman.Services
             newPlayer.LastName = _personNameService.GetRandomLastName(countryId);
             newPlayer.CountryId = countryId;
 
+            if (newPlayer.Age < 22)
+            {
+                newPlayer.ContractYears = 5;
+            }
+            else if (newPlayer.Age < 26)
+            {
+                newPlayer.ContractYears = 4;
+            }
+            else if (newPlayer.Age < 31)
+            {
+                newPlayer.ContractYears = 3;
+            }
+            else if (newPlayer.Age < 35)
+            {
+                newPlayer.ContractYears = 2;
+            }
+            else
+            {
+                newPlayer.ContractYears = 1;
+            }
+
             return CreatePlayer(newPlayer);
         }
 
@@ -94,6 +115,8 @@ namespace FootballChairman.Services
             newPlayer.FirstName = _personNameService.GetRandomFirstName(countryId);
             newPlayer.LastName = _personNameService.GetRandomLastName(countryIdLastName);
             newPlayer.CountryId = countryId;
+            newPlayer.ContractYears = 2;
+            newPlayer.Wage = 10;
 
             return CreatePlayer(newPlayer);
         }
@@ -129,6 +152,7 @@ namespace FootballChairman.Services
             foreach (var player in allPlayers)
             {
                 player.Age++;
+                player.ContractYears--;
                 var manager = allManagers.FirstOrDefault(m => m.ClubId == player.ClubId);
                 var trainingRating = clubs.FirstOrDefault(c => c.Id == player.ClubId).TrainingFacilities;
 

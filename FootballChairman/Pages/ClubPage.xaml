@@ -48,6 +48,12 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label 
+                Content="Player Budget: "/>
+                <Label 
+                Content="{Binding SelectedClub.PlayerBudget}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label 
                 Content="Youth: "/>
                 <Label 
                 Content="{Binding SelectedClub.YouthFacilities}"/>
@@ -144,6 +150,18 @@
                 <Label 
                 Content="{Binding SelectedManager.TrainingAttackSkill}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label 
+                Content="Wage: "/>
+                <Label 
+                Content="{Binding SelectedManager.Wage}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label 
+                Content="ContractYears: "/>
+                <Label 
+                Content="{Binding SelectedManager.ContractYears}"/>
+            </StackPanel>
         </StackPanel>
         <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}">
             <ListView.View>
@@ -168,6 +186,12 @@
                     </GridViewColumn>
                     <GridViewColumn Width="150" DisplayMemberBinding="{Binding Attack}">
                         <GridViewColumnHeader Content="Attack"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Wage}">
+                        <GridViewColumnHeader Content="Wage"/>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding ContractYears}">
+                        <GridViewColumnHeader Content="ContractYears"/>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>

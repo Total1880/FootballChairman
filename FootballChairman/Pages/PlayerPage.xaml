@@ -40,6 +40,20 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label
+                    Content="Wage: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding ShownPlayer.Wage}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label
+                    Content="ContractYears: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding ShownPlayer.ContractYears}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label
                     Content="GoalKeeping: "
                     Width="50"/>
                 <Label

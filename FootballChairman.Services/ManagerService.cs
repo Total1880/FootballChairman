@@ -40,6 +40,8 @@ namespace FootballChairman.Services
             Array managerTypeValues = managerType.GetEnumValues();
             Array facilityUpgradeTypeValues = facilityUpgradeType.GetEnumValues();
 
+
+
             var allManagers = GetAllManagers();
             int newid;
             if (allManagers.Count > 0)
@@ -64,7 +66,8 @@ namespace FootballChairman.Services
             newManager.CountryId = countryId;
             newManager.ManagerType = (ManagerType)managerTypeValues.GetValue(random.Next(managerTypeValues.Length));
             newManager.FacilityUpgradeType = (FacilityUpgradeType)facilityUpgradeTypeValues.GetValue(random.Next(facilityUpgradeTypeValues.Length));
-
+            newManager.ContractYears = random.Next(1, 5);
+            newManager.Wage = (int)_clubRepository.Get().FirstOrDefault(c => c.Id == clubId).PlayerBudget;
             CreateManager(newManager);
             return newManager;
         }
@@ -102,6 +105,7 @@ namespace FootballChairman.Services
             foreach (var manager in allManagersToLoop)
             {
                 manager.Age++;
+                manager.ContractYears--;
                 if (manager.Age > 65)
                 {
                     if (random.Next(0, 5) == 0)
@@ -141,7 +145,11 @@ namespace FootballChairman.Services
 
                 foreach (var lowerRepClub in lowerRepClubs)
                 {
-                    transferablePlayers.AddRange(players.Where(p => p.ClubId == lowerRepClub.Id).ToList());
+                    transferablePlayers.AddRange(players.Where(p => 
+                    p.ClubId == lowerRepClub.Id &&
+                    p.ContractYears < 1 &&
+                    p.Wage < club.PlayerBudget
+                    ).ToList());
                 }
 
                 var tactic = tactics.FirstOrDefault(t => t.ClubId == club.Id);
@@ -192,7 +200,31 @@ namespace FootballChairman.Services
                     transfer.PreviousClub.Id = player.ClubId;
                     transfer.NextClub.Id = club.Id;
                     transfers.Add(transfer);
-                    players.FirstOrDefault(p => p.Id == player.Id).ClubId= club.Id;
+
+                    var lookupPlayer = players.FirstOrDefault(p => p.Id == player.Id);
+                    lookupPlayer.ClubId = club.Id;
+                    lookupPlayer.Wage = (int)club.PlayerBudget;
+
+                    if (lookupPlayer.Age < 22)
+                    {
+                        lookupPlayer.ContractYears = 5;
+                    }
+                    else if (lookupPlayer.Age < 26)
+                    {
+                        lookupPlayer.ContractYears = 4;
+                    }
+                    else if (lookupPlayer.Age < 31)
+                    {
+                        lookupPlayer.ContractYears = 3;
+                    }
+                    else if (lookupPlayer.Age < 35)
+                    {
+                        lookupPlayer.ContractYears = 2;
+                    }
+                    else
+                    {
+                        lookupPlayer.ContractYears = 1;
+                    }
                 }
             }
 
