@@ -32,7 +32,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Club.Reputation), club.Reputation.ToString());
                     writer.WriteAttributeString(nameof(Club.Budget), club.Budget.ToString());
                     writer.WriteAttributeString(nameof(Club.YouthFacilities), club.YouthFacilities.ToString());
-                    writer.WriteAttributeString(nameof(Club.TrainingFacilities), club.Budget.ToString());
+                    writer.WriteAttributeString(nameof(Club.TrainingFacilities), club.TrainingFacilities.ToString());
                     writer.WriteEndElement();
                 }
 

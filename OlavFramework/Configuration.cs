@@ -10,5 +10,6 @@
         public static string DefaultSaveGameName = "Default";
         public static int WeeksInYear = 52;
         public static int PriceUpgrade = 1000;
+        public static int CeilingFacilities = 50;
     }
 }

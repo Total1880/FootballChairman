@@ -59,6 +59,7 @@ namespace FootballChairman.Services
             var allPlayers = _playerRepository.Get();
             var newId = 0;
             var countryIdLastName = countryId;
+            var youthRating = _clubService.GetClub(clubId).YouthFacilities;
 
             //randomize potential foreigner
             if (random.Next(0, 10) == 0)
@@ -85,11 +86,11 @@ namespace FootballChairman.Services
             newPlayer.Id = newId;
             newPlayer.ClubId = clubId;
             newPlayer.Age = 18;
-            newPlayer.Defense = random.Next(0, 50);
-            newPlayer.Midfield = random.Next(0, 50);
-            newPlayer.Attack = random.Next(0, 50);
-            newPlayer.Goalkeeping = random.Next(0, 50);
-            newPlayer.Potential = random.Next(0, 300);
+            newPlayer.Defense = random.Next(0, 50 + youthRating);
+            newPlayer.Midfield = random.Next(0, 50 + youthRating);
+            newPlayer.Attack = random.Next(0, 50 + youthRating);
+            newPlayer.Goalkeeping = random.Next(0, 50 + youthRating);
+            newPlayer.Potential = random.Next(0, 300 + +youthRating);
             newPlayer.FirstName = _personNameService.GetRandomFirstName(countryId);
             newPlayer.LastName = _personNameService.GetRandomLastName(countryIdLastName);
             newPlayer.CountryId = countryId;
@@ -123,11 +124,13 @@ namespace FootballChairman.Services
             var allPlayers = _playerRepository.Get();
             var allManagers = _managerService.GetAllManagers();
             var playersToRetire = new List<Player>();
+            var clubs = _clubService.GetAllClubs();
 
             foreach (var player in allPlayers)
             {
                 player.Age++;
                 var manager = allManagers.FirstOrDefault(m => m.ClubId == player.ClubId);
+                var trainingRating = clubs.FirstOrDefault(c => c.Id == player.ClubId).TrainingFacilities;
 
                 if (player.Age > 30 && random.Next(0, 5) == 0)
                 {
@@ -140,10 +143,10 @@ namespace FootballChairman.Services
                     continue;
                 }
 
-                player.Defense += random.Next(0, manager.TrainingDefenseSkill / 10);
-                player.Midfield += random.Next(0, manager.TrainingMidfieldSkill / 10);
-                player.Attack += random.Next(0, manager.TrainingAttackSkill / 10);
-                player.Goalkeeping += random.Next(0, manager.TrainingGoalkeepingSkill / 10);
+                player.Defense += random.Next(0, (manager.TrainingDefenseSkill / 10) + trainingRating);
+                player.Midfield += random.Next(0, (manager.TrainingMidfieldSkill / 10) + trainingRating);
+                player.Attack += random.Next(0, (manager.TrainingAttackSkill / 10) + trainingRating);
+                player.Goalkeeping += random.Next(0, (manager.TrainingGoalkeepingSkill / 10) + trainingRating);
             }
 
             foreach (var player in playersToRetire)
