@@ -46,30 +46,6 @@
                 <Label 
                 Content="{Binding SelectedClub.Budget}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label 
-                Content="Goalkeeping: "/>
-                <Label 
-                Content="{Binding SelectedClub.SkillGoalkeeping}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label 
-                Content="Defence: "/>
-                <Label 
-                Content="{Binding SelectedClub.SkillDefense}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label 
-                Content="Midfield: "/>
-                <Label 
-                Content="{Binding SelectedClub.SkillMidfield}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label 
-                Content="Attack: "/>
-                <Label 
-                Content="{Binding SelectedClub.SkillAttack}"/>
-            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
