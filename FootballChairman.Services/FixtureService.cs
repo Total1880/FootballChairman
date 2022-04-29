@@ -33,8 +33,6 @@ namespace FootballChairman.Services
 
         public IList<Fixture> GenerateFixtures(IList<Club> teams, int competitionId)
         {
-            Shuffle(teams);
-
             var fixtures = LoadFixtures().Where(f => f.CompetitionId != competitionId).ToList();
             var newFixtures = _scheduleMakerService.Generate(teams, competitionId);
 
@@ -49,7 +47,6 @@ namespace FootballChairman.Services
 
         public IList<Fixture> GenerateCupFixtures(IList<Club> teams, CompetitionCup competition)
         {
-            Shuffle(teams);
             var fixtures = LoadFixtures().Where(f => f.CompetitionId != competition.Id).ToList();
             var newFixtures = _scheduleMakerService.GenerateCup(teams, competition);
 
@@ -110,19 +107,8 @@ namespace FootballChairman.Services
 
             return fixture;
         }
-        private readonly Random rng = new Random();
+       
 
-        private void Shuffle<T>(IList<T> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-        }
+
     }
 }

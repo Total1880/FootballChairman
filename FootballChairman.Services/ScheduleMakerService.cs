@@ -10,6 +10,7 @@ namespace FootballChairman.Services
         private int _matchesPerRoundCount;
         private bool _alternate = false;
         private IList<int> _offsetList;
+        private readonly Random rng = new Random();
 
         public ScheduleMakerService()
         {
@@ -20,6 +21,7 @@ namespace FootballChairman.Services
         public IList<Fixture> Generate(IList<Club> teams, int competitionId)
         {
             _teams = teams;
+            Shuffle(_teams);
             _roundCount = _teams.Count - 1;
             _matchesPerRoundCount = teams.Count / 2;
 
@@ -150,17 +152,20 @@ namespace FootballChairman.Services
             //Create extra round
             if (extrateams > 0)
             {
+                var extraRoundTeams = teams.OrderBy(t => t.Reputation).Take(extrateams * 2).ToList();
+                teams = teams.OrderBy(t => t.Reputation).Skip(extrateams * 2).ToList();
+                Shuffle(extraRoundTeams);
                 for (int i = 0; i < extrateams * 2; i += 2)
                 {
                     Fixture fixture = new Fixture();
                     counter++;
 
-                    fixture.AwayOpponentId = teams[i].Id;
-                    fixture.HomeOpponentId = teams[i + 1].Id;
+                    fixture.AwayOpponentId = extraRoundTeams[i].Id;
+                    fixture.HomeOpponentId = extraRoundTeams[i + 1].Id;
                     fixture.RoundNo = cupround;
                     fixture.MatchNo = counter;
-                    fixture.AwayOpponent = teams[i].Name;
-                    fixture.HomeOpponent = teams[i + 1].Name;
+                    fixture.AwayOpponent = extraRoundTeams[i].Name;
+                    fixture.HomeOpponent = extraRoundTeams[i + 1].Name;
                     fixture.CompetitionId = competitionCup.Id;
 
                     fixtures.Add(fixture);
@@ -168,6 +173,8 @@ namespace FootballChairman.Services
                 cupround++;
                 counter = 0;
             }
+
+            Shuffle(teams);
 
             //Create first round
             for (int i = 0; i < nextRoundTeams /** 2 - extrateams*/; i += 2)
@@ -185,10 +192,10 @@ namespace FootballChairman.Services
                 }
                 else
                 {
-                    fixture.AwayOpponentId = teams[i + extrateams].Id;
-                    fixture.HomeOpponentId = teams[i + extrateams + 1].Id;
-                    fixture.AwayOpponent = teams[i + extrateams].Name;
-                    fixture.HomeOpponent = teams[i + extrateams + 1].Name;
+                    fixture.AwayOpponentId = teams[i - extrateams].Id;
+                    fixture.HomeOpponentId = teams[i - extrateams + 1].Id;
+                    fixture.AwayOpponent = teams[i - extrateams].Name;
+                    fixture.HomeOpponent = teams[i - extrateams + 1].Name;
                 }
                 fixtures.Add(fixture);
                 counter++;
@@ -237,6 +244,18 @@ namespace FootballChairman.Services
             } while (numbertocheck <= number);
 
             return -1;
+        }
+        private void Shuffle<T>(IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }
