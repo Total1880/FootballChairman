@@ -28,6 +28,7 @@ namespace FootballChairman.Repositories
                     writer.WriteAttributeString(nameof(Transfer.Player), transfer.Player.Id.ToString());
                     writer.WriteAttributeString(nameof(Transfer.PreviousClub), transfer.PreviousClub.Id.ToString());
                     writer.WriteAttributeString(nameof(Transfer.NextClub), transfer.NextClub.Id.ToString());
+                    writer.WriteAttributeString(nameof(Transfer.TransferValue), transfer.TransferValue.ToString());
                     writer.WriteEndElement();
                 }
 
@@ -84,6 +85,7 @@ namespace FootballChairman.Repositories
                         readTransferData.Player.Id = int.Parse(xmlReader.GetAttribute(nameof(Transfer.Player)));
                         readTransferData.PreviousClub.Id = int.Parse(xmlReader.GetAttribute(nameof(Transfer.PreviousClub)));
                         readTransferData.NextClub.Id = int.Parse(xmlReader.GetAttribute(nameof(Transfer.NextClub)));
+                        readTransferData.TransferValue = float.Parse(xmlReader.GetAttribute(nameof(Transfer.TransferValue)));
 
                         transferList.Add(readTransferData);
                     } while (xmlReader.ReadToNextSibling(nameof(Transfer)));

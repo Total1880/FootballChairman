@@ -12,6 +12,7 @@ namespace FootballChairman.Models
         public Player Player { get; set; }
         public Club PreviousClub { get; set; }
         public Club NextClub { get; set; }
+        public float TransferValue { get; set; }
 
         public Transfer()
         {
@@ -27,7 +28,7 @@ namespace FootballChairman.Models
                 {
                     return "empty transfer";
                 }
-                return Year + ": " + Player.LastName + " " + Player.FirstName + " transfered from " + PreviousClub.Name + " to " + NextClub.Name + ".";
+                return Year + ": " + Player.LastName + " " + Player.FirstName + " transfered from " + PreviousClub.Name + " to " + NextClub.Name + " for a value of " + TransferValue + ".";
             } 
         }
     }

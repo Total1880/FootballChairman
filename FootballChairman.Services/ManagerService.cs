@@ -147,7 +147,7 @@ namespace FootballChairman.Services
                 {
                     transferablePlayers.AddRange(players.Where(p => 
                     p.ClubId == lowerRepClub.Id &&
-                    p.ContractYears < 1 &&
+                    (p.ContractYears < 1 || p.TransferValue <= club.Budget) &&
                     p.Wage < club.PlayerBudget
                     ).ToList());
                 }
@@ -199,6 +199,7 @@ namespace FootballChairman.Services
                     transfer.Player.Id = player.Id;
                     transfer.PreviousClub.Id = player.ClubId;
                     transfer.NextClub.Id = club.Id;
+                    transfer.TransferValue = player.TransferValue;
                     transfers.Add(transfer);
 
                     var lookupPlayer = players.FirstOrDefault(p => p.Id == player.Id);

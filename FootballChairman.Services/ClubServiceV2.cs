@@ -50,6 +50,19 @@ namespace FootballChairman.Services
             return CreateAllClubs(list).FirstOrDefault(c => c.Id == club.Id);
         }
 
+        public void UpdateClubFinanceTransfers(IList<Transfer> newTransfers)
+        {
+            var clubs = GetAllClubs();
+            
+            foreach (var transfer in newTransfers)
+            {
+                clubs.FirstOrDefault(c => c.Id == transfer.PreviousClub.Id).Budget += transfer.TransferValue;
+                clubs.FirstOrDefault(c => c.Id == transfer.NextClub.Id).Budget -= transfer.TransferValue;
+            }
+
+            _clubRepository.Create(clubs);
+        }
+
         public void UpdateClubsEndOfSeason(IList<ClubPerCompetition> ranking, int competitionReputation)
         {
             var managers = _managerRepository.Get();

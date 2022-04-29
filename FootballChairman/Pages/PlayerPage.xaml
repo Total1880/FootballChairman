@@ -54,6 +54,13 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label
+                    Content="TransferValue: "
+                    Width="50"/>
+                <Label
+                    Content="{Binding ShownPlayer.TransferValue}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label
                     Content="GoalKeeping: "
                     Width="50"/>
                 <Label

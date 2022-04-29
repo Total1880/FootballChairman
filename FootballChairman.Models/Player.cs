@@ -68,5 +68,12 @@
         }
 
         public int Potential { get; set; }
+        public float TransferValue
+        {
+            get
+            {
+                return Wage * ContractYears;
+            }
+        }
     }
 }

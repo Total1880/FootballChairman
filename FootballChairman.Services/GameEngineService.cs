@@ -143,8 +143,9 @@ namespace FootballChairman.Services
             ResetFixtures();
             _clubPerCompetitionService.ResetData();
 
-            //GenerateTactics();
-            _transferService.AddTransfers(_managerService.DoTransfers(_saveGameData.Year));
+            var newTransfers = _managerService.DoTransfers(_saveGameData.Year);
+            _transferService.AddTransfers(newTransfers);
+            _clubService.UpdateClubFinanceTransfers(newTransfers.Where(t => t.TransferValue > 0).ToList());
             CheckIfClubHasEnoughPlayers();
             GenerateTactics();
 
